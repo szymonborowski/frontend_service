@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
@@ -12,6 +13,17 @@ class BlogApiService
     public function __construct()
     {
         $this->baseUrl = config('services.blog.url') . '/api/v1';
+    }
+
+    protected function http(): PendingRequest
+    {
+        $token = session('access_token');
+
+        if ($token) {
+            return Http::withToken($token);
+        }
+
+        return Http::withHeaders([]);
     }
 
     public function getRecentPosts(int $limit = 10): array

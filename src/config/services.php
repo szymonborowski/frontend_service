@@ -37,6 +37,10 @@ return [
 
     'sso' => [
         'url' => env('SSO_URL', 'https://sso.microservices.local'),
+        'internal_url' => env('SSO_INTERNAL_URL', env('SSO_URL', 'https://sso.microservices.local')),
+        'client_id' => env('SSO_CLIENT_ID'),
+        'client_secret' => env('SSO_CLIENT_SECRET'),
+        'redirect_uri' => env('APP_URL') . '/oauth/callback',
     ],
 
     'blog' => [

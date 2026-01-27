@@ -19,12 +19,30 @@
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="{{ config('services.sso.url') }}/login" class="text-sm font-medium text-gray-600 hover:text-sky-800">
-                        Zaloguj
-                    </a>
-                    <a href="{{ config('services.sso.url') }}/register" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-700">
-                        Zarejestruj
-                    </a>
+                    @if(session('access_token'))
+                        @php $user = session('user', []); @endphp
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                                <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">{{ $user['name'] ?? 'Uzytkownik' }}</span>
+                        </div>
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
+                            @csrf
+                            <button type="submit" class="text-sm font-medium text-gray-600 hover:text-sky-800">
+                                Wyloguj
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm font-medium text-gray-600 hover:text-sky-800">
+                            Zaloguj
+                        </a>
+                        <a href="{{ route('login', ['register' => 1]) }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-700">
+                            Zarejestruj
+                        </a>
+                    @endif
                 </div>
             </div>
         </nav>
