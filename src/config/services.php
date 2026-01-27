@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'sso' => [
+        'url' => env('SSO_URL', 'https://sso.microservices.local'),
+    ],
+
+    'blog' => [
+        'url' => env('BLOG_API_URL', 'https://blog.microservices.local'),
+    ],
+
 ];
