@@ -44,7 +44,11 @@ return [
     ],
 
     'blog' => [
-        'url' => env('BLOG_API_URL', 'https://blog.microservices.local'),
+        'url' => env('BLOG_API_URL_INTERNAL', 'https://blog.microservices.local'),
+    ],
+
+    'users' => [
+        'url' => env('USERS_API_URL_INTERNAL', 'https://users.microservices.local'),
     ],
 
 ];

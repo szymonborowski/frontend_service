@@ -21,14 +21,14 @@
                 <div class="flex items-center space-x-4">
                     @if(session('access_token'))
                         @php $user = session('user', []); @endphp
-                        <div class="flex items-center space-x-3">
+                        <a href="{{ route('me') }}" class="flex items-center space-x-3 hover:opacity-80">
                             <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                                 <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
                                 </svg>
                             </div>
                             <span class="text-sm font-medium text-gray-700">{{ $user['name'] ?? 'Uzytkownik' }}</span>
-                        </div>
+                        </a>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
                             <button type="submit" class="text-sm font-medium text-gray-600 hover:text-sky-800">

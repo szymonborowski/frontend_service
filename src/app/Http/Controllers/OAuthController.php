@@ -57,17 +57,18 @@ class OAuthController extends Controller
             $request->session()->put('refresh_token', $tokens['refresh_token']);
         }
 
-        // Decode JWT payload to get user data
-        $parts = explode('.', $accessToken);
-        if (count($parts) === 3) {
-            $payload = json_decode(base64_decode(strtr($parts[1], '-_', '+/')), true);
-            if ($payload) {
-                $request->session()->put('user', [
-                    'id' => $payload['sub'] ?? null,
-                    'name' => $payload['name'] ?? null,
-                    'email' => $payload['email'] ?? null,
-                ]);
-            }
+        // Fetch user data from SSO
+        $userResponse = Http::withToken($accessToken)
+            ->get(config('services.sso.internal_url') . '/api/user');
+
+        if ($userResponse->successful()) {
+            $userData = $userResponse->json();
+            $request->session()->put('user', [
+                'id' => $userData['id'],
+                'name' => $userData['name'] ?? null,
+                'email' => $userData['email'] ?? null,
+                'created_at' => $userData['created_at'] ?? null,
+            ]);
         }
 
         return redirect()->route('home');
