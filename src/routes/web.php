@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/oauth/login', [OAuthController::class, 'redirect'])->name('login');
+Route::get('/oauth/login', [OAuthController::class, 'login'])->name('login');
+Route::get('/oauth/register', [OAuthController::class, 'register'])->name('register');
 Route::get('/oauth/callback', [OAuthController::class, 'callback']);
 Route::post('/oauth/logout', [OAuthController::class, 'logout'])->name('logout');
 

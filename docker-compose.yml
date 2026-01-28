@@ -17,7 +17,7 @@ services:
       - "9000"
     networks:
       - frontend-internal
-      - web
+      - microservices
 
   frontend-nginx:
     container_name: frontend-nginx
@@ -52,6 +52,8 @@ networks:
   frontend-internal:
     driver: bridge
   web:
+    external: true
+  microservices:
     external: true
 
 volumes:

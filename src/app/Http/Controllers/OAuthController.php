@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class OAuthController extends Controller
 {
-    public function redirect(Request $request)
+    public function login(Request $request)
     {
         $state = Str::random(40);
         $request->session()->put('oauth_state', $state);
@@ -22,6 +22,13 @@ class OAuthController extends Controller
         ]);
 
         return redirect(config('services.sso.url') . '/oauth/authorize?' . $query);
+    }
+
+    public function register()
+    {
+        $redirectUri = urlencode(route('login'));
+
+        return redirect(config('services.sso.url') . '/register?redirect_uri=' . $redirectUri);
     }
 
     public function callback(Request $request)
