@@ -85,4 +85,81 @@ class BlogApiService
 
         return null;
     }
+
+    public function getPostById(int $id): ?array
+    {
+        $response = $this->http()->get("{$this->baseUrl}/posts/{$id}", [
+            'with' => 'categories,tags',
+        ]);
+
+        if ($response->successful()) {
+            return $response->json('data') ?? $response->json();
+        }
+
+        return null;
+    }
+
+    public function getUserPosts(int $userId, int $page = 1): array
+    {
+        $response = $this->http()->get("{$this->baseUrl}/posts", [
+            'author_id' => $userId,
+            'with' => 'categories,tags',
+            'page' => $page,
+            'per_page' => 15,
+        ]);
+
+        if ($response->successful()) {
+            return $response->json() ?? ['data' => [], 'meta' => []];
+        }
+
+        return ['data' => [], 'meta' => []];
+    }
+
+    public function getUserComments(int $userId, int $page = 1): array
+    {
+        $response = $this->http()->get("{$this->baseUrl}/comments", [
+            'author_id' => $userId,
+            'with' => 'post',
+            'page' => $page,
+            'per_page' => 15,
+        ]);
+
+        if ($response->successful()) {
+            return $response->json() ?? ['data' => [], 'meta' => []];
+        }
+
+        return ['data' => [], 'meta' => []];
+    }
+
+    public function createPost(array $data): array
+    {
+        $response = $this->http()->post("{$this->baseUrl}/posts", $data);
+
+        return [
+            'success' => $response->successful(),
+            'data' => $response->json('data'),
+            'errors' => $response->json('errors') ?? [],
+        ];
+    }
+
+    public function updatePost(int $id, array $data): array
+    {
+        $response = $this->http()->put("{$this->baseUrl}/posts/{$id}", $data);
+
+        return [
+            'success' => $response->successful(),
+            'data' => $response->json('data'),
+            'errors' => $response->json('errors') ?? [],
+        ];
+    }
+
+    public function deletePost(int $id): array
+    {
+        $response = $this->http()->delete("{$this->baseUrl}/posts/{$id}");
+
+        return [
+            'success' => $response->successful(),
+            'errors' => $response->json('errors') ?? [],
+        ];
+    }
 }

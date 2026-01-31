@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Strona glowna')
+@section('title', __('general.home'))
 
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {{-- Lewa kolumna - ostatnie wpisy --}}
+            {{-- Left column - recent posts --}}
             <aside class="lg:col-span-1">
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Ostatnie wpisy</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.recent_posts') }}</h2>
                     <ul class="space-y-3">
                         @forelse($recentPosts as $post)
                             <li>
@@ -22,13 +22,13 @@
                                 </a>
                             </li>
                         @empty
-                            <li class="text-sm text-gray-500">Brak wpisow</li>
+                            <li class="text-sm text-gray-500">{{ __('general.no_posts') }}</li>
                         @endforelse
                     </ul>
                 </div>
             </aside>
 
-            {{-- Srodkowa kolumna - wyroziony wpis --}}
+            {{-- Middle column - featured post --}}
             <main class="lg:col-span-2">
                 @if($featuredPost)
                     <article class="bg-white rounded-lg shadow overflow-hidden">
@@ -73,16 +73,16 @@
                     </article>
                 @else
                     <div class="bg-white rounded-lg shadow p-6">
-                        <p class="text-gray-500 text-center">Brak wpisow do wyswietlenia</p>
+                        <p class="text-gray-500 text-center">{{ __('general.no_posts_to_display') }}</p>
                     </div>
                 @endif
             </main>
 
-            {{-- Prawa kolumna - kategorie i tagi --}}
+            {{-- Right column - categories and tags --}}
             <aside class="lg:col-span-1 space-y-6">
-                {{-- Kategorie --}}
+                {{-- Categories --}}
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Kategorie</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.categories') }}</h2>
                     <ul class="space-y-2">
                         @forelse($categories as $category)
                             <li>
@@ -94,21 +94,21 @@
                                 </a>
                             </li>
                         @empty
-                            <li class="text-sm text-gray-500">Brak kategorii</li>
+                            <li class="text-sm text-gray-500">{{ __('general.no_categories') }}</li>
                         @endforelse
                     </ul>
                 </div>
 
-                {{-- Tagi --}}
+                {{-- Tags --}}
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Tagi</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.tags') }}</h2>
                     <div class="flex flex-wrap gap-2">
                         @forelse($tags as $tag)
                             <a href="{{ url('/tags/' . $tag['slug']) }}" class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-600 hover:bg-sky-100 hover:text-sky-800">
                                 #{{ $tag['name'] }}
                             </a>
                         @empty
-                            <p class="text-sm text-gray-500">Brak tagow</p>
+                            <p class="text-sm text-gray-500">{{ __('general.no_tags') }}</p>
                         @endforelse
                     </div>
                 </div>

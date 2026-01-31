@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MeController;
 use App\Http\Controllers\OAuthController;
+use App\Http\Controllers\UserPanelController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -12,6 +13,27 @@ Route::get('/oauth/register', [OAuthController::class, 'register'])->name('regis
 Route::get('/oauth/callback', [OAuthController::class, 'callback']);
 Route::post('/oauth/logout', [OAuthController::class, 'logout'])->name('logout');
 
-Route::get('/me', [MeController::class, 'show'])->name('me');
-Route::put('/me/profile', [MeController::class, 'updateProfile'])->name('me.profile');
-Route::put('/me/password', [MeController::class, 'updatePassword'])->name('me.password');
+// Legacy routes - redirect to panel
+Route::get('/me', fn() => redirect()->route('panel.profile'))->name('me');
+Route::put('/me/profile', fn() => redirect()->route('panel.profile.update'))->name('me.profile');
+Route::put('/me/password', fn() => redirect()->route('panel.password.update'))->name('me.password');
+
+// User Panel Routes (protected)
+Route::prefix('panel')->name('panel.')->middleware('auth.session')->group(function () {
+    Route::get('/', fn() => redirect()->route('panel.posts'))->name('index');
+
+    // User category
+    Route::get('/profile', [UserPanelController::class, 'profile'])->name('profile');
+    Route::put('/profile', [UserPanelController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/password', [UserPanelController::class, 'updatePassword'])->name('password.update');
+
+    // Blog category
+    Route::get('/posts', [UserPanelController::class, 'posts'])->name('posts');
+    Route::get('/posts/create', [UserPanelController::class, 'createPost'])->name('posts.create');
+    Route::post('/posts', [UserPanelController::class, 'storePost'])->name('posts.store');
+    Route::get('/posts/{id}/edit', [UserPanelController::class, 'editPost'])->name('posts.edit');
+    Route::put('/posts/{id}', [UserPanelController::class, 'updatePost'])->name('posts.update');
+    Route::delete('/posts/{id}', [UserPanelController::class, 'deletePost'])->name('posts.delete');
+
+    Route::get('/comments', [UserPanelController::class, 'comments'])->name('comments');
+});
