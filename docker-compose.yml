@@ -12,7 +12,8 @@ services:
     volumes:
       - ./src:/var/www/html
     depends_on:
-      - frontend-redis
+      frontend-redis:
+        condition: service_healthy
     expose:
       - "9000"
     networks:
@@ -32,7 +33,14 @@ services:
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
     depends_on:
-      - frontend-app
+      frontend-app:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/localhost/80'"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     networks:
       - frontend-internal
       - web
@@ -45,6 +53,12 @@ services:
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     networks:
       - frontend-internal
 
