@@ -4,7 +4,23 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MeController;
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\UserPanelController;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
+
+// Kubernetes liveness probe - process is alive
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok'], 200);
+});
+
+// Kubernetes readiness probe - Redis is reachable
+Route::get('/ready', function () {
+    try {
+        Redis::connection()->ping();
+        return response()->json(['status' => 'ready'], 200);
+    } catch (\Throwable $e) {
+        return response()->json(['status' => 'not ready', 'error' => $e->getMessage()], 503);
+    }
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
