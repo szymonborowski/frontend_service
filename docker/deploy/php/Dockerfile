@@ -63,7 +63,8 @@ RUN composer install \
     --no-ansi \
     --no-scripts
 
-RUN php artisan package:discover --ansi
+RUN rm -rf bootstrap/cache/*.php \
+ && php artisan package:discover --ansi
 
 
 # =========================================================
