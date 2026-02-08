@@ -36,10 +36,10 @@ Route::get('/oauth/register', [OAuthController::class, 'register'])->name('regis
 Route::get('/oauth/callback', [OAuthController::class, 'callback']);
 Route::post('/oauth/logout', [OAuthController::class, 'logout'])->name('logout');
 
-// Legacy routes - redirect to panel
-Route::get('/me', fn() => redirect()->route('panel.profile'))->name('me');
-Route::put('/me/profile', fn() => redirect()->route('panel.profile.update'))->name('me.profile');
-Route::put('/me/password', fn() => redirect()->route('panel.password.update'))->name('me.password');
+// Me (profile) routes – use MeController; legacy aliases redirect to panel
+Route::get('/me', [MeController::class, 'show'])->name('me')->middleware('auth.session');
+Route::put('/me/profile', [MeController::class, 'updateProfile'])->name('me.profile')->middleware('auth.session');
+Route::put('/me/password', [MeController::class, 'updatePassword'])->name('me.password')->middleware('auth.session');
 
 // User Panel Routes (protected)
 Route::prefix('panel')->name('panel.')->middleware('auth.session')->group(function () {
