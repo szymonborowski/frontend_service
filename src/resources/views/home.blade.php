@@ -12,7 +12,7 @@
                     <ul class="space-y-3">
                         @forelse($recentPosts as $post)
                             <li>
-                                <a href="{{ url('/posts/' . $post['slug']) }}" class="block group">
+                                <a href="{{ route('post.show', $post['slug']) }}" class="block group">
                                     <h3 class="text-sm font-medium text-gray-900 group-hover:text-sky-800 line-clamp-2">
                                         {{ $post['title'] }}
                                     </h3>
@@ -43,7 +43,7 @@
                                 @endif
                             </div>
                             <h1 class="text-2xl font-bold text-gray-900 mb-3">
-                                <a href="{{ url('/posts/' . $featuredPost['slug']) }}" class="hover:text-sky-800">
+                                <a href="{{ route('post.show', $featuredPost['slug']) }}" class="hover:text-sky-800">
                                     {{ $featuredPost['title'] }}
                                 </a>
                             </h1>
@@ -86,7 +86,7 @@
                     <ul class="space-y-2">
                         @forelse($categories as $category)
                             <li>
-                                <a href="{{ url('/categories/' . $category['slug']) }}" class="flex items-center justify-between text-sm text-gray-600 hover:text-sky-800">
+                                <a href="{{ route('category.show', $category['slug']) }}" class="flex items-center justify-between text-sm text-gray-600 hover:text-sky-800">
                                     <span>{{ $category['name'] }}</span>
                                     <span class="bg-gray-100 text-gray-500 text-xs px-2 py-0.5 rounded-full">
                                         {{ $category['posts_count'] ?? 0 }}
@@ -104,7 +104,7 @@
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.tags') }}</h2>
                     <div class="flex flex-wrap gap-2">
                         @forelse($tags as $tag)
-                            <a href="{{ url('/tags/' . $tag['slug']) }}" class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-600 hover:bg-sky-100 hover:text-sky-800">
+                            <a href="{{ route('tag.show', $tag['slug']) }}" class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-600 hover:bg-sky-100 hover:text-sky-800">
                                 #{{ $tag['name'] }}
                             </a>
                         @empty

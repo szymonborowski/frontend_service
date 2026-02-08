@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MeController;
 use App\Http\Controllers\OAuthController;
+use App\Http\Controllers\PostViewController;
+use App\Http\Controllers\TagViewController;
 use App\Http\Controllers\UserPanelController;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +26,10 @@ Route::get('/ready', function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/kategoria/{slug}', [CategoryViewController::class, 'show'])->name('category.show');
+Route::get('/tag/{slug}', [TagViewController::class, 'show'])->name('tag.show');
+Route::get('/post/{slugOrId}', [PostViewController::class, 'show'])->name('post.show')->where('slugOrId', '[a-zA-Z0-9\-]+|\d+');
 
 Route::get('/oauth/login', [OAuthController::class, 'login'])->name('login');
 Route::get('/oauth/register', [OAuthController::class, 'register'])->name('register');

@@ -71,6 +71,60 @@ class BlogApiService
         });
     }
 
+    public function getCategoryBySlug(string $slug): ?array
+    {
+        $categories = $this->getCategories();
+        foreach ($categories as $category) {
+            if (($category['slug'] ?? '') === $slug) {
+                return $category;
+            }
+        }
+        return null;
+    }
+
+    public function getTagBySlug(string $slug): ?array
+    {
+        $tags = $this->getTags();
+        foreach ($tags as $tag) {
+            if (($tag['slug'] ?? '') === $slug) {
+                return $tag;
+            }
+        }
+        return null;
+    }
+
+    public function getPostsByCategoryId(int $categoryId, int $page = 1, int $perPage = 15): array
+    {
+        $response = Http::get("{$this->baseUrl}/posts", [
+            'category_id' => $categoryId,
+            'status' => 'published',
+            'with' => 'categories,tags',
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
+
+        if ($response->successful()) {
+            return $response->json() ?? ['data' => [], 'meta' => []];
+        }
+        return ['data' => [], 'meta' => []];
+    }
+
+    public function getPostsByTagId(int $tagId, int $page = 1, int $perPage = 15): array
+    {
+        $response = Http::get("{$this->baseUrl}/posts", [
+            'tag_id' => $tagId,
+            'status' => 'published',
+            'with' => 'categories,tags',
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
+
+        if ($response->successful()) {
+            return $response->json() ?? ['data' => [], 'meta' => []];
+        }
+        return ['data' => [], 'meta' => []];
+    }
+
     public function getPost(string $slug): ?array
     {
         $response = Http::get("{$this->baseUrl}/posts", [

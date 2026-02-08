@@ -31,4 +31,5 @@ return [
     'no_categories' => 'No categories',
     'no_tags' => 'No tags',
     'no_posts_to_display' => 'No posts to display',
+    'posts_count' => ':count posts',
 ];

@@ -31,4 +31,5 @@ return [
     'no_categories' => 'Brak kategorii',
     'no_tags' => 'Brak tagow',
     'no_posts_to_display' => 'Brak wpisow do wyswietlenia',
+    'posts_count' => ':count wpisow',
 ];
