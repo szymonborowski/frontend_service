@@ -72,6 +72,13 @@
                             <li class="text-gray-500">{{ __('general.no_posts') }}</li>
                         @endforelse
                     </ul>
+                    <x-pagination
+                        :paginationRoute="$paginationRoute"
+                        :paginationRouteParams="$paginationRouteParams"
+                        :meta="$meta"
+                        :currentPerPage="$currentPerPage"
+                        :allowedPerPage="$allowedPerPage"
+                    />
                 </div>
             </main>
 
