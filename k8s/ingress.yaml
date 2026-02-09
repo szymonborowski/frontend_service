@@ -12,10 +12,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - portfolio.local
+        - portfolio.kube
       secretName: frontend-tls
   rules:
-    - host: portfolio.local
+    - host: portfolio.kube
       http:
         paths:
           - path: /
