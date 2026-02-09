@@ -14,6 +14,10 @@ data:
   LOG_CHANNEL: "stderr"
   REDIS_HOST: "frontend-redis"
   REDIS_PORT: "6379"
+  # Session and cache configuration
+  SESSION_DRIVER: "redis"
+  SESSION_CONNECTION: "default"
+  CACHE_DRIVER: "redis"
   # Internal service-to-service URLs (Kubernetes DNS)
   BLOG_API_URL_INTERNAL: "http://blog"
   USERS_API_URL_INTERNAL: "http://users"
