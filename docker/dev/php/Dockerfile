@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql pdo_sqlite mbstring zip exif pcntl bcmath intl \
     && pecl install redis \
     && pecl install pcov \
-    && docker-php-ext-enable redis pcov
+    && pecl install xdebug \
+    && docker-php-ext-enable redis pcov xdebug
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 

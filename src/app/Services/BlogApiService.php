@@ -19,17 +19,22 @@ class BlogApiService
     {
         $token = session('access_token');
 
+        $client = Http::withOptions([
+            'verify' => false,  // Disable SSL verification for internal calls
+            'allow_redirects' => false,  // Don't follow redirects
+        ]);
+
         if ($token) {
-            return Http::withToken($token);
+            return $client->withToken($token);
         }
 
-        return Http::withHeaders([]);
+        return $client;
     }
 
     public function getRecentPosts(int $limit = 10): array
     {
         return Cache::remember("blog.posts.recent.{$limit}", 300, function () use ($limit) {
-            $response = Http::get("{$this->baseUrl}/posts", [
+            $response = $this->http()->get("{$this->baseUrl}/posts", [
                 'per_page' => $limit,
                 'status' => 'published',
                 'with' => 'categories,tags',
@@ -46,7 +51,7 @@ class BlogApiService
     public function getCategories(): array
     {
         return Cache::remember('blog.categories', 300, function () {
-            $response = Http::get("{$this->baseUrl}/categories", [
+            $response = $this->http()->get("{$this->baseUrl}/categories", [
                 'with_count' => 'posts',
             ]);
 
@@ -61,7 +66,7 @@ class BlogApiService
     public function getTags(): array
     {
         return Cache::remember('blog.tags', 300, function () {
-            $response = Http::get("{$this->baseUrl}/tags");
+            $response = $this->http()->get("{$this->baseUrl}/tags");
 
             if ($response->successful()) {
                 return $response->json('data') ?? [];
@@ -95,7 +100,7 @@ class BlogApiService
 
     public function getPostsByCategoryId(int $categoryId, int $page = 1, int $perPage = 15): array
     {
-        $response = Http::get("{$this->baseUrl}/posts", [
+        $response = $this->http()->get("{$this->baseUrl}/posts", [
             'category_id' => $categoryId,
             'status' => 'published',
             'with' => 'categories,tags',
@@ -111,7 +116,7 @@ class BlogApiService
 
     public function getPostsByTagId(int $tagId, int $page = 1, int $perPage = 15): array
     {
-        $response = Http::get("{$this->baseUrl}/posts", [
+        $response = $this->http()->get("{$this->baseUrl}/posts", [
             'tag_id' => $tagId,
             'status' => 'published',
             'with' => 'categories,tags',
@@ -127,7 +132,7 @@ class BlogApiService
 
     public function getPost(string $slug): ?array
     {
-        $response = Http::get("{$this->baseUrl}/posts", [
+        $response = $this->http()->get("{$this->baseUrl}/posts", [
             'slug' => $slug,
             'with' => 'categories,tags',
         ]);

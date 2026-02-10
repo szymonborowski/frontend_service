@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MeController;
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\PostViewController;
 use App\Http\Controllers\TagViewController;
@@ -36,18 +35,13 @@ Route::get('/oauth/register', [OAuthController::class, 'register'])->name('regis
 Route::get('/oauth/callback', [OAuthController::class, 'callback']);
 Route::post('/oauth/logout', [OAuthController::class, 'logout'])->name('logout');
 
-// Me (profile) routes – use MeController; legacy aliases redirect to panel
-Route::get('/me', [MeController::class, 'show'])->name('me')->middleware('auth.session');
-Route::put('/me/profile', [MeController::class, 'updateProfile'])->name('me.profile')->middleware('auth.session');
-Route::put('/me/password', [MeController::class, 'updatePassword'])->name('me.password')->middleware('auth.session');
-
 // User Panel Routes (protected)
 Route::prefix('panel')->name('panel.')->middleware('auth.session')->group(function () {
     Route::get('/', fn() => redirect()->route('panel.posts'))->name('index');
 
     // User category
     Route::get('/profile', [UserPanelController::class, 'profile'])->name('profile');
-    Route::put('/profile', [UserPanelController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile', [UserPanelController::class, 'updateProfile'])->name('profile.update');
     Route::put('/password', [UserPanelController::class, 'updatePassword'])->name('password.update');
 
     // Blog category

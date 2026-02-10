@@ -7,7 +7,7 @@
 @section('panel-content')
     <form method="POST" action="{{ route('panel.posts.update', $post['id']) }}" class="space-y-6">
         @csrf
-        @method('PUT')
+        @method('POST')
 
         <div>
             <label for="title" class="block text-sm font-medium text-gray-700 mb-2">{{ __('posts.title_required') }}</label>
