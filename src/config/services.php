@@ -49,6 +49,7 @@ return [
 
     'users' => [
         'url' => env('USERS_API_URL_INTERNAL', 'https://users.microservices.local'),
+        'internal_api_key' => env('USERS_INTERNAL_API_KEY'),
     ],
 
 ];
