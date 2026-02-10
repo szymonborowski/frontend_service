@@ -37,18 +37,18 @@ return [
 
     'sso' => [
         'url' => env('SSO_URL', 'https://sso.microservices.local'),
-        'internal_url' => env('SSO_INTERNAL_URL', env('SSO_URL', 'https://sso.microservices.local')),
+        'internal_url' => env('SSO_API_URL_INTERNAL', 'http://sso-nginx'),
         'client_id' => env('SSO_CLIENT_ID'),
         'client_secret' => env('SSO_CLIENT_SECRET'),
         'redirect_uri' => env('APP_URL') . '/oauth/callback',
     ],
 
     'blog' => [
-        'url' => env('BLOG_API_URL_INTERNAL', 'https://blog.microservices.local'),
+        'url' => env('BLOG_API_URL_INTERNAL', 'http://blog-nginx'),
     ],
 
     'users' => [
-        'url' => env('USERS_API_URL_INTERNAL', 'https://users.microservices.local'),
+        'url' => env('USERS_API_URL_INTERNAL', 'http://users-nginx'),
         'internal_api_key' => env('USERS_INTERNAL_API_KEY'),
     ],
 

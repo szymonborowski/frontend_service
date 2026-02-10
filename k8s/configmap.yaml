@@ -21,7 +21,7 @@ data:
   # Internal service-to-service URLs (Kubernetes DNS)
   BLOG_API_URL_INTERNAL: "http://blog"
   USERS_API_URL_INTERNAL: "http://users"
-  SSO_INTERNAL_URL: "http://sso"
+  SSO_API_URL_INTERNAL: "http://sso"
   # External SSO URL (for browser redirects)
   SSO_URL: "https://sso.portfolio.kube"
   # OAuth credentials (generate proper values in production)
