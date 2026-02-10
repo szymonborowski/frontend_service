@@ -15,7 +15,7 @@
 
 @if($total > 0)
     <div class="mt-6 pt-6 border-t border-gray-200 space-y-4">
-        {{-- Wybór liczby postów na stronie --}}
+        {{-- Per page selector --}}
         <div class="flex flex-wrap items-center gap-2">
             <span class="text-sm text-gray-600">{{ __('general.per_page') }}</span>
             @foreach($allowedPerPage as $num)
@@ -28,7 +28,7 @@
             @endforeach
         </div>
 
-        {{-- Lista stron --}}
+        {{-- Page list --}}
         @if($lastPage > 1)
             <nav class="flex flex-wrap items-center gap-1" aria-label="{{ __('general.pagination') }}">
                 @for($p = 1; $p <= $lastPage; $p++)
