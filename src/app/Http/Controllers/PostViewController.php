@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AnalyticsEventPublisher;
 use App\Services\BlogApiService;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PostViewController extends Controller
 {
     public function __construct(
-        protected BlogApiService $blogApi
+        protected BlogApiService $blogApi,
+        protected AnalyticsEventPublisher $analyticsPublisher,
     ) {}
 
-    public function show(string $slugOrId): View
+    public function show(string $slugOrId, Request $request): View
     {
         $post = null;
 
@@ -23,6 +26,12 @@ class PostViewController extends Controller
 
         if (!$post) {
             abort(404);
+        }
+
+        $postUuid = $post['uuid'] ?? null;
+        if ($postUuid) {
+            $userId = session('user_id');
+            $this->analyticsPublisher->publishPostViewed($postUuid, $userId, $request);
         }
 
         $recentPosts = $this->blogApi->getRecentPosts(5);

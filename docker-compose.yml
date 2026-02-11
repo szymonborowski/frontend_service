@@ -12,6 +12,10 @@ services:
     environment:
       - PHP_IDE_CONFIG="serverName=frontend-docker"
       - XDEBUG_CONFIG="client_host=host.docker.internal"
+      - RABBITMQ_HOST=${RABBITMQ_HOST:-rabbitmq}
+      - RABBITMQ_PORT=${RABBITMQ_PORT:-5672}
+      - RABBITMQ_USER=${RABBITMQ_USER:-admin}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-secret}
     volumes:
       - ./src:/var/www/html
       - ./docker/dev/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:ro
