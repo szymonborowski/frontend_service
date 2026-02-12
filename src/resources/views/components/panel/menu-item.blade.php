@@ -1,4 +1,4 @@
-@props(['href', 'active' => false, 'icon' => null])
+@props(['href', 'active' => false, 'icon' => null, 'target' => null])
 
 @php
 $classes = $active
@@ -7,7 +7,7 @@ $classes = $active
 @endphp
 
 <li>
-    <a href="{{ $href }}" {{ $attributes->merge(['class' => "flex items-center px-3 py-2 text-sm font-medium rounded-r-md transition-colors $classes"]) }}>
+    <a href="{{ $href }}" @if($target) target="{{ $target }}" @endif {{ $attributes->merge(['class' => "flex items-center px-3 py-2 text-sm font-medium rounded-r-md transition-colors $classes"]) }}>
         @if($icon)
             <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 @switch($icon)
@@ -22,6 +22,9 @@ $classes = $active
                         @break
                     @case('plus')
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        @break
+                    @case('admin')
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         @break
                 @endswitch
             </svg>

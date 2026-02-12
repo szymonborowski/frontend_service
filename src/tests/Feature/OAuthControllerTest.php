@@ -17,6 +17,8 @@ class OAuthControllerTest extends TestCase
             'services.sso.client_id' => 'frontend-client',
             'services.sso.client_secret' => 'secret',
             'services.sso.redirect_uri' => 'https://frontend.test/oauth/callback',
+            'services.users.url' => 'https://users-internal.test',
+            'services.users.internal_api_key' => 'test-api-key',
         ]);
     }
 
@@ -84,6 +86,13 @@ class OAuthControllerTest extends TestCase
                 'email' => 'test@example.com',
                 'created_at' => '2026-01-01T00:00:00.000000Z',
             ], 200),
+            'users-internal.test/api/internal/users/1' => Http::response([
+                'id' => 1,
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+                'roles' => ['reader'],
+                'created_at' => '2026-01-01T00:00:00.000000Z',
+            ], 200),
         ]);
 
         $response = $this->get('/oauth/callback?state=valid-state&code=auth-code');
@@ -93,6 +102,7 @@ class OAuthControllerTest extends TestCase
         $this->assertEquals('refresh-456', session('refresh_token'));
         $this->assertEquals(1, session('user')['id']);
         $this->assertEquals('Test User', session('user')['name']);
+        $this->assertEquals(['reader'], session('user')['roles']);
     }
 
     #[Test]
@@ -107,6 +117,40 @@ class OAuthControllerTest extends TestCase
         $response = $this->get('/oauth/callback?state=valid-state&code=bad-code');
 
         $response->assertStatus(400);
+    }
+
+    #[Test]
+    public function callback_loads_admin_role_for_admin_users(): void
+    {
+        $this->withSession(['oauth_state' => 'valid-state']);
+
+        Http::fake([
+            'sso-internal.test/oauth/token' => Http::response([
+                'access_token' => 'token-123',
+                'refresh_token' => 'refresh-456',
+                'token_type' => 'Bearer',
+                'expires_in' => 3600,
+            ], 200),
+            'sso-internal.test/api/user' => Http::response([
+                'id' => 2,
+                'name' => 'Admin User',
+                'email' => 'admin@example.com',
+                'created_at' => '2026-01-01T00:00:00.000000Z',
+            ], 200),
+            'users-internal.test/api/internal/users/2' => Http::response([
+                'id' => 2,
+                'name' => 'Admin User',
+                'email' => 'admin@example.com',
+                'roles' => ['admin', 'author'],
+                'created_at' => '2026-01-01T00:00:00.000000Z',
+            ], 200),
+        ]);
+
+        $response = $this->get('/oauth/callback?state=valid-state&code=auth-code');
+
+        $response->assertRedirect(route('home'));
+        $this->assertEquals(['admin', 'author'], session('user')['roles']);
+        $this->assertContains('admin', session('user')['roles']);
     }
 
     #[Test]

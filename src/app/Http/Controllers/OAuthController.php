@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UsersApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class OAuthController extends Controller
 {
+    public function __construct(
+        protected UsersApiService $usersApiService
+    ) {}
     public function login(Request $request)
     {
         $state = Str::random(40);
@@ -70,11 +74,17 @@ class OAuthController extends Controller
 
         if ($userResponse->successful()) {
             $userData = $userResponse->json();
+            $userId = $userData['id'];
+
+            // Fetch full user data with roles from Users API
+            $fullUserData = $this->usersApiService->getUser($userId);
+
             $request->session()->put('user', [
                 'id' => $userData['id'],
                 'name' => $userData['name'] ?? null,
                 'email' => $userData['email'] ?? null,
                 'created_at' => $userData['created_at'] ?? null,
+                'roles' => $fullUserData['roles'] ?? [],
             ]);
         }
 

@@ -32,4 +32,23 @@
             {{ __('panel.new_post') }}
         </x-panel.menu-item>
     </x-panel.menu-category>
+
+    @php
+        $user = session('user', []);
+        $roles = $user['roles'] ?? [];
+        $isAdmin = in_array('admin', $roles, true);
+    @endphp
+
+    @if($isAdmin)
+        <x-panel.menu-category :title="__('panel.admin_section')" class="mt-6">
+            <x-panel.menu-item
+                :href="config('services.admin.url')"
+                :active="false"
+                icon="admin"
+                target="_blank"
+            >
+                {{ __('panel.admin_panel') }}
+            </x-panel.menu-item>
+        </x-panel.menu-category>
+    @endif
 </nav>

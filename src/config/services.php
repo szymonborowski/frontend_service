@@ -52,4 +52,8 @@ return [
         'internal_api_key' => env('USERS_INTERNAL_API_KEY'),
     ],
 
+    'admin' => [
+        'url' => env('ADMIN_URL', 'https://admin.microservices.local'),
+    ],
+
 ];

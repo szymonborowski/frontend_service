@@ -4,10 +4,12 @@ return [
     // Sidebar
     'user_section' => 'Uzytkownik',
     'blog_section' => 'Blog',
+    'admin_section' => 'Administracja',
     'user_data' => 'Dane uzytkownika',
     'my_posts' => 'Moje posty',
     'my_comments' => 'Moje komentarze',
     'new_post' => 'Nowy post',
+    'admin_panel' => 'Panel administracyjny',
 
     // Profile
     'profile_data' => 'Dane profilu',
