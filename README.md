@@ -19,7 +19,7 @@ Browser ──▶ Traefik ──▶ Nginx ──▶ PHP-FPM (Laravel)
 
 ## Tech Stack
 
-- **Backend:** PHP 8.2 / Laravel 12
+- **Backend:** PHP 8.5 / Laravel 12
 - **Frontend:** Vite 7 / Tailwind CSS 4 / Axios
 - **Session store:** Redis 7
 - **Authentication:** OAuth 2.0 (via SSO service / Laravel Passport)
