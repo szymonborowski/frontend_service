@@ -30,12 +30,13 @@ RUN apk add --no-cache \
         icu-dev \
         oniguruma-dev \
         libxml2-dev \
+        linux-headers \
         autoconf \
         gcc \
         g++ \
         make \
     && docker-php-ext-install -j"$(nproc)" \
-        pdo_mysql mbstring zip exif pcntl bcmath intl \
+        pdo_mysql mbstring zip exif pcntl bcmath intl sockets \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && apk del .build-deps \
