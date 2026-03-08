@@ -1,6 +1,5 @@
 services:
   frontend-app:
-    container_name: frontend-app
     build:
       context: .
       dockerfile: docker/dev/php/Dockerfile
@@ -33,7 +32,6 @@ services:
       - microservices
 
   frontend-vite:
-    container_name: frontend-vite
     image: node:22-alpine
     working_dir: /app
     volumes:
@@ -45,7 +43,6 @@ services:
       - frontend-internal
 
   frontend-nginx:
-    container_name: frontend-nginx
     image: nginx:1.27
     volumes:
       - ./src:/var/www/html
@@ -73,7 +70,6 @@ services:
 
   frontend-redis:
     image: redis:7-alpine
-    container_name: frontend-redis
     ports:
       - "6379:6379"
     command: redis-server --appendonly yes
