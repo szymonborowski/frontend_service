@@ -86,7 +86,8 @@ WORKDIR /var/www/html
 COPY --from=build-composer /var/www/html .
 COPY --from=build-frontend /app/public/build ./public/build
 
-RUN chown -R www-data:www-data storage bootstrap/cache \
+RUN rm -f public/hot \
+ && chown -R www-data:www-data storage bootstrap/cache \
  && php artisan view:clear \
  && php artisan config:clear \
  && php artisan route:clear

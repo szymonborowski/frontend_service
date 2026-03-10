@@ -26,6 +26,9 @@ docker/dev
 src/tests
 src/phpunit.xml
 
+# Vite dev server hot-reload file (must never end up in production image)
+src/public/hot
+
 # Logs and cache (should be empty in image)
 src/storage/logs/*
 src/storage/framework/cache/*
