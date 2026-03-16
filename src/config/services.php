@@ -56,4 +56,9 @@ return [
         'url' => env('ADMIN_URL', 'https://admin.microservices.local'),
     ],
 
+    'analytics' => [
+        'url' => env('ANALYTICS_API_URL_INTERNAL', 'http://analytics-nginx'),
+        'internal_api_key' => env('ANALYTICS_INTERNAL_API_KEY'),
+    ],
+
 ];

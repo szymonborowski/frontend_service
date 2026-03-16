@@ -53,4 +53,5 @@ Route::prefix('panel')->name('panel.')->middleware('auth.session')->group(functi
     Route::delete('/posts/{id}', [UserPanelController::class, 'deletePost'])->name('posts.delete');
 
     Route::get('/comments', [UserPanelController::class, 'comments'])->name('comments');
+    Route::get('/analytics', [UserPanelController::class, 'analytics'])->name('analytics');
 });

@@ -9,6 +9,7 @@ return [
     'my_posts' => 'Moje posty',
     'my_comments' => 'Moje komentarze',
     'new_post' => 'Nowy post',
+    'analytics' => 'Statystyki',
     'admin_panel' => 'Panel administracyjny',
 
     // Profile
@@ -21,4 +22,5 @@ return [
     'my_comments_panel' => 'Moje komentarze - Panel',
     'new_post_panel' => 'Nowy post - Panel',
     'edit_post_panel' => 'Edytuj post - Panel',
+    'analytics_panel' => 'Statystyki - Panel',
 ];

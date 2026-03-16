@@ -25,6 +25,13 @@
             {{ __('panel.my_comments') }}
         </x-panel.menu-item>
         <x-panel.menu-item
+            :href="route('panel.analytics')"
+            :active="request()->routeIs('panel.analytics')"
+            icon="analytics"
+        >
+            {{ __('panel.analytics') }}
+        </x-panel.menu-item>
+        <x-panel.menu-item
             :href="route('panel.posts.create')"
             :active="request()->routeIs('panel.posts.create')"
             icon="plus"

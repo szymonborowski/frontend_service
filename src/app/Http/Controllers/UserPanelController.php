@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AnalyticsApiService;
 use App\Services\BlogApiService;
 use App\Services\UsersApiService;
 use Illuminate\Http\RedirectResponse;
@@ -12,7 +13,8 @@ class UserPanelController extends Controller
 {
     public function __construct(
         protected UsersApiService $usersApiService,
-        protected BlogApiService $blogApiService
+        protected BlogApiService $blogApiService,
+        protected AnalyticsApiService $analyticsApiService,
     ) {}
 
     // === User Category ===
@@ -91,11 +93,56 @@ class UserPanelController extends Controller
         $user = session('user', []);
         $userId = $user['id'] ?? null;
 
-        // TODO: Implement getUserPosts in BlogApiService
         $posts = $userId ? $this->blogApiService->getUserPosts($userId) : [];
+
+        // Fetch view counts for all posts in one request
+        $postUuids = array_filter(array_column($posts['data'] ?? [], 'uuid'));
+        $viewsByUuid = [];
+
+        if ($userId && !empty($postUuids)) {
+            $stats = $this->analyticsApiService->getAuthorStats($userId, array_values($postUuids), 'all');
+            foreach ($stats['top_posts'] ?? [] as $topPost) {
+                $viewsByUuid[$topPost['post_uuid']] = $topPost['views'];
+            }
+        }
 
         return view('panel.posts.index', [
             'posts' => $posts,
+            'viewsByUuid' => $viewsByUuid,
+        ]);
+    }
+
+    public function analytics(): View
+    {
+        $user = session('user', []);
+        $userId = $user['id'] ?? null;
+
+        $posts = $userId ? $this->blogApiService->getUserPosts($userId, page: 1) : [];
+        $postList = $posts['data'] ?? [];
+        $postUuids = array_filter(array_column($postList, 'uuid'));
+
+        $stats = ['total_views' => 0, 'unique_viewers' => 0, 'top_posts' => []];
+        $viewsByUuid = [];
+
+        if ($userId && !empty($postUuids)) {
+            $stats = $this->analyticsApiService->getAuthorStats($userId, array_values($postUuids), 'all');
+            foreach ($stats['top_posts'] ?? [] as $topPost) {
+                $viewsByUuid[$topPost['post_uuid']] = $topPost['views'];
+            }
+        }
+
+        // Merge view counts into post list and sort by views desc
+        $postList = array_map(function ($post) use ($viewsByUuid) {
+            $post['views'] = $viewsByUuid[$post['uuid'] ?? ''] ?? 0;
+            return $post;
+        }, $postList);
+
+        usort($postList, fn ($a, $b) => $b['views'] <=> $a['views']);
+
+        return view('panel.analytics', [
+            'postList' => $postList,
+            'totalViews' => $stats['total_views'] ?? 0,
+            'uniqueViewers' => $stats['unique_viewers'] ?? 0,
         ]);
     }
 
