@@ -37,6 +37,11 @@ services:
       - frontend-internal
       - microservices
     logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+          cpus: '0.50'
 
   frontend-vite:
     image: node:22-alpine
@@ -49,6 +54,11 @@ services:
     networks:
       - frontend-internal
     logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+          cpus: '0.50'
 
   frontend-nginx:
     image: nginx:1.27
@@ -76,6 +86,11 @@ services:
       - frontend-internal
       - web
     logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 64m
+          cpus: '0.25'
 
   frontend-redis:
     image: redis:7-alpine
@@ -93,6 +108,11 @@ services:
     networks:
       - frontend-internal
     logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+          cpus: '0.10'
 
 networks:
   frontend-internal:
