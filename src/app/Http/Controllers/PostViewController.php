@@ -37,12 +37,16 @@ class PostViewController extends Controller
         $recentPosts = $this->blogApi->getRecentPosts(5);
         $categories = $this->blogApi->getCategories();
         $tags = $this->blogApi->getTags();
+        $commentsPage = max(1, (int) $request->query('comments_page', 1));
+        $commentsResult = $this->blogApi->getPostComments($post['id'], $commentsPage);
 
         return view('post', [
             'post' => $post,
             'recentPosts' => $recentPosts,
             'categories' => $categories,
             'tags' => $tags,
+            'comments' => $commentsResult['data'] ?? [],
+            'commentsMeta' => $commentsResult['meta'] ?? [],
         ]);
     }
 }

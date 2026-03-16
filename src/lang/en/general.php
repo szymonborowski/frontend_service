@@ -33,6 +33,11 @@ return [
     'no_posts_to_display' => 'No posts to display',
     'posts_count' => ':count posts',
 
+    // Comments
+    'comments' => 'Comments',
+    'no_comments' => 'No comments yet',
+    'load_more_comments' => 'Load more comments',
+
     // Pagination
     'per_page' => 'Per page:',
     'pagination' => 'Pages',

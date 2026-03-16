@@ -64,8 +64,57 @@
                                 </div>
                             </div>
                         @endif
+
+                        {{-- Przycisk edycji dla autora --}}
+                        @if(session('user_id') && session('user_id') == ($post['author']['user_id'] ?? null))
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <a href="{{ route('panel.posts.edit', $post['id']) }}"
+                                   class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-sky-800 bg-sky-50 rounded hover:bg-sky-100">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                    {{ __('posts.edit_post') }}
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </article>
+
+                {{-- Sekcja komentarzy --}}
+                <div class="mt-6 bg-white rounded-lg shadow p-6" id="comments">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">
+                        {{ __('general.comments') }}
+                        @if(($commentsMeta['total'] ?? 0) > 0)
+                            <span class="text-sm font-normal text-gray-500">({{ $commentsMeta['total'] }})</span>
+                        @endif
+                    </h2>
+
+                    @forelse($comments as $comment)
+                        <div class="py-4 border-b border-gray-100 last:border-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-800">
+                                    {{ __('general.user') }} #{{ $comment['author_id'] }}
+                                </span>
+                                <time class="text-xs text-gray-400">
+                                    {{ \Carbon\Carbon::parse($comment['created_at'])->format('d.m.Y H:i') }}
+                                </time>
+                            </div>
+                            <p class="text-sm text-gray-700">{{ $comment['content'] }}</p>
+                        </div>
+                    @empty
+                        <p class="text-sm text-gray-500">{{ __('general.no_comments') }}</p>
+                    @endforelse
+
+                    @if(($commentsMeta['total'] ?? 0) > count($comments))
+                        <div class="mt-4 text-center">
+                            <a href="{{ request()->fullUrlWithQuery(['comments_page' => ($commentsMeta['current_page'] ?? 1) + 1]) }}#comments"
+                               class="text-sm text-sky-800 hover:underline">
+                                {{ __('general.load_more_comments') }}
+                            </a>
+                        </div>
+                    @endif
+                </div>
             </main>
 
             {{-- Right column - categories and tags --}}

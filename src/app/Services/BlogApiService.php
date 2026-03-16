@@ -174,6 +174,24 @@ class BlogApiService
         return ['data' => [], 'meta' => []];
     }
 
+    public function getPostComments(int $postId, int $page = 1, int $perPage = 5): array
+    {
+        $response = $this->http()->get("{$this->baseUrl}/comments", [
+            'post_id' => $postId,
+            'status' => 'approved',
+            'sort_by' => 'created_at',
+            'sort_order' => 'desc',
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
+
+        if ($response->successful()) {
+            return $response->json() ?? ['data' => [], 'meta' => []];
+        }
+
+        return ['data' => [], 'meta' => []];
+    }
+
     public function getUserComments(int $userId, int $page = 1): array
     {
         $response = $this->http()->get("{$this->baseUrl}/comments", [

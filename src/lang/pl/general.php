@@ -33,6 +33,11 @@ return [
     'no_posts_to_display' => 'Brak wpisow do wyswietlenia',
     'posts_count' => ':count wpisow',
 
+    // Comments
+    'comments' => 'Komentarze',
+    'no_comments' => 'Brak komentarzy',
+    'load_more_comments' => 'Załaduj więcej komentarzy',
+
     // Pagination
     'per_page' => 'Na stronie:',
     'pagination' => 'Strony',
