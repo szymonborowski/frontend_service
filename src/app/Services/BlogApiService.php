@@ -48,6 +48,19 @@ class BlogApiService
         });
     }
 
+    public function getActiveSlides(): array
+    {
+        return Cache::remember('blog.slides.active', 300, function () {
+            $response = $this->http()->get("{$this->baseUrl}/slides");
+
+            if ($response->successful()) {
+                return $response->json('data') ?? [];
+            }
+
+            return [];
+        });
+    }
+
     public function getCategories(): array
     {
         return Cache::remember('blog.categories', 300, function () {

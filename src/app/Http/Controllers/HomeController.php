@@ -17,12 +17,14 @@ class HomeController extends Controller
         $featuredPost = $recentPosts[0] ?? null;
         $categories = $this->blogApi->getCategories();
         $tags = $this->blogApi->getTags();
+        $slides = $this->blogApi->getActiveSlides();
 
         return view('home', [
             'recentPosts' => $recentPosts,
             'featuredPost' => $featuredPost,
             'categories' => $categories,
             'tags' => $tags,
+            'slides' => $slides,
         ]);
     }
 }
