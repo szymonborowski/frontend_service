@@ -70,7 +70,7 @@
 
     <footer class="bg-white border-t border-gray-200 mt-12">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-sm text-gray-500">&copy; {{ date('Y') }} Portfolio. {{ __('general.all_rights_reserved') }}</p>
+            <p class="text-center text-sm text-gray-500">&copy; {{ date('Y') }} Szymon Borowski. {{ __('general.all_rights_reserved') }}</p>
         </div>
     </footer>
 
