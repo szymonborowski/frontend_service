@@ -33,6 +33,9 @@ return [
 
     // Home page
     'home' => 'Home',
+    'most_important_posts' => 'Start Here',
+    'most_important_posts_subtitle' => 'Where the ideas behind this site began — handpicked posts about who I am, what I build, and why.',
+    'read_more' => 'Read more',
     'recent_posts' => 'Recent posts',
     'categories' => 'Categories',
     'tags' => 'Tags',

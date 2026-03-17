@@ -50,8 +50,19 @@ class BlogApiService
 
     public function getActiveSlides(): array
     {
-        return Cache::remember('blog.slides.active', 300, function () {
-            $response = $this->http()->get("{$this->baseUrl}/slides");
+        $response = $this->http()->get("{$this->baseUrl}/slides");
+
+        if ($response->successful()) {
+            return $response->json('data') ?? [];
+        }
+
+        return [];
+    }
+
+    public function getMostImportantPosts(): array
+    {
+        return Cache::remember('blog.featured_posts', 300, function () {
+            $response = $this->http()->get("{$this->baseUrl}/featured-posts");
 
             if ($response->successful()) {
                 return $response->json('data') ?? [];

@@ -33,6 +33,9 @@ return [
 
     // Home page
     'home' => 'Strona glowna',
+    'most_important_posts' => 'Od czego zacząć',
+    'most_important_posts_subtitle' => 'Tu zaczęły się pomysły stojące za tą stroną — wybrane posty o tym, kim jestem, co buduję i dlaczego.',
+    'read_more' => 'Czytaj dalej',
     'recent_posts' => 'Ostatnie wpisy',
     'categories' => 'Kategorie',
     'tags' => 'Tagi',

@@ -32,54 +32,55 @@
                 </div>
             </aside>
 
-            {{-- Middle column - featured post --}}
+            {{-- Middle column - most important posts --}}
             <main class="lg:col-span-2">
-                @if($featuredPost)
-                    <article class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                @if($featuredPost['categories'] ?? [])
-                                    @foreach($featuredPost['categories'] as $category)
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-800">
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="px-6 pt-6 pb-3 border-b border-gray-100">
+                        <h2 class="text-lg font-semibold text-gray-900">{{ __('general.most_important_posts') }}</h2>
+                        <p class="text-sm text-gray-500 mt-0.5">{{ __('general.most_important_posts_subtitle') }}</p>
+                    </div>
+
+                    @forelse($mostImportantPosts as $post)
+                        <article class="px-6 py-5 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors">
+                            {{-- Categories --}}
+                            @if(!empty($post['categories']))
+                                <div class="flex flex-wrap gap-1.5 mb-2">
+                                    @foreach($post['categories'] as $category)
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-800">
                                             {{ $category['name'] }}
                                         </span>
                                     @endforeach
-                                @endif
-                            </div>
-                            <h1 class="text-2xl font-bold text-gray-900 mb-3">
-                                <a href="{{ route('post.show', $featuredPost['slug']) }}" class="hover:text-sky-800">
-                                    {{ $featuredPost['title'] }}
-                                </a>
-                            </h1>
-                            <div class="flex items-center text-sm text-gray-500 mb-4">
-                                <time datetime="{{ $featuredPost['published_at'] }}">
-                                    {{ \Carbon\Carbon::parse($featuredPost['published_at'])->format('d F Y') }}
-                                </time>
-                            </div>
-                            @if($featuredPost['excerpt'])
-                                <p class="text-gray-600 mb-4">{{ $featuredPost['excerpt'] }}</p>
-                            @endif
-                            <div class="prose prose-gray max-w-none">
-                                {!! \Illuminate\Support\Str::markdown($featuredPost['content']) !!}
-                            </div>
-                            @if($featuredPost['tags'] ?? [])
-                                <div class="mt-6 pt-4 border-t border-gray-200">
-                                    <div class="flex flex-wrap gap-2">
-                                        @foreach($featuredPost['tags'] as $tag)
-                                            <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-600">
-                                                #{{ $tag['name'] }}
-                                            </span>
-                                        @endforeach
-                                    </div>
                                 </div>
                             @endif
+
+                            {{-- Title --}}
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">
+                                <a href="{{ route('post.show', $post['slug']) }}" class="hover:text-sky-800 transition-colors">
+                                    {{ $post['title'] }}
+                                </a>
+                            </h3>
+
+                            {{-- Excerpt --}}
+                            @if(!empty($post['excerpt']))
+                                <p class="text-sm text-gray-600 line-clamp-2 mb-2">{{ $post['excerpt'] }}</p>
+                            @endif
+
+                            {{-- Meta --}}
+                            <div class="flex items-center justify-between">
+                                <time class="text-xs text-gray-400" datetime="{{ $post['published_at'] }}">
+                                    {{ \Carbon\Carbon::parse($post['published_at'])->format('d.m.Y') }}
+                                </time>
+                                <a href="{{ route('post.show', $post['slug']) }}" class="text-xs font-medium text-sky-700 hover:text-sky-900 transition-colors">
+                                    {{ __('general.read_more') }} →
+                                </a>
+                            </div>
+                        </article>
+                    @empty
+                        <div class="px-6 py-10 text-center text-gray-400 text-sm">
+                            {{ __('general.no_posts_to_display') }}
                         </div>
-                    </article>
-                @else
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <p class="text-gray-500 text-center">{{ __('general.no_posts_to_display') }}</p>
-                    </div>
-                @endif
+                    @endforelse
+                </div>
             </main>
 
             {{-- Right column - categories and tags --}}

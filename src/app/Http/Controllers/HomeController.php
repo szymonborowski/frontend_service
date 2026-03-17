@@ -13,18 +13,18 @@ class HomeController extends Controller
 
     public function index(): View
     {
-        $recentPosts = $this->blogApi->getRecentPosts(10);
-        $featuredPost = $recentPosts[0] ?? null;
-        $categories = $this->blogApi->getCategories();
-        $tags = $this->blogApi->getTags();
-        $slides = $this->blogApi->getActiveSlides();
+        $recentPosts        = $this->blogApi->getRecentPosts(10);
+        $mostImportantPosts = $this->blogApi->getMostImportantPosts();
+        $categories         = $this->blogApi->getCategories();
+        $tags               = $this->blogApi->getTags();
+        $slides             = $this->blogApi->getActiveSlides();
 
         return view('home', [
-            'recentPosts' => $recentPosts,
-            'featuredPost' => $featuredPost,
-            'categories' => $categories,
-            'tags' => $tags,
-            'slides' => $slides,
+            'recentPosts'        => $recentPosts,
+            'mostImportantPosts' => $mostImportantPosts,
+            'categories'         => $categories,
+            'tags'               => $tags,
+            'slides'             => $slides,
         ]);
     }
 }
