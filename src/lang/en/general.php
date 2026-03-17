@@ -12,6 +12,14 @@ return [
 
     // Footer
     'all_rights_reserved' => 'All rights reserved.',
+    'footer_navigation' => 'Navigation',
+    'footer_find_me' => 'Find me',
+    'footer_blog' => 'Blog',
+    'footer_about' => 'About me',
+    'footer_contact' => 'Contact',
+    'footer_download_cv' => 'Download CV',
+    'footer_built_with' => 'Built with Laravel & Livewire',
+    'footer_cv_url' => '/cv-en.pdf',
 
     // Common
     'save_changes' => 'Save changes',
