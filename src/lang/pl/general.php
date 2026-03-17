@@ -2,7 +2,8 @@
 
 return [
     // Navigation
-    'blog' => 'Blog',
+    'blog' => 'Extended\Mind::Thesis()',
+    'blog_tooltip' => 'Umysł nie kończy się na granicy czaszki — rozciąga się na narzędzia, notatki i środowisko. — Clark & Chalmers, 1998',
     'login' => 'Zaloguj',
     'logout' => 'Wyloguj',
     'register' => 'Zarejestruj',

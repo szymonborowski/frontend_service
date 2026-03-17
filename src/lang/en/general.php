@@ -2,7 +2,8 @@
 
 return [
     // Navigation
-    'blog' => 'Blog',
+    'blog' => 'Extended\Mind::Thesis()',
+    'blog_tooltip' => 'The mind extends beyond the skull — into tools, notes, and environment. — Clark & Chalmers, 1998',
     'login' => 'Login',
     'logout' => 'Logout',
     'register' => 'Register',
