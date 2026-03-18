@@ -8,7 +8,7 @@ RUN groupadd -g ${GID} app \
 
 RUN apt-get update && apt-get install -y \
     git zip unzip curl libpng-dev libonig-dev libxml2-dev libzip-dev libicu-dev libsqlite3-dev \
-    && docker-php-ext-install pdo_mysql pdo_sqlite mbstring zip exif pcntl bcmath intl \
+    && docker-php-ext-install pdo_mysql pdo_sqlite mbstring zip exif pcntl bcmath intl sockets \
     && pecl install redis \
     && pecl install pcov \
     && pecl install xdebug \
