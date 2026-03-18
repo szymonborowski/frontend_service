@@ -84,7 +84,7 @@ class OAuthController extends Controller
                 'name' => $userData['name'] ?? null,
                 'email' => $userData['email'] ?? null,
                 'created_at' => $userData['created_at'] ?? null,
-                'roles' => $fullUserData['roles'] ?? [],
+                'roles' => $fullUserData['data']['roles'] ?? $fullUserData['roles'] ?? [],
             ]);
         }
 
