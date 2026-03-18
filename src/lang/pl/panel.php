@@ -14,6 +14,8 @@ return [
 
     // Profile
     'profile_data' => 'Dane profilu',
+    'account_info' => 'Informacje o koncie',
+    'roles' => 'Role',
     'change_password' => 'Zmiana hasla',
 
     // Page titles

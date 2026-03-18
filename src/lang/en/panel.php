@@ -14,6 +14,8 @@ return [
 
     // Profile
     'profile_data' => 'Profile data',
+    'account_info' => 'Account information',
+    'roles' => 'Roles',
     'change_password' => 'Change password',
 
     // Page titles

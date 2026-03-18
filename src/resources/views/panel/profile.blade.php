@@ -42,6 +42,23 @@
             </form>
         </div>
 
+        <!-- Account info (read-only) -->
+        <div class="pt-8 border-t border-gray-200">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('panel.account_info') }}</h2>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('panel.roles') }}</label>
+                <div class="flex flex-wrap gap-2">
+                    @forelse ($user['roles'] ?? [] as $role)
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-sky-100 text-sky-800">
+                            {{ $role }}
+                        </span>
+                    @empty
+                        <span class="text-sm text-gray-400">—</span>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
         <!-- Change password form -->
         <div class="pt-8 border-t border-gray-200">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('panel.change_password') }}</h2>
