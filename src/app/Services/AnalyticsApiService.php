@@ -38,6 +38,53 @@ class AnalyticsApiService
         return ['total_views' => 0, 'unique_viewers' => 0, 'daily_stats' => []];
     }
 
+    public function toggleLike(string $type, string $id, string $ipAddress, ?int $userId = null): array
+    {
+        try {
+            $payload = [
+                'likeable_type' => $type,
+                'likeable_id' => $id,
+                'ip_address' => $ipAddress,
+            ];
+
+            if ($userId !== null) {
+                $payload['user_id'] = $userId;
+            }
+
+            $response = $this->http()->post("{$this->baseUrl}/likes/toggle", $payload);
+
+            if ($response->successful()) {
+                return $response->json();
+            }
+        } catch (\Throwable $e) {
+            report($e);
+        }
+
+        return ['liked' => false, 'count' => 0];
+    }
+
+    public function getBatchLikes(array $items, ?string $ipAddress = null): array
+    {
+        if (empty($items)) {
+            return [];
+        }
+
+        try {
+            $response = $this->http()->post("{$this->baseUrl}/likes/batch", [
+                'items' => $items,
+                'ip_address' => $ipAddress,
+            ]);
+
+            if ($response->successful()) {
+                return $response->json('data') ?? [];
+            }
+        } catch (\Throwable $e) {
+            report($e);
+        }
+
+        return [];
+    }
+
     /**
      * @param  array<string>  $postUuids
      */

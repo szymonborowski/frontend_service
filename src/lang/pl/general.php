@@ -19,6 +19,7 @@ return [
     'footer_contact' => 'Kontakt',
     'footer_download_cv' => 'Pobierz CV',
     'footer_built_with' => 'Zbudowane z Laravel & Livewire',
+    'footer_tech_stack' => 'Technologie',
     'footer_cv_url' => '/cv-pl.pdf',
 
     // Common
@@ -31,8 +32,27 @@ return [
     'created_at' => 'Utworzono',
     'updated_at' => 'Edytowano',
 
+    // Theme
+    'theme_auto' => 'Auto (systemowy)',
+    'theme_dark' => 'Tryb ciemny',
+    'theme_light' => 'Tryb jasny',
+
+    // Hero
+    'hero_greeting' => '> Hello, World!',
+    'hero_subtitle' => 'Blog dewelopera o PHP, Laravel, Docker i nowoczesnej architekturze webowej. Przemyślenia, eksperymenty i wyciągnięte wnioski.',
+    'hero_read_blog' => 'Czytaj bloga',
+    'hero_about_me' => 'O mnie',
+
+    // Newsletter
+    'newsletter_title' => 'Nie przegap nowego wpisu',
+    'newsletter_subtitle' => 'Cotygodniowe materiały o rozwoju, architekturze i nowoczesnych narzędziach webowych. Bez spamu, wypisz się w każdej chwili.',
+    'newsletter_placeholder' => 'twoj@email.com',
+    'newsletter_subscribe' => 'Subskrybuj',
+    'newsletter_error' => 'Coś poszło nie tak. Spróbuj ponownie.',
+
     // Home page
     'home' => 'Strona glowna',
+    'featured_post' => 'Wyróżniony',
     'most_important_posts' => 'Od czego zacząć',
     'most_important_posts_subtitle' => 'Tu zaczęły się pomysły stojące za tą stroną — wybrane posty o tym, kim jestem, co buduję i dlaczego.',
     'read_more' => 'Czytaj dalej',
@@ -49,6 +69,10 @@ return [
     'comments' => 'Komentarze',
     'no_comments' => 'Brak komentarzy',
     'load_more_comments' => 'Załaduj więcej komentarzy',
+
+    // Likes
+    'like' => 'Lubię',
+    'likes' => 'Polubienia',
 
     // Pagination
     'per_page' => 'Na stronie:',

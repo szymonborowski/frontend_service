@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AnalyticsApiService;
 use App\Services\AnalyticsEventPublisher;
 use App\Services\BlogApiService;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ class PostViewController extends Controller
     public function __construct(
         protected BlogApiService $blogApi,
         protected AnalyticsEventPublisher $analyticsPublisher,
+        protected AnalyticsApiService $analyticsApi,
     ) {}
 
     public function show(string $slugOrId, Request $request): View
@@ -40,13 +42,36 @@ class PostViewController extends Controller
         $commentsPage = max(1, (int) $request->query('comments_page', 1));
         $commentsResult = $this->blogApi->getPostComments($post['id'], $commentsPage);
 
+        // Fetch like data for post and comments
+        $comments = $commentsResult['data'] ?? [];
+        $likesItems = [];
+
+        if ($postUuid) {
+            $likesItems[] = ['type' => 'post', 'id' => $postUuid];
+        }
+
+        foreach ($comments as $comment) {
+            if (isset($comment['id'])) {
+                $likesItems[] = ['type' => 'comment', 'id' => (string) $comment['id']];
+            }
+        }
+
+        $likesData = [];
+        if (!empty($likesItems)) {
+            $batchResult = $this->analyticsApi->getBatchLikes($likesItems, $request->ip());
+            foreach ($batchResult as $item) {
+                $likesData[$item['type'] . ':' . $item['id']] = $item;
+            }
+        }
+
         return view('post', [
             'post' => $post,
             'recentPosts' => $recentPosts,
             'categories' => $categories,
             'tags' => $tags,
-            'comments' => $commentsResult['data'] ?? [],
+            'comments' => $comments,
             'commentsMeta' => $commentsResult['meta'] ?? [],
+            'likesData' => $likesData,
         ]);
     }
 }

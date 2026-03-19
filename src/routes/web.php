@@ -30,6 +30,26 @@ Route::get('/kategoria/{slug}', [CategoryViewController::class, 'show'])->name('
 Route::get('/tag/{slug}', [TagViewController::class, 'show'])->name('tag.show');
 Route::get('/post/{slugOrId}', [PostViewController::class, 'show'])->name('post.show')->where('slugOrId', '[a-zA-Z0-9\-]+|\d+');
 
+// Newsletter
+Route::post('/newsletter/subscribe', function (\Illuminate\Http\Request $request) {
+    $result = app(\App\Services\BlogApiService::class)->subscribeNewsletter($request->input('email', ''));
+    return response()->json($result);
+})->name('newsletter.subscribe');
+
+// Likes
+Route::post('/likes/toggle', function (\Illuminate\Http\Request $request) {
+    $userId = session('user_id') ? (int) session('user_id') : null;
+
+    $result = app(\App\Services\AnalyticsApiService::class)->toggleLike(
+        $request->input('type', ''),
+        $request->input('id', ''),
+        $request->ip(),
+        $userId,
+    );
+
+    return response()->json($result);
+})->middleware('throttle:30,1')->name('likes.toggle');
+
 Route::get('/oauth/login', [OAuthController::class, 'login'])->name('login');
 Route::get('/oauth/register', [OAuthController::class, 'register'])->name('register');
 Route::get('/oauth/callback', [OAuthController::class, 'callback']);

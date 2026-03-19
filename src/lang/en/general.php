@@ -19,6 +19,7 @@ return [
     'footer_contact' => 'Contact',
     'footer_download_cv' => 'Download CV',
     'footer_built_with' => 'Built with Laravel & Livewire',
+    'footer_tech_stack' => 'Tech Stack',
     'footer_cv_url' => '/cv-en.pdf',
 
     // Common
@@ -31,8 +32,27 @@ return [
     'created_at' => 'Created',
     'updated_at' => 'Edited',
 
+    // Theme
+    'theme_auto' => 'Auto (system)',
+    'theme_dark' => 'Dark mode',
+    'theme_light' => 'Light mode',
+
+    // Hero
+    'hero_greeting' => '> Hello, World!',
+    'hero_subtitle' => 'Software developer blog about PHP, Laravel, Docker, and modern web architecture. Thoughts, experiments, and lessons learned.',
+    'hero_read_blog' => 'Read Blog',
+    'hero_about_me' => 'About Me',
+
+    // Newsletter
+    'newsletter_title' => 'Never Miss a Post',
+    'newsletter_subtitle' => 'Weekly insights on development, architecture, and modern web tools. No spam, unsubscribe anytime.',
+    'newsletter_placeholder' => 'your@email.com',
+    'newsletter_subscribe' => 'Subscribe',
+    'newsletter_error' => 'Something went wrong. Please try again.',
+
     // Home page
     'home' => 'Home',
+    'featured_post' => 'Featured',
     'most_important_posts' => 'Start Here',
     'most_important_posts_subtitle' => 'Where the ideas behind this site began — handpicked posts about who I am, what I build, and why.',
     'read_more' => 'Read more',
@@ -49,6 +69,10 @@ return [
     'comments' => 'Comments',
     'no_comments' => 'No comments yet',
     'load_more_comments' => 'Load more comments',
+
+    // Likes
+    'like' => 'Like',
+    'likes' => 'Likes',
 
     // Pagination
     'per_page' => 'Per page:',
