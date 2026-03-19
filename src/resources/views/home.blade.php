@@ -3,121 +3,92 @@
 @section('title', __('general.home'))
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        @if(!empty($slides))
-            <x-hero-slider :slides="$slides" />
-        @endif
+    {{-- Hero Section --}}
+    <x-hero-section />
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {{-- Left column - recent posts --}}
-            <aside class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.recent_posts') }}</h2>
-                    <ul class="space-y-3">
-                        @forelse($recentPosts as $post)
-                            <li>
-                                <a href="{{ route('post.show', $post['slug']) }}" class="block group">
-                                    <h3 class="text-sm font-medium text-gray-900 group-hover:text-sky-800 line-clamp-2">
-                                        {{ $post['title'] }}
-                                    </h3>
-                                    <p class="text-xs text-gray-500 mt-1">
-                                        {{ \Carbon\Carbon::parse($post['published_at'])->format('d.m.Y') }}
-                                    </p>
-                                </a>
-                            </li>
-                        @empty
-                            <li class="text-sm text-gray-500">{{ __('general.no_posts') }}</li>
-                        @endforelse
-                    </ul>
-                </div>
-            </aside>
+    {{-- Bento Grid Content --}}
+    <div id="posts" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-            {{-- Middle column - most important posts --}}
-            <main class="lg:col-span-2">
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <div class="px-6 pt-6 pb-3 border-b border-gray-100">
-                        <h2 class="text-lg font-semibold text-gray-900">{{ __('general.most_important_posts') }}</h2>
-                        <p class="text-sm text-gray-500 mt-0.5">{{ __('general.most_important_posts_subtitle') }}</p>
+        {{-- Bento Grid --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {{-- Featured Post (spans 2 cols on lg) --}}
+            @if(!empty($mostImportantPosts) && count($mostImportantPosts) > 0)
+                <div class="md:col-span-2 opacity-0" x-data x-init="fadeInOnScroll($el)">
+                    <div class="relative">
+                        <span class="absolute -top-3 left-4 z-10 inline-flex items-center px-3 py-0.5 rounded-full text-xs font-semibold bg-sky-600 text-white shadow-sm">
+                            {{ __('general.featured_post') }}
+                        </span>
+                        <x-post-card :post="$mostImportantPosts[0]" :featured="true" />
                     </div>
+                </div>
+            @endif
 
-                    @forelse($mostImportantPosts as $post)
-                        <article class="px-6 py-5 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors">
-                            {{-- Categories --}}
-                            @if(!empty($post['categories']))
-                                <div class="flex flex-wrap gap-1.5 mb-2">
-                                    @foreach($post['categories'] as $category)
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-800">
-                                            {{ $category['name'] }}
-                                        </span>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            {{-- Title --}}
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">
-                                <a href="{{ route('post.show', $post['slug']) }}" class="hover:text-sky-800 transition-colors">
-                                    {{ $post['title'] }}
-                                </a>
-                            </h3>
-
-                            {{-- Excerpt --}}
-                            @if(!empty($post['excerpt']))
-                                <p class="text-sm text-gray-600 line-clamp-2 mb-2">{{ $post['excerpt'] }}</p>
-                            @endif
-
-                            {{-- Meta --}}
-                            <div class="flex items-center justify-between">
-                                <time class="text-xs text-gray-400" datetime="{{ $post['published_at'] }}">
-                                    {{ \Carbon\Carbon::parse($post['published_at'])->format('d.m.Y') }}
-                                </time>
-                                <a href="{{ route('post.show', $post['slug']) }}" class="text-xs font-medium text-sky-700 hover:text-sky-900 transition-colors">
-                                    {{ __('general.read_more') }} →
-                                </a>
-                            </div>
-                        </article>
-                    @empty
-                        <div class="px-6 py-10 text-center text-gray-400 text-sm">
-                            {{ __('general.no_posts_to_display') }}
+            {{-- About Me mini card --}}
+            <div class="opacity-0 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-between" x-data x-init="fadeInOnScroll($el)">
+                <div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="/images/me200x200.png" alt="Szymon Borowski" class="w-16 h-16 rounded-full ring-2 ring-gray-200 dark:ring-gray-700">
+                        <div>
+                            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Szymon Borowski</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Software Developer</p>
                         </div>
-                    @endforelse
-                </div>
-            </main>
-
-            {{-- Right column - categories and tags --}}
-            <aside class="lg:col-span-1 space-y-6">
-                {{-- Categories --}}
-                <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.categories') }}</h2>
-                    <ul class="space-y-2">
-                        @forelse($categories as $category)
-                            <li>
-                                <a href="{{ route('category.show', $category['slug']) }}" class="flex items-center justify-between text-sm text-gray-600 hover:text-sky-800">
-                                    <span>{{ $category['name'] }}</span>
-                                    <span class="bg-gray-100 text-gray-500 text-xs px-2 py-0.5 rounded-full">
-                                        {{ $category['posts_count'] ?? 0 }}
-                                    </span>
-                                </a>
-                            </li>
-                        @empty
-                            <li class="text-sm text-gray-500">{{ __('general.no_categories') }}</li>
-                        @endforelse
-                    </ul>
-                </div>
-
-                {{-- Tags --}}
-                <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('general.tags') }}</h2>
-                    <div class="flex flex-wrap gap-2">
-                        @forelse($tags as $tag)
-                            <a href="{{ route('tag.show', $tag['slug']) }}" class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-600 hover:bg-sky-100 hover:text-sky-800">
-                                #{{ $tag['name'] }}
-                            </a>
-                        @empty
-                            <p class="text-sm text-gray-500">{{ __('general.no_tags') }}</p>
-                        @endforelse
                     </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                        {{ __('general.hero_subtitle') }}
+                    </p>
                 </div>
-            </aside>
+                <a href="{{ url('/about') }}" class="mt-4 inline-flex items-center text-sm font-medium text-sky-700 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors">
+                    {{ __('general.hero_about_me') }}
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+            {{-- Post cards (row 2) --}}
+            @foreach(array_slice($mostImportantPosts, 1, 2) as $index => $post)
+                <div class="opacity-0 stagger-{{ $index + 1 }}" x-data x-init="fadeInOnScroll($el)">
+                    <x-post-card :post="$post" />
+                </div>
+            @endforeach
+
+            {{-- Categories grid --}}
+            <div class="opacity-0" x-data x-init="fadeInOnScroll($el)">
+                <x-category-grid :categories="$categories" />
+            </div>
+
+            {{-- More post cards (row 3) --}}
+            @foreach(array_slice($mostImportantPosts, 3, 3) as $index => $post)
+                <div class="opacity-0 stagger-{{ $index + 1 }}" x-data x-init="fadeInOnScroll($el)">
+                    <x-post-card :post="$post" />
+                </div>
+            @endforeach
         </div>
+
+        {{-- Tags bar --}}
+        <div class="mt-8 opacity-0" x-data x-init="fadeInOnScroll($el)">
+            <x-tags-bar :tags="$tags" />
+        </div>
+
+        {{-- Recent Posts Section --}}
+        @if(!empty($recentPosts))
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 opacity-0" x-data x-init="fadeInOnScroll($el)">
+                    {{ __('general.recent_posts') }}
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach($recentPosts as $index => $post)
+                        <div class="opacity-0 stagger-{{ ($index % 6) + 1 }}" x-data x-init="fadeInOnScroll($el)">
+                            <x-post-card :post="$post" />
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
     </div>
+@endsection
+
+@section('pre-footer')
+    <x-newsletter-cta />
 @endsection

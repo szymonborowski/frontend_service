@@ -1,4 +1,4 @@
-<nav class="bg-white rounded-lg shadow p-4">
+<nav class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/30 p-4">
     <x-panel.menu-category :title="__('panel.user_section')">
         <x-panel.menu-item
             :href="route('panel.profile')"

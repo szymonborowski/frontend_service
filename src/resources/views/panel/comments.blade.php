@@ -10,16 +10,16 @@
     @endphp
 
     @forelse($commentsList as $comment)
-        <div class="border-b border-gray-200 py-4 last:border-b-0">
+        <div class="border-b border-gray-200 dark:border-gray-700 py-4 last:border-b-0">
             <div class="flex items-start justify-between">
                 <div class="flex-1">
-                    <p class="text-gray-800">{{ $comment['content'] }}</p>
-                    <div class="flex items-center gap-4 mt-2 text-xs text-gray-500">
+                    <p class="text-gray-800 dark:text-gray-200">{{ $comment['content'] }}</p>
+                    <div class="flex items-center gap-4 mt-2 text-xs text-gray-500 dark:text-gray-400">
                         @if(isset($comment['post']))
                             <span>
                                 {{ __('comments.under_post') }}
                                 <a href="{{ url('/posts/' . ($comment['post']['slug'] ?? $comment['post_id'])) }}"
-                                   class="text-sky-800 hover:underline font-medium">
+                                   class="text-sky-800 dark:text-sky-400 hover:underline font-medium">
                                     {{ $comment['post']['title'] ?? 'Post #' . $comment['post_id'] }}
                                 </a>
                             </span>
@@ -32,13 +32,13 @@
                                 {{ __('general.status') }}:
                                 @switch($comment['status'])
                                     @case('approved')
-                                        <span class="text-green-600">{{ __('comments.status_approved') }}</span>
+                                        <span class="text-green-600 dark:text-green-400">{{ __('comments.status_approved') }}</span>
                                         @break
                                     @case('pending')
-                                        <span class="text-yellow-600">{{ __('comments.status_pending') }}</span>
+                                        <span class="text-yellow-600 dark:text-yellow-400">{{ __('comments.status_pending') }}</span>
                                         @break
                                     @case('rejected')
-                                        <span class="text-red-600">{{ __('comments.status_rejected') }}</span>
+                                        <span class="text-red-600 dark:text-red-400">{{ __('comments.status_rejected') }}</span>
                                         @break
                                     @default
                                         <span>{{ $comment['status'] }}</span>
@@ -51,11 +51,11 @@
         </div>
     @empty
         <div class="text-center py-12">
-            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
-            <h3 class="mt-2 text-sm font-medium text-gray-900">{{ __('comments.no_comments') }}</h3>
-            <p class="mt-1 text-sm text-gray-500">{{ __('comments.no_comments_yet') }}</p>
+            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{{ __('comments.no_comments') }}</h3>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ __('comments.no_comments_yet') }}</p>
         </div>
     @endforelse
 

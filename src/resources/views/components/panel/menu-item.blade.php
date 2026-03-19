@@ -2,8 +2,8 @@
 
 @php
 $classes = $active
-    ? 'bg-sky-50 text-sky-800 border-l-4 border-sky-800'
-    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent';
+    ? 'bg-sky-50 dark:bg-sky-900/20 text-sky-800 dark:text-sky-400 border-l-4 border-sky-800 dark:border-sky-400'
+    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-gray-200 border-l-4 border-transparent';
 @endphp
 
 <li>

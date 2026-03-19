@@ -10,7 +10,7 @@
 
             {{-- Main Content --}}
             <main class="flex-1">
-                <div class="bg-white rounded-lg shadow p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/30 p-6">
                     @if(session('success'))
                         <x-panel.alert type="success" :message="session('success')" />
                     @endif
@@ -29,7 +29,7 @@
                         </x-panel.alert>
                     @endif
 
-                    <h1 class="text-2xl font-bold text-gray-900 mb-6">@yield('panel-title')</h1>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">@yield('panel-title')</h1>
 
                     @yield('panel-content')
                 </div>
