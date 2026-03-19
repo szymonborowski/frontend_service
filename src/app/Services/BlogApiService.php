@@ -48,17 +48,6 @@ class BlogApiService
         });
     }
 
-    public function getActiveSlides(): array
-    {
-        $response = $this->http()->get("{$this->baseUrl}/slides");
-
-        if ($response->successful()) {
-            return $response->json('data') ?? [];
-        }
-
-        return [];
-    }
-
     public function getMostImportantPosts(): array
     {
         return Cache::remember('blog.featured_posts', 300, function () {
@@ -260,6 +249,19 @@ class BlogApiService
 
         return [
             'success' => $response->successful(),
+            'errors' => $response->json('errors') ?? [],
+        ];
+    }
+
+    public function subscribeNewsletter(string $email): array
+    {
+        $response = $this->http()->post("{$this->baseUrl}/newsletter/subscribe", [
+            'email' => $email,
+        ]);
+
+        return [
+            'success' => $response->successful(),
+            'message' => $response->json('message') ?? '',
             'errors' => $response->json('errors') ?? [],
         ];
     }

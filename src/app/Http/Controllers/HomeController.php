@@ -17,14 +17,12 @@ class HomeController extends Controller
         $mostImportantPosts = $this->blogApi->getMostImportantPosts();
         $categories         = $this->blogApi->getCategories();
         $tags               = $this->blogApi->getTags();
-        $slides             = $this->blogApi->getActiveSlides();
 
         return view('home', [
             'recentPosts'        => $recentPosts,
             'mostImportantPosts' => $mostImportantPosts,
             'categories'         => $categories,
             'tags'               => $tags,
-            'slides'             => $slides,
         ]);
     }
 }
