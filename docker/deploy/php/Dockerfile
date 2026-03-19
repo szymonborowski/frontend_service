@@ -9,6 +9,7 @@ COPY src/package.json src/package-lock.json ./
 RUN npm ci --no-audit
 
 COPY src/resources ./resources
+COPY src/app/Helpers ./app/Helpers
 COPY src/vite.config.* ./
 
 RUN npm run build

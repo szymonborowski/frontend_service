@@ -16,13 +16,13 @@ class CategoryColor
     // Badge classes: bg + text (light & dark)
     // These strings MUST stay here so Tailwind can scan them via @source
     protected static array $badge = [
-        'violet'  => 'bg-violet-100 text-violet-700 dark:bg-violet-500/20 dark:text-violet-300',
-        'blue'    => 'bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300',
-        'emerald' => 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300',
-        'amber'   => 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300',
-        'rose'    => 'bg-rose-100 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300',
-        'cyan'    => 'bg-cyan-100 text-cyan-700 dark:bg-cyan-500/20 dark:text-cyan-300',
-        'gray'    => 'bg-gray-100 text-gray-700 dark:bg-gray-500/20 dark:text-gray-300',
+        'violet'  => 'bg-violet-100 text-violet-700 dark:bg-violet-500/30 dark:text-violet-200',
+        'blue'    => 'bg-blue-100 text-blue-700 dark:bg-blue-500/30 dark:text-blue-200',
+        'emerald' => 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/30 dark:text-emerald-200',
+        'amber'   => 'bg-amber-100 text-amber-700 dark:bg-amber-500/30 dark:text-amber-200',
+        'rose'    => 'bg-rose-100 text-rose-700 dark:bg-rose-500/30 dark:text-rose-200',
+        'cyan'    => 'bg-cyan-100 text-cyan-700 dark:bg-cyan-500/30 dark:text-cyan-200',
+        'gray'    => 'bg-gray-100 text-gray-700 dark:bg-gray-500/30 dark:text-gray-200',
     ];
 
     // Border color for card left-border accent
