@@ -20,7 +20,7 @@ return [
     'footer_download_cv' => 'Download CV',
     'footer_built_with' => 'Built with Laravel & Livewire',
     'footer_tech_stack' => 'Tech Stack',
-    'footer_cv_url' => '/cv-en.pdf',
+    'footer_cv_url' => '/resume/Szymon%20Borowski%20Resume.pdf',
 
     // Common
     'save_changes' => 'Save changes',
@@ -73,6 +73,10 @@ return [
     // Likes
     'like' => 'Like',
     'likes' => 'Likes',
+
+    // Navigation pages
+    'footer_collaboration' => 'Collaboration',
+    'hero_collaboration'   => 'Collaboration',
 
     // GitHub
     'recent_commits' => 'Recent commits',

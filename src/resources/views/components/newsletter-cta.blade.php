@@ -1,4 +1,5 @@
 {{-- Pre-footer Newsletter CTA --}}
+@if(env('NEWSLETTER_ENABLED', false))
 <section class="relative overflow-hidden bg-gradient-to-r from-gray-900 via-indigo-950 to-gray-900">
     {{-- Animated gradient overlay --}}
     <div class="absolute inset-0 bg-gradient-to-r from-sky-500/5 via-violet-500/10 to-sky-500/5 animate-gradient"></div>
@@ -75,3 +76,4 @@
         </div>
     </div>
 </section>
+@endif

@@ -20,7 +20,7 @@ return [
     'footer_download_cv' => 'Pobierz CV',
     'footer_built_with' => 'Zbudowane z Laravel & Livewire',
     'footer_tech_stack' => 'Technologie',
-    'footer_cv_url' => '/cv-pl.pdf',
+    'footer_cv_url' => '/resume/Szymon%20Borowski%20CV.pdf',
 
     // Common
     'save_changes' => 'Zapisz zmiany',
@@ -73,6 +73,10 @@ return [
     // Likes
     'like' => 'Lubię',
     'likes' => 'Polubienia',
+
+    // Navigation pages
+    'footer_collaboration' => 'Współpraca',
+    'hero_collaboration'   => 'Współpraca',
 
     // GitHub
     'recent_commits' => 'Ostatnie commity',
