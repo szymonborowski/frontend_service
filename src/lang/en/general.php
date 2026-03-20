@@ -74,6 +74,11 @@ return [
     'like' => 'Like',
     'likes' => 'Likes',
 
+    // GitHub
+    'recent_commits' => 'Recent commits',
+    'no_commits' => 'No commit data available.',
+    'more' => 'More',
+
     // Pagination
     'per_page' => 'Per page:',
     'pagination' => 'Pages',

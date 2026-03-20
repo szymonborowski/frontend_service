@@ -61,4 +61,9 @@ return [
         'internal_api_key' => env('ANALYTICS_INTERNAL_API_KEY'),
     ],
 
+    'github' => [
+        'username' => env('GITHUB_USERNAME', 'szymonborowski'),
+        'token'    => env('GITHUB_TOKEN'),
+    ],
+
 ];
