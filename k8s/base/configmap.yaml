@@ -11,6 +11,8 @@ data:
   APP_ENV: "production"
   APP_DEBUG: "false"
   APP_URL: "https://borowski.services"
+  APP_LOCALE: "pl"
+  APP_FALLBACK_LOCALE: "pl"
   LOG_CHANNEL: "stderr"
   DB_CONNECTION: "mysql"
   DB_HOST: "frontend-mysql"

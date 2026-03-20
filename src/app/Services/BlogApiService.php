@@ -66,9 +66,12 @@ class BlogApiService
 
     public function getCategories(): array
     {
-        return Cache::remember('blog.categories', 300, function () {
+        $locale = app()->getLocale();
+
+        return Cache::remember("blog.categories.{$locale}", 300, function () use ($locale) {
             $response = $this->http()->get("{$this->baseUrl}/categories", [
                 'with_count' => 'posts',
+                'locale' => $locale,
             ]);
 
             if ($response->successful()) {
