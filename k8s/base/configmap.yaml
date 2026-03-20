@@ -26,11 +26,14 @@ data:
   # Internal service-to-service URLs (Kubernetes DNS)
   BLOG_API_URL_INTERNAL: "http://blog"
   USERS_API_URL_INTERNAL: "http://users"
+  USERS_INTERNAL_API_KEY: "ce96caad66109fcae01b5206b5ad155af8b46207f258e27ea0c4c30814da86b7"
   SSO_API_URL_INTERNAL: "http://sso"
   SSO_INTERNAL_URL: "http://sso"
   SSO_REDIRECT_URI: "https://borowski.services/oauth/callback"
   # External SSO URL (for browser redirects)
   SSO_URL: "https://sso.borowski.services"
+  # External Admin URL (for browser redirects)
+  ADMIN_URL: "https://admin.borowski.services"
   # OAuth credentials (generate proper values in production)
   SSO_CLIENT_ID: "frontend-client"
   SSO_CLIENT_SECRET: "frontend-secret-change-in-production"
