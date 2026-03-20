@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\CategoryViewController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\PostViewController;
 use App\Http\Controllers\TagViewController;
 use App\Http\Controllers\UserPanelController;
+use App\Mail\NewsletterWelcome;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +27,19 @@ Route::get('/ready', function () {
     }
 });
 
+Route::get('/lang/{locale}', function (string $locale) {
+    if (in_array($locale, ['pl', 'en'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/about',         fn() => view('about'))->name('about');
+Route::get('/contact',       fn() => view('contact'))->name('contact');
+Route::post('/contact',      [ContactController::class, 'send'])->middleware('throttle:5,1')->name('contact.send');
+Route::get('/collaboration', fn() => view('collaboration'))->name('collaboration');
 
 Route::get('/kategoria/{slug}', [CategoryViewController::class, 'show'])->name('category.show');
 Route::get('/tag/{slug}', [TagViewController::class, 'show'])->name('tag.show');
@@ -32,9 +47,19 @@ Route::get('/post/{slugOrId}', [PostViewController::class, 'show'])->name('post.
 
 // Newsletter
 Route::post('/newsletter/subscribe', function (\Illuminate\Http\Request $request) {
-    $result = app(\App\Services\BlogApiService::class)->subscribeNewsletter($request->input('email', ''));
+    if (!env('NEWSLETTER_ENABLED', false)) {
+        return response()->json(['success' => false, 'message' => 'Newsletter is disabled.'], 503);
+    }
+
+    $email = $request->input('email', '');
+    $result = app(\App\Services\BlogApiService::class)->subscribeNewsletter($email);
+
+    if ($result['success'] && $email) {
+        Mail::to($email)->queue(new NewsletterWelcome($email));
+    }
+
     return response()->json($result);
-})->name('newsletter.subscribe');
+})->middleware('throttle:5,1')->name('newsletter.subscribe');
 
 // Likes
 Route::post('/likes/toggle', function (\Illuminate\Http\Request $request) {
