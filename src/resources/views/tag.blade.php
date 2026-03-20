@@ -7,25 +7,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {{-- Left column - recent posts --}}
             <aside class="lg:col-span-1">
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('general.recent_posts') }}</h2>
-                    <ul class="space-y-3">
-                        @forelse($recentPosts as $post)
-                            <li>
-                                <a href="{{ route('post.show', $post['slug']) }}" class="block group">
-                                    <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100 group-hover:text-sky-700 dark:group-hover:text-sky-400 line-clamp-2">
-                                        {{ $post['title'] }}
-                                    </h3>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                        {{ \Carbon\Carbon::parse($post['published_at'])->format('d.m.Y') }}
-                                    </p>
-                                </a>
-                            </li>
-                        @empty
-                            <li class="text-sm text-gray-500 dark:text-gray-400">{{ __('general.no_posts') }}</li>
-                        @endforelse
-                    </ul>
-                </div>
+                <x-recent-posts-sidebar :recentPosts="$recentPosts" />
             </aside>
 
             {{-- Middle column - list of posts with this tag --}}
@@ -87,23 +69,7 @@
 
             {{-- Right column - categories and tags --}}
             <aside class="lg:col-span-1 space-y-6">
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('general.categories') }}</h2>
-                    <ul class="space-y-2">
-                        @forelse($categories as $category)
-                            <li>
-                                <a href="{{ route('category.show', $category['slug']) }}" class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 hover:text-sky-700 dark:hover:text-sky-400">
-                                    <span>{{ $category['name'] }}</span>
-                                    <span class="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs px-2 py-0.5 rounded-full">
-                                        {{ $category['posts_count'] ?? 0 }}
-                                    </span>
-                                </a>
-                            </li>
-                        @empty
-                            <li class="text-sm text-gray-500 dark:text-gray-400">{{ __('general.no_categories') }}</li>
-                        @endforelse
-                    </ul>
-                </div>
+                <x-category-grid :categories="$categories" />
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('general.tags') }}</h2>
                     <div class="flex flex-wrap gap-2">
