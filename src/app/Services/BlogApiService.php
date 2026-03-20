@@ -33,10 +33,13 @@ class BlogApiService
 
     public function getRecentPosts(int $limit = 10): array
     {
-        return Cache::remember("blog.posts.recent.{$limit}", 300, function () use ($limit) {
+        $locale = app()->getLocale();
+
+        return Cache::remember("blog.posts.recent.{$limit}.{$locale}", 300, function () use ($limit, $locale) {
             $response = $this->http()->get("{$this->baseUrl}/posts", [
                 'per_page' => $limit,
                 'status' => 'published',
+                'locale' => $locale,
                 'with' => 'categories,tags',
             ]);
 
@@ -116,6 +119,7 @@ class BlogApiService
         $response = $this->http()->get("{$this->baseUrl}/posts", [
             'category_id' => $categoryId,
             'status' => 'published',
+            'locale' => app()->getLocale(),
             'with' => 'categories,tags',
             'page' => $page,
             'per_page' => $perPage,
@@ -132,6 +136,7 @@ class BlogApiService
         $response = $this->http()->get("{$this->baseUrl}/posts", [
             'tag_id' => $tagId,
             'status' => 'published',
+            'locale' => app()->getLocale(),
             'with' => 'categories,tags',
             'page' => $page,
             'per_page' => $perPage,
