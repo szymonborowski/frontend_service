@@ -47,6 +47,17 @@ class CategoryColor
         'gray'    => 'from-gray-500 to-gray-700',
     ];
 
+    // Solid background for small color tiles
+    protected static array $solid = [
+        'violet'  => 'bg-violet-500',
+        'blue'    => 'bg-blue-500',
+        'emerald' => 'bg-emerald-500',
+        'amber'   => 'bg-amber-500',
+        'rose'    => 'bg-rose-500',
+        'cyan'    => 'bg-cyan-500',
+        'gray'    => 'bg-gray-500',
+    ];
+
     public static function name(string $slug, ?string $color = null): string
     {
         if ($color && isset(static::$badge[$color])) {
@@ -69,5 +80,10 @@ class CategoryColor
     public static function gradient(string $slug, ?string $color = null): string
     {
         return static::$gradient[static::name($slug, $color)];
+    }
+
+    public static function solid(string $slug, ?string $color = null): string
+    {
+        return static::$solid[static::name($slug, $color)];
     }
 }
