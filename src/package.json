@@ -6,6 +6,10 @@
         "build": "vite build",
         "dev": "vite"
     },
+    "dependencies": {
+        "easymde": "^2.18.0",
+        "highlight.js": "^11.11.1"
+    },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
         "axios": "^1.11.0",

@@ -31,9 +31,7 @@
 
         <div>
             <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ __('posts.content_required') }}</label>
-            <textarea name="content" id="content" rows="15" required
-                      class="appearance-none rounded relative block w-full px-3 py-2 border @error('content') border-red-500 dark:border-red-400 @else border-gray-300 dark:border-gray-600 @enderror placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 focus:outline-none focus:ring-sky-700 dark:focus:ring-sky-500 focus:border-sky-700 dark:focus:border-sky-500 sm:text-sm font-mono"
-                      placeholder="{{ __('posts.content_placeholder') }}">{{ old('content') }}</textarea>
+            <textarea name="content" id="content" required>{{ old('content') }}</textarea>
             @error('content')
                 <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
             @enderror
@@ -98,5 +96,19 @@
                 input.value = currentTags.join(', ');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const textarea = document.getElementById('content');
+            const editor = new EasyMDE({
+                element: textarea,
+                spellChecker: false,
+                toolbar: ['bold','italic','heading-1','heading-2','|','quote','code','|','unordered-list','ordered-list','|','link','|','preview','guide'],
+                minHeight: '320px',
+                placeholder: textarea.placeholder,
+            });
+            editor.codemirror.on('change', () => {
+                textarea.value = editor.value();
+            });
+        });
     </script>
 @endsection

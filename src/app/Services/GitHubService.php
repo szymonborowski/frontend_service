@@ -18,57 +18,98 @@ class GitHubService
 
     public function getRecentCommits(int $limit = 3): array
     {
-        return Cache::remember('github.recent_commits', 3600, function () use ($limit) {
-            $request = Http::withHeaders([
-                'Accept'     => 'application/vnd.github+json',
-                'User-Agent' => 'portfolio-app',
-            ]);
+        $cached = Cache::get('github.recent_commits');
+        if (\is_array($cached) && !empty($cached)) {
+            return $cached;
+        }
 
-            if ($this->token) {
-                $request = $request->withToken($this->token);
+        $request = Http::withHeaders([
+            'Accept'     => 'application/vnd.github+json',
+            'User-Agent' => 'portfolio-app',
+        ]);
+
+        if ($this->token) {
+            $request = $request->withToken($this->token);
+        }
+
+        $response = $request->get(
+            "https://api.github.com/users/{$this->username}/events/public",
+            ['per_page' => 30]
+        );
+
+        if (!$response->successful()) {
+            return [];
+        }
+
+        $commits = [];
+
+        foreach ($response->json() as $event) {
+            if (($event['type'] ?? '') !== 'PushEvent') {
+                continue;
             }
 
-            $response = $request->get(
-                "https://api.github.com/users/{$this->username}/events/public",
-                ['per_page' => 30]
-            );
+            $repo    = $event['repo']['name'] ?? '';
+            $repoUrl = "https://github.com/{$repo}";
+            $date    = $event['created_at'] ?? null;
+            $sha     = $event['payload']['head'] ?? '';
 
-            if (!$response->successful()) {
-                return [];
+            if (!$sha || !$repo) {
+                continue;
             }
 
-            $commits = [];
+            // Payload commits may be stripped by the API; fetch commit details by SHA
+            $payloadCommits = $event['payload']['commits'] ?? [];
 
-            foreach ($response->json() as $event) {
-                if (($event['type'] ?? '') !== 'PushEvent') {
-                    continue;
-                }
-
-                $repo     = $event['repo']['name'] ?? '';
-                $repoUrl  = "https://github.com/{$repo}";
-                $date     = $event['created_at'] ?? null;
-
-                foreach (array_reverse($event['payload']['commits'] ?? []) as $commit) {
-                    $sha     = $commit['sha'] ?? '';
-                    $message = $commit['message'] ?? '';
+            if (!empty($payloadCommits)) {
+                foreach (array_reverse($payloadCommits) as $commit) {
+                    $commitSha     = $commit['sha'] ?? '';
+                    $commitMessage = $commit['message'] ?? '';
 
                     $commits[] = [
-                        'sha'     => $sha,
-                        'short'   => substr($sha, 0, 7),
-                        'message' => strtok($message, "\n"),
+                        'sha'     => $commitSha,
+                        'short'   => substr($commitSha, 0, 7),
+                        'message' => explode("\n", $commitMessage)[0],
                         'repo'    => $repo,
-                        'url'     => "{$repoUrl}/commit/{$sha}",
+                        'url'     => "{$repoUrl}/commit/{$commitSha}",
                         'date'    => $date,
                     ];
 
                     if (count($commits) >= $limit) {
-                        return $commits;
+                        break 2;
                     }
                 }
-            }
+            } else {
+                $commitResponse = $request->get(
+                    "https://api.github.com/repos/{$repo}/commits/{$sha}"
+                );
 
-            return $commits;
-        });
+                if (!$commitResponse->successful()) {
+                    continue;
+                }
+
+                $commitData = $commitResponse->json();
+                $message    = $commitData['commit']['message'] ?? '';
+
+                $commits[] = [
+                    'sha'     => $sha,
+                    'short'   => substr($sha, 0, 7),
+                    'message' => explode("\n", $message)[0],
+                    'repo'    => $repo,
+                    'url'     => "{$repoUrl}/commit/{$sha}",
+                    'date'    => $date,
+                ];
+
+                if (count($commits) >= $limit) {
+                    break;
+                }
+            }
+        }
+
+        if (!empty($commits)) {
+            Cache::put('github.recent_commits', $commits, 3600);
+        }
+
+        return $commits;
     }
 
     public function getProfileUrl(): string

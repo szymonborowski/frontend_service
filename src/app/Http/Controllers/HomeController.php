@@ -15,7 +15,7 @@ class HomeController extends Controller
 
     public function index(): View
     {
-        $recentPosts        = $this->blogApi->getRecentPosts(10);
+        $recentPosts        = $this->blogApi->getRecentPosts(9);
         $mostImportantPosts = $this->blogApi->getMostImportantPosts();
         $categories         = $this->blogApi->getCategories();
         $tags               = $this->blogApi->getTags();
