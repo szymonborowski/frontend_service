@@ -2,10 +2,9 @@
 
 @php
     $primaryCategory = $post['categories'][0] ?? null;
-    $categorySlug = $primaryCategory['slug'] ?? 'default';
     $categoryColor = $primaryCategory['color'] ?? null;
-    $gradientClasses = \App\Helpers\CategoryColor::gradient($categorySlug, $categoryColor);
-    $borderClasses = \App\Helpers\CategoryColor::border($categorySlug, $categoryColor);
+    $gradientClasses = \App\Helpers\CategoryColor::gradient($categoryColor);
+    $borderClasses = \App\Helpers\CategoryColor::border($categoryColor);
 @endphp
 
 <article {{ $attributes->merge(['class' => 'group relative flex flex-col bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ' . ($featured ? 'md:flex-row' : '')]) }}>
@@ -35,7 +34,6 @@
                 @foreach($post['categories'] as $category)
                     <x-category-badge
                         :name="$category['name']"
-                        :slug="$category['slug']"
                         :color="$category['color'] ?? null"
                         :href="route('category.show', $category['slug'])"
                     />

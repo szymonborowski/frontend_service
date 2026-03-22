@@ -1,7 +1,7 @@
-@props(['name', 'slug', 'href' => null, 'color' => null])
+@props(['name', 'href' => null, 'color' => null])
 
 @php
-    $colorClasses = \App\Helpers\CategoryColor::badge($slug, $color);
+    $colorClasses = \App\Helpers\CategoryColor::badge($color);
 @endphp
 
 @if($href)

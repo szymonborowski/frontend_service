@@ -6,9 +6,7 @@
         @forelse($recentPosts as $post)
             @php
                 $firstCat = $post['categories'][0] ?? null;
-                $colorClass = $firstCat
-                    ? \App\Helpers\CategoryColor::badge($firstCat['slug'], $firstCat['color'] ?? null)
-                    : 'bg-gray-100 text-gray-700 dark:bg-gray-500/30 dark:text-gray-200';
+                $colorClass = \App\Helpers\CategoryColor::badge($firstCat['color'] ?? null);
             @endphp
             <li>
                 <a href="{{ route('post.show', $post['slug']) }}"

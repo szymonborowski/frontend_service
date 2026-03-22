@@ -5,7 +5,7 @@
     <div class="grid grid-cols-2 gap-2">
         @foreach($categories as $category)
             @php
-                $colorClasses = \App\Helpers\CategoryColor::badge($category['slug'], $category['color'] ?? null);
+                $colorClasses = \App\Helpers\CategoryColor::badge($category['color'] ?? null);
             @endphp
             <a href="{{ route('category.show', $category['slug']) }}"
                class="flex items-center justify-between px-3 py-2.5 rounded-lg {{ $colorClasses }} transition-all hover:opacity-80 hover:scale-[1.02]">
