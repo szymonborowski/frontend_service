@@ -23,6 +23,7 @@ services:
       - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-secret}
     volumes:
       - ./src:/var/www/html
+      - frontend_vendor:/var/www/html/vendor
       - ./docker/dev/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:ro
     depends_on:
       frontend-redis:
@@ -124,3 +125,4 @@ networks:
 
 volumes:
   redis_data:
+  frontend_vendor:
