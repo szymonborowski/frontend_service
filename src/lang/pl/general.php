@@ -82,6 +82,7 @@ return [
     'recent_commits' => 'Ostatnie commity',
     'no_commits' => 'Brak danych o commitach.',
     'more' => 'Więcej',
+    'less' => 'Mniej',
 
     // Pagination
     'per_page' => 'Na stronie:',

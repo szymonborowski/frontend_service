@@ -53,8 +53,12 @@ class BlogApiService
 
     public function getMostImportantPosts(): array
     {
-        return Cache::remember('blog.featured_posts', 300, function () {
-            $response = $this->http()->get("{$this->baseUrl}/featured-posts");
+        $locale = app()->getLocale();
+
+        return Cache::remember("blog.featured_posts.{$locale}", 300, function () use ($locale) {
+            $response = $this->http()->get("{$this->baseUrl}/featured-posts", [
+                'locale' => $locale,
+            ]);
 
             if ($response->successful()) {
                 return $response->json('data') ?? [];
@@ -154,8 +158,9 @@ class BlogApiService
     public function getPost(string $slug): ?array
     {
         $response = $this->http()->get("{$this->baseUrl}/posts", [
-            'slug' => $slug,
-            'with' => 'categories,tags',
+            'slug'   => $slug,
+            'locale' => app()->getLocale(),
+            'with'   => 'categories,tags',
         ]);
 
         if ($response->successful()) {
