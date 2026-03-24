@@ -76,6 +76,7 @@ class BlogApiService
             $response = $this->http()->get("{$this->baseUrl}/categories", [
                 'with_count' => 'posts',
                 'locale' => $locale,
+                'per_page' => 100,
             ]);
 
             if ($response->successful()) {
