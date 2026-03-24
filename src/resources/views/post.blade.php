@@ -50,9 +50,6 @@
                                 {{ \Carbon\Carbon::parse($post['published_at'])->format('d F Y') }}
                             </time>
                         </div>
-                        @if($post['excerpt'] ?? null)
-                            <p class="text-gray-600 dark:text-gray-400 mb-4">{{ $post['excerpt'] }}</p>
-                        @endif
                         <div class="prose prose-gray dark:prose-invert max-w-none">
                             {!! \Illuminate\Support\Str::markdown($post['content'] ?? '') !!}
                         </div>
