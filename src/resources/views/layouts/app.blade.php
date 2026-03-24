@@ -13,7 +13,7 @@
     <script>
         (function(){
             var t = localStorage.getItem('theme');
-            if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches) || (t === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            if (t === 'light' ? false : (t === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : true)) {
                 document.documentElement.classList.add('dark');
             }
         })();

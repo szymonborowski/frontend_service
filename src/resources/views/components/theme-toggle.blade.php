@@ -1,6 +1,6 @@
 <div
     x-data="{
-        theme: localStorage.getItem('theme') || 'auto',
+        theme: localStorage.getItem('theme') || 'dark',
         init() {
             this.apply();
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
