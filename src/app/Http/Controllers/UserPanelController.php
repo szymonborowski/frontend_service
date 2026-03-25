@@ -88,12 +88,15 @@ class UserPanelController extends Controller
 
     // === Blog Category ===
 
-    public function posts(): View
+    public function posts(Request $request): View
     {
         $user = session('user', []);
         $userId = $user['id'] ?? null;
 
-        $posts = $userId ? $this->blogApiService->getUserPosts($userId) : [];
+        $page = (int) $request->input('page', 1);
+        $perPage = (int) $request->input('per_page', 15);
+
+        $posts = $userId ? $this->blogApiService->getUserPosts($userId, $page, $perPage) : [];
 
         // Fetch view counts for all posts in one request
         $postUuids = array_filter(array_column($posts['data'] ?? [], 'uuid'));
@@ -109,6 +112,8 @@ class UserPanelController extends Controller
         return view('panel.posts.index', [
             'posts' => $posts,
             'viewsByUuid' => $viewsByUuid,
+            'meta' => $posts['meta'] ?? [],
+            'currentPerPage' => $perPage,
         ]);
     }
 

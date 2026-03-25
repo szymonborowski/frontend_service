@@ -69,6 +69,7 @@ return [
     'comments' => 'Comments',
     'no_comments' => 'No comments yet',
     'load_more_comments' => 'Load more comments',
+    'login_to_comment' => 'Log in to leave a comment.',
 
     // Likes
     'like' => 'Like',

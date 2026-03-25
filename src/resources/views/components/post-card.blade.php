@@ -57,9 +57,15 @@
 
         {{-- Meta row --}}
         <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-100 dark:border-gray-700">
-            <time class="text-xs text-gray-400 dark:text-gray-500" datetime="{{ $post['published_at'] }}">
-                {{ \Carbon\Carbon::parse($post['published_at'])->format('d.m.Y') }}
-            </time>
+            <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                @if($post['author']['name'] ?? null)
+                    <span>{{ $post['author']['name'] }}</span>
+                    <span>&middot;</span>
+                @endif
+                <time datetime="{{ $post['published_at'] }}">
+                    {{ \Carbon\Carbon::parse($post['published_at'])->format('d.m.Y') }}
+                </time>
+            </div>
             <div class="flex items-center gap-2">
                 @if(!empty($post['tags']))
                     @foreach(array_slice($post['tags'], 0, 2) as $tag)

@@ -28,6 +28,10 @@
                         </div>
                         <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">{{ $post['title'] }}</h1>
                         <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            @if($post['author']['name'] ?? null)
+                                <span>{{ $post['author']['name'] }}</span>
+                                <span class="mx-2">&middot;</span>
+                            @endif
                             <time datetime="{{ $post['published_at'] }}">
                                 {{ \Carbon\Carbon::parse($post['published_at'])->format('d F Y') }}
                             </time>
@@ -78,6 +82,14 @@
                         @endif
                     </div>
                 </article>
+
+                {{-- Login prompt for guests --}}
+                @unless(session('access_token'))
+                    <div class="mt-6 bg-sky-50 dark:bg-sky-900/20 border border-sky-200 dark:border-sky-800 rounded-lg p-4 text-sm text-sky-800 dark:text-sky-300">
+                        <a href="{{ route('login') }}" class="font-medium underline hover:text-sky-600 dark:hover:text-sky-400">{{ __('general.login') }}</a>
+                        — {{ __('general.login_to_comment') }}
+                    </div>
+                @endunless
 
                 {{-- Comments section --}}
                 <div class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6" id="comments">

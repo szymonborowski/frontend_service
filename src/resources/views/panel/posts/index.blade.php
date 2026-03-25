@@ -107,10 +107,10 @@
         </div>
     @endforelse
 
-    {{-- Pagination --}}
-    @if(isset($posts['meta']['last_page']) && $posts['meta']['last_page'] > 1)
-        <div class="mt-6 flex justify-center">
-            {{-- Simple pagination links --}}
-        </div>
-    @endif
+    <x-pagination
+        paginationRoute="panel.posts"
+        :meta="$meta"
+        :currentPerPage="$currentPerPage"
+        :allowedPerPage="[10, 15, 30, 50]"
+    />
 @endsection

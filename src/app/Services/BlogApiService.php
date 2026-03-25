@@ -40,7 +40,7 @@ class BlogApiService
                 'per_page' => $limit,
                 'status' => 'published',
                 'locale' => $locale,
-                'with' => 'categories,tags',
+                'with' => 'categories,tags,author',
             ]);
 
             if ($response->successful()) {
@@ -127,7 +127,7 @@ class BlogApiService
             'category_id' => $categoryId,
             'status' => 'published',
             'locale' => app()->getLocale(),
-            'with' => 'categories,tags',
+            'with' => 'categories,tags,author',
             'page' => $page,
             'per_page' => $perPage,
         ]);
@@ -144,7 +144,7 @@ class BlogApiService
             'tag_id' => $tagId,
             'status' => 'published',
             'locale' => app()->getLocale(),
-            'with' => 'categories,tags',
+            'with' => 'categories,tags,author',
             'page' => $page,
             'per_page' => $perPage,
         ]);
@@ -174,7 +174,7 @@ class BlogApiService
     public function getPostById(int $id): ?array
     {
         $response = $this->http()->get("{$this->baseUrl}/posts/{$id}", [
-            'with' => 'categories,tags',
+            'with' => 'categories,tags,author',
         ]);
 
         if ($response->successful()) {
@@ -184,13 +184,13 @@ class BlogApiService
         return null;
     }
 
-    public function getUserPosts(int $userId, int $page = 1): array
+    public function getUserPosts(int $userId, int $page = 1, int $perPage = 15): array
     {
         $response = $this->http()->get("{$this->baseUrl}/posts", [
             'author_id' => $userId,
-            'with' => 'categories,tags',
+            'with' => 'categories,tags,author',
             'page' => $page,
-            'per_page' => 15,
+            'per_page' => $perPage,
         ]);
 
         if ($response->successful()) {

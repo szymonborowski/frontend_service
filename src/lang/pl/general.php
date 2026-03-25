@@ -69,6 +69,7 @@ return [
     'comments' => 'Komentarze',
     'no_comments' => 'Brak komentarzy',
     'load_more_comments' => 'Załaduj więcej komentarzy',
+    'login_to_comment' => 'Zaloguj się, aby dodać komentarz.',
 
     // Likes
     'like' => 'Lubię',
