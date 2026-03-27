@@ -15,15 +15,22 @@ class HomeController extends Controller
 
     public function index(): View
     {
-        $recentPosts        = $this->blogApi->getRecentPosts(9);
+        $allPosts           = $this->blogApi->getRecentPosts(20);
         $mostImportantPosts = $this->blogApi->getMostImportantPosts();
         $categories         = $this->blogApi->getCategories();
         $tags               = $this->blogApi->getTags();
         $githubCommits      = $this->github->getRecentCommits(3);
         $githubProfileUrl   = $this->github->getProfileUrl();
 
+        $isDevLog = fn (array $post): bool => collect($post['categories'] ?? [])
+            ->contains(fn ($c) => ($c['slug'] ?? '') === 'dev-log');
+
+        $recentArticles  = array_values(array_slice(array_filter($allPosts, fn ($p) => !$isDevLog($p)), 0, 6));
+        $recentFeatures  = array_values(array_slice(array_filter($allPosts, $isDevLog), 0, 3));
+
         return view('home', [
-            'recentPosts'        => $recentPosts,
+            'recentArticles'     => $recentArticles,
+            'recentFeatures'     => $recentFeatures,
             'mostImportantPosts' => $mostImportantPosts,
             'categories'         => $categories,
             'tags'               => $tags,

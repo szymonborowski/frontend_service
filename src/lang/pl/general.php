@@ -57,6 +57,7 @@ return [
     'most_important_posts_subtitle' => 'Tu zaczęły się pomysły stojące za tą stroną — wybrane posty o tym, kim jestem, co buduję i dlaczego.',
     'read_more' => 'Czytaj dalej',
     'recent_posts' => 'Ostatnie wpisy',
+    'recent_features' => 'Ostatnie featurey',
     'categories' => 'Kategorie',
     'tags' => 'Tagi',
     'no_posts' => 'Brak wpisow',

@@ -29,7 +29,7 @@ class UserPanelController extends Controller
     public function updateProfile(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'min:3', 'max:32', 'regex:/^[a-zA-Z0-9_-]+$/'],
             'email' => ['required', 'email', 'max:255'],
         ]);
 

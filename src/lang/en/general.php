@@ -57,6 +57,7 @@ return [
     'most_important_posts_subtitle' => 'Where the ideas behind this site began — handpicked posts about who I am, what I build, and why.',
     'read_more' => 'Read more',
     'recent_posts' => 'Recent posts',
+    'recent_features' => 'Last features',
     'categories' => 'Categories',
     'tags' => 'Tags',
     'no_posts' => 'No posts',
