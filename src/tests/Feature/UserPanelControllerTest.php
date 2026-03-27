@@ -54,7 +54,7 @@ class UserPanelControllerTest extends TestCase
             ], 200),
         ]);
 
-        $response = $this->put(route('panel.profile.update'), [
+        $response = $this->post(route('panel.profile.update'), [
             'name' => 'Updated',
             'email' => 'updated@example.com',
         ]);
@@ -69,7 +69,7 @@ class UserPanelControllerTest extends TestCase
     {
         $this->withSession(['access_token' => 'token']); // no 'user' key
 
-        $response = $this->put(route('panel.profile.update'), [
+        $response = $this->post(route('panel.profile.update'), [
             'name' => 'Updated',
             'email' => 'updated@example.com',
         ]);
@@ -84,8 +84,8 @@ class UserPanelControllerTest extends TestCase
         $this->withSession($this->authenticatedSession());
 
         Http::fake([
-            'http://users-test/api/auth/check' => Http::response(['authorised' => true], 200),
-            'http://users-test/api/users/1' => Http::response(['data' => ['id' => 1]], 200),
+            'http://users-test/api/internal/auth/check' => Http::response(['authorized' => true], 200),
+            'http://users-test/api/internal/users/1' => Http::response(['data' => ['id' => 1]], 200),
         ]);
 
         $response = $this->put(route('panel.password.update'), [

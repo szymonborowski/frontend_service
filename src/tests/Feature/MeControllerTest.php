@@ -20,7 +20,7 @@ class MeControllerTest extends TestCase
             'access_token' => 'token',
             'user' => [
                 'id' => 1,
-                'name' => 'Test User',
+                'name' => 'TestUser',
                 'email' => 'test@example.com',
             ],
         ];
@@ -29,7 +29,7 @@ class MeControllerTest extends TestCase
     #[Test]
     public function me_show_redirects_to_login_when_no_access_token(): void
     {
-        $response = $this->get(route('me'));
+        $response = $this->get(route('panel.profile'));
 
         $response->assertRedirect(route('login'));
     }
@@ -39,17 +39,17 @@ class MeControllerTest extends TestCase
     {
         $this->withSession($this->authenticatedSession());
 
-        $response = $this->get(route('me'));
+        $response = $this->get(route('panel.profile'));
 
         $response->assertOk();
-        $response->assertViewIs('me');
-        $response->assertViewHas('user', ['id' => 1, 'name' => 'Test User', 'email' => 'test@example.com']);
+        $response->assertViewIs('panel.profile');
+        $response->assertViewHas('user', ['id' => 1, 'name' => 'TestUser', 'email' => 'test@example.com']);
     }
 
     #[Test]
     public function me_update_profile_redirects_to_login_when_no_access_token(): void
     {
-        $response = $this->put(route('me.profile'), [
+        $response = $this->post(route('panel.profile.update'), [
             'name' => 'Updated',
             'email' => 'updated@example.com',
         ]);
@@ -68,13 +68,13 @@ class MeControllerTest extends TestCase
             ], 200),
         ]);
 
-        $response = $this->put(route('me.profile'), [
+        $response = $this->post(route('panel.profile.update'), [
             'name' => 'Updated',
             'email' => 'updated@example.com',
         ]);
 
         $response->assertRedirect();
-        $response->assertSessionHas('profile_success');
+        $response->assertSessionHas('success');
         $this->assertEquals('Updated', session('user')['name']);
     }
 
@@ -83,7 +83,7 @@ class MeControllerTest extends TestCase
     {
         $this->withSession(['access_token' => 'token']);
 
-        $response = $this->put(route('me.profile'), [
+        $response = $this->post(route('panel.profile.update'), [
             'name' => 'Updated',
             'email' => 'updated@example.com',
         ]);
@@ -95,7 +95,7 @@ class MeControllerTest extends TestCase
     #[Test]
     public function me_update_password_redirects_to_login_when_no_access_token(): void
     {
-        $response = $this->put(route('me.password'), [
+        $response = $this->put(route('panel.password.update'), [
             'current_password' => 'old',
             'password' => 'NewPassword123!',
             'password_confirmation' => 'NewPassword123!',
@@ -110,18 +110,18 @@ class MeControllerTest extends TestCase
         $this->withSession($this->authenticatedSession());
 
         Http::fake([
-            'http://users-test/api/auth/check' => Http::response(['authorised' => true], 200),
-            'http://users-test/api/users/1' => Http::response(['data' => ['id' => 1]], 200),
+            'http://users-test/api/internal/auth/check' => Http::response(['authorized' => true], 200),
+            'http://users-test/api/internal/users/1' => Http::response(['data' => ['id' => 1]], 200),
         ]);
 
-        $response = $this->put(route('me.password'), [
+        $response = $this->put(route('panel.password.update'), [
             'current_password' => 'oldpass',
             'password' => 'NewPassword123!',
             'password_confirmation' => 'NewPassword123!',
         ]);
 
         $response->assertRedirect();
-        $response->assertSessionHas('password_success');
+        $response->assertSessionHas('success');
     }
 
     #[Test]
@@ -130,10 +130,10 @@ class MeControllerTest extends TestCase
         $this->withSession($this->authenticatedSession());
 
         Http::fake([
-            'http://users-test/api/*' => Http::response(['authorised' => false], 200),
+            'http://users-test/api/*' => Http::response(['authorized' => false], 200),
         ]);
 
-        $response = $this->put(route('me.password'), [
+        $response = $this->put(route('panel.password.update'), [
             'current_password' => 'wrong',
             'password' => 'NewPassword123!',
             'password_confirmation' => 'NewPassword123!',

@@ -32,8 +32,8 @@ class UsersApiServiceTest extends TestCase
         $result = $service->getUser(1);
 
         $this->assertNotNull($result);
-        $this->assertEquals(1, $result['id']);
-        $this->assertEquals('test@example.com', $result['email']);
+        $this->assertEquals(1, $result['data']['id']);
+        $this->assertEquals('test@example.com', $result['data']['email']);
     }
 
     #[Test]
@@ -85,7 +85,7 @@ class UsersApiServiceTest extends TestCase
     public function verify_password_returns_true_when_authorised(): void
     {
         Http::fake([
-            'http://users-test/api/*' => Http::response(['authorised' => true], 200),
+            'http://users-test/api/*' => Http::response(['authorized' => true], 200),
         ]);
 
         $service = app(UsersApiService::class);
@@ -98,7 +98,7 @@ class UsersApiServiceTest extends TestCase
     public function verify_password_returns_false_when_not_authorised(): void
     {
         Http::fake([
-            'http://users-test/api/*' => Http::response(['authorised' => false], 200),
+            'http://users-test/api/*' => Http::response(['authorized' => false], 200),
         ]);
 
         $service = app(UsersApiService::class);
