@@ -154,4 +154,65 @@ class BlogApiServiceTest extends TestCase
 
         $this->assertTrue($result['success']);
     }
+
+    #[Test]
+    public function create_comment_returns_success_and_data(): void
+    {
+        Http::fake([
+            'blog-test/api/v1/comments' => Http::response([
+                'data' => ['id' => 5, 'content' => 'Nice post!', 'status' => 'pending'],
+            ], 201),
+        ]);
+
+        $service = app(BlogApiService::class);
+        $result = $service->createComment(1, 'Nice post!');
+
+        $this->assertTrue($result['success']);
+        $this->assertEquals(5, $result['data']['id']);
+        $this->assertEquals('Nice post!', $result['data']['content']);
+    }
+
+    #[Test]
+    public function create_comment_returns_failure_with_errors(): void
+    {
+        Http::fake([
+            'blog-test/api/v1/comments' => Http::response([
+                'errors' => ['content' => ['The content field is required.']],
+            ], 422),
+        ]);
+
+        $service = app(BlogApiService::class);
+        $result = $service->createComment(1, '');
+
+        $this->assertFalse($result['success']);
+        $this->assertNotEmpty($result['errors']);
+    }
+
+    #[Test]
+    public function approve_comment_returns_true_on_success(): void
+    {
+        Http::fake([
+            'blog-test/api/v1/comments/5/approve' => Http::response([
+                'data' => ['id' => 5, 'status' => 'approved'],
+            ], 200),
+        ]);
+
+        $service = app(BlogApiService::class);
+        $result = $service->approveComment(5);
+
+        $this->assertTrue($result);
+    }
+
+    #[Test]
+    public function approve_comment_returns_false_on_failure(): void
+    {
+        Http::fake([
+            'blog-test/api/v1/comments/99/approve' => Http::response(null, 404),
+        ]);
+
+        $service = app(BlogApiService::class);
+        $result = $service->approveComment(99);
+
+        $this->assertFalse($result);
+    }
 }
