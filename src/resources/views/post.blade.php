@@ -68,7 +68,7 @@
                         @endif
 
                         {{-- Edit button for author --}}
-                        @if(session('user_id') && session('user_id') == ($post['author']['user_id'] ?? null))
+                        @if(session('user.id') && session('user.id') == ($post['author']['user_id'] ?? null))
                             <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                                 <a href="{{ route('panel.posts.edit', $post['id']) }}"
                                    class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-sky-700 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/20 rounded hover:bg-sky-100 dark:hover:bg-sky-900/40">
@@ -83,13 +83,54 @@
                     </div>
                 </article>
 
-                {{-- Login prompt for guests --}}
-                @unless(session('access_token'))
+                {{-- Comment form for eligible users / login prompt for guests --}}
+                @if(session('access_token') && $canComment)
+                    <div class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('comments.add_comment') }}</h3>
+
+                        @if(session('comment_success'))
+                            <div class="mb-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded text-sm text-green-800 dark:text-green-300">
+                                {{ __('comments.store_success') }}
+                            </div>
+                        @endif
+
+                        @if($errors->has('comment_content'))
+                            <div class="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded text-sm text-red-800 dark:text-red-300">
+                                {{ $errors->first('comment_content') }}
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('post.comments.store', $post['id']) }}">
+                            @csrf
+                            <div x-data="{ chars: {{ strlen(old('content', '')) }} }">
+                                <textarea
+                                    name="content"
+                                    rows="4"
+                                    class="w-full rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-gray-100 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                                    placeholder="{{ __('comments.content_placeholder') }}"
+                                    required
+                                    minlength="3"
+                                    maxlength="5000"
+                                    @input="chars = $el.value.length"
+                                >{{ old('content') }}</textarea>
+                                <div class="mt-1 flex justify-end text-xs"
+                                     :class="chars >= 5000 ? 'text-red-500' : (chars >= 4500 ? 'text-amber-500' : 'text-gray-400 dark:text-gray-500')">
+                                    <span x-text="chars"></span>&nbsp;/ 5000
+                                </div>
+                            </div>
+                            <div class="mt-3 flex justify-end">
+                                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded">
+                                    {{ __('comments.add_comment') }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                @elseif(!session('access_token'))
                     <div class="mt-6 bg-sky-50 dark:bg-sky-900/20 border border-sky-200 dark:border-sky-800 rounded-lg p-4 text-sm text-sky-800 dark:text-sky-300">
                         <a href="{{ route('login') }}" class="font-medium underline hover:text-sky-600 dark:hover:text-sky-400">{{ __('general.login') }}</a>
                         — {{ __('general.login_to_comment') }}
                     </div>
-                @endunless
+                @endif
 
                 {{-- Comments section --}}
                 <div class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6" id="comments">
@@ -104,7 +145,7 @@
                         <div class="py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
                             <div class="flex items-center justify-between mb-1">
                                 <span class="text-sm font-medium text-gray-800 dark:text-gray-200">
-                                    {{ __('general.user') }} #{{ $comment['author_id'] }}
+                                    {{ $comment['author']['name'] ?? __('general.user') . ' #' . $comment['author_id'] }}
                                 </span>
                                 <time class="text-xs text-gray-400 dark:text-gray-500">
                                     {{ \Carbon\Carbon::parse($comment['created_at'])->format('d.m.Y H:i') }}

@@ -32,7 +32,7 @@ class PostViewController extends Controller
 
         $postUuid = $post['uuid'] ?? null;
         if ($postUuid) {
-            $userId = session('user_id');
+            $userId = session('user.id');
             $this->analyticsPublisher->publishPostViewed($postUuid, $userId, $request);
         }
 
@@ -64,6 +64,11 @@ class PostViewController extends Controller
             }
         }
 
+        $userRoles = session('user.roles', []);
+        $canComment = session('access_token') &&
+            !empty($userRoles) &&
+            count(array_filter($userRoles, fn($r) => $r !== 'guest')) > 0;
+
         return view('post', [
             'post' => $post,
             'recentPosts' => $recentPosts,
@@ -72,6 +77,7 @@ class PostViewController extends Controller
             'comments' => $comments,
             'commentsMeta' => $commentsResult['meta'] ?? [],
             'likesData' => $likesData,
+            'canComment' => $canComment,
         ]);
     }
 }

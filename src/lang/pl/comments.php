@@ -9,4 +9,10 @@ return [
     'status_approved' => 'Zatwierdzony',
     'status_pending' => 'Oczekujacy',
     'status_rejected' => 'Odrzucony',
+
+    // Form
+    'add_comment'        => 'Dodaj komentarz',
+    'content_placeholder' => 'Napisz komentarz...',
+    'store_success'      => 'Komentarz został dodany.',
+    'store_error'        => 'Nie udało się dodać komentarza. Spróbuj ponownie.',
 ];

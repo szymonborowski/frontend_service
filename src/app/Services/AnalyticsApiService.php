@@ -38,7 +38,7 @@ class AnalyticsApiService
         return ['total_views' => 0, 'unique_viewers' => 0, 'daily_stats' => []];
     }
 
-    public function toggleLike(string $type, string $id, string $ipAddress, ?int $userId = null): array
+    public function toggleLike(string $type, string $id, string $ipAddress, ?int $userId = null): ?array
     {
         try {
             $payload = [
@@ -60,7 +60,7 @@ class AnalyticsApiService
             report($e);
         }
 
-        return ['liked' => false, 'count' => 0];
+        return null;
     }
 
     public function getBatchLikes(array $items, ?string $ipAddress = null): array

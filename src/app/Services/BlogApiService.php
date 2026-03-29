@@ -209,6 +209,7 @@ class BlogApiService
             'sort_order' => 'desc',
             'page' => $page,
             'per_page' => $perPage,
+            'with' => 'author',
         ]);
 
         if ($response->successful()) {
@@ -264,6 +265,27 @@ class BlogApiService
             'success' => $response->successful(),
             'errors' => $response->json('errors') ?? [],
         ];
+    }
+
+    public function createComment(int $postId, string $content): array
+    {
+        $response = $this->http()->post("{$this->baseUrl}/comments", [
+            'post_id' => $postId,
+            'content' => $content,
+        ]);
+
+        return [
+            'success' => $response->successful(),
+            'data'    => $response->json('data'),
+            'errors'  => $response->json('errors') ?? [],
+        ];
+    }
+
+    public function approveComment(int $commentId): bool
+    {
+        $response = $this->http()->patch("{$this->baseUrl}/comments/{$commentId}/approve");
+
+        return $response->successful();
     }
 
     public function subscribeNewsletter(string $email): array

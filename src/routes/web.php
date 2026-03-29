@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryViewController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OAuthController;
@@ -44,6 +45,7 @@ Route::get('/collaboration', fn() => view('collaboration'))->name('collaboration
 Route::get('/kategoria/{slug}', [CategoryViewController::class, 'show'])->name('category.show');
 Route::get('/tag/{slug}', [TagViewController::class, 'show'])->name('tag.show');
 Route::get('/post/{slugOrId}', [PostViewController::class, 'show'])->name('post.show')->where('slugOrId', '[a-zA-Z0-9\-]+|\d+');
+Route::post('/post/{postId}/comments', [CommentController::class, 'store'])->name('post.comments.store')->middleware('auth.session')->where('postId', '\d+');
 
 // Newsletter
 Route::post('/newsletter/subscribe', function (\Illuminate\Http\Request $request) {
@@ -63,7 +65,7 @@ Route::post('/newsletter/subscribe', function (\Illuminate\Http\Request $request
 
 // Likes
 Route::post('/likes/toggle', function (\Illuminate\Http\Request $request) {
-    $userId = session('user_id') ? (int) session('user_id') : null;
+    $userId = session('user.id') ? (int) session('user.id') : null;
 
     $result = app(\App\Services\AnalyticsApiService::class)->toggleLike(
         $request->input('type', ''),
@@ -71,6 +73,10 @@ Route::post('/likes/toggle', function (\Illuminate\Http\Request $request) {
         $request->ip(),
         $userId,
     );
+
+    if ($result === null) {
+        return response()->json(['error' => 'Service unavailable'], 503);
+    }
 
     return response()->json($result);
 })->middleware('throttle:30,1')->name('likes.toggle');
