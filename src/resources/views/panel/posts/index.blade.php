@@ -20,17 +20,27 @@
     @endphp
 
     @forelse($postsList as $post)
+        @php
+            $translations = $post['all_translations'] ?? [['locale' => $post['locale'] ?? 'pl', 'title' => $post['title'], 'excerpt' => $post['excerpt'] ?? null, 'content' => $post['content'] ?? null]];
+        @endphp
+        @foreach($translations as $translation)
         <div class="border-b border-gray-200 dark:border-gray-700 py-4 last:border-b-0">
             <div class="flex items-start justify-between">
                 <div class="flex-1">
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $post['title'] }}</h3>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-bold uppercase
+                            {{ $translation['locale'] === 'en' ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-400' : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400' }}">
+                            {{ $translation['locale'] }}
+                        </span>
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $translation['title'] }}</h3>
+                    </div>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
                         @if(isset($post['slug']))
                             <span class="font-mono text-xs bg-gray-100 dark:bg-gray-700 px-1 rounded">{{ $post['slug'] }}</span>
                         @endif
                     </p>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                        {{ \Illuminate\Support\Str::limit(strip_tags($post['content'] ?? ''), 150) }}
+                        {{ \Illuminate\Support\Str::limit(strip_tags($translation['content'] ?? ''), 150) }}
                     </p>
                     <div class="flex items-center gap-4 mt-2 text-xs text-gray-500 dark:text-gray-400">
                         <span>
@@ -76,7 +86,7 @@
                     @endif
                 </div>
                 <div class="flex items-center space-x-3 ml-4">
-                    <a href="{{ route('panel.posts.edit', $post['id']) }}"
+                    <a href="{{ route('panel.posts.edit', $post['id']) }}?locale={{ $translation['locale'] }}"
                        class="text-sm text-sky-800 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-300 font-medium">
                         {{ __('general.edit') }}
                     </a>
@@ -91,6 +101,7 @@
                 </div>
             </div>
         </div>
+        @endforeach
     @empty
         <div class="text-center py-12">
             <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
