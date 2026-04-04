@@ -36,7 +36,10 @@
                                 {{ \Carbon\Carbon::parse($post['published_at'])->format('d F Y') }}
                             </time>
                         </div>
-                        <div class="prose prose-gray dark:prose-invert max-w-none">
+                        <div class="prose prose-gray dark:prose-invert max-w-none"
+                             x-data
+                             @click="if ($event.target.tagName === 'IMG') $dispatch('open-lightbox', { src: $event.target.src, alt: $event.target.alt })"
+                        >
                             {!! \Illuminate\Support\Str::markdown($post['content'] ?? '') !!}
                         </div>
                         @if($post['tags'] ?? [])
@@ -200,4 +203,6 @@
             </aside>
         </div>
     </div>
+
+    <x-image-lightbox />
 @endsection

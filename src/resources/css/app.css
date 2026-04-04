@@ -65,6 +65,11 @@ html {
     }
 }
 
+/* ── Clickable images in post content ── */
+.prose img {
+    cursor: zoom-in;
+}
+
 /* ── Gradient text utility ── */
 .text-gradient {
     -webkit-background-clip: text;
