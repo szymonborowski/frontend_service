@@ -34,4 +34,7 @@ return [
     'save_as_draft' => 'Zapisz jako wersje robocza',
     'publish' => 'Opublikuj',
     'edit_post' => 'Edytuj post',
+    'insert_image' => 'Wstaw obrazek',
+    'search_media' => 'Szukaj mediów...',
+    'no_media_found' => 'Nie znaleziono mediów.',
 ];

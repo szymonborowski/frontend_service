@@ -105,4 +105,7 @@ Route::prefix('panel')->name('panel.')->middleware('auth.session')->group(functi
 
     Route::get('/comments', [UserPanelController::class, 'comments'])->name('comments');
     Route::get('/analytics', [UserPanelController::class, 'analytics'])->name('analytics');
+
+    // Media picker API (JSON)
+    Route::get('/media', [UserPanelController::class, 'mediaJson'])->name('media.json');
 });

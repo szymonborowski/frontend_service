@@ -89,4 +89,5 @@ return [
     // Pagination
     'per_page' => 'Per page:',
     'pagination' => 'Pages',
+    'cancel' => 'Cancel',
 ];

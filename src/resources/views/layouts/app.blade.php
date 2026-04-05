@@ -7,6 +7,7 @@
     <title>@yield('title', 'Extended\Mind::Thesis()')</title>
     <link rel="icon" href="/favicon_1.ico" sizes="32x32" type="image/x-icon">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
     {{-- Anti-flash: set dark class before paint --}}

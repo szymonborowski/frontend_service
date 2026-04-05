@@ -86,6 +86,17 @@ class UserPanelController extends Controller
         return back()->withErrors(['password' => 'Nie udalo sie zmienic hasla.']);
     }
 
+    public function mediaJson(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $result = $this->blogApiService->getMedia([
+            'page' => (int) $request->input('page', 1),
+            'per_page' => 12,
+            'search' => $request->input('search', ''),
+        ]);
+
+        return response()->json($result);
+    }
+
     // === Blog Category ===
 
     public function posts(Request $request): View

@@ -120,13 +120,34 @@
             const textarea = document.getElementById('content');
             const editor = new EasyMDE({
                 element: textarea,
+                autoDownloadFontAwesome: false,
                 spellChecker: false,
-                toolbar: ['bold','italic','heading-1','heading-2','|','quote','code','|','unordered-list','ordered-list','|','link','|','preview','guide'],
+                toolbar: [
+                    'bold','italic','heading-1','heading-2','|',
+                    'quote','code','|',
+                    'unordered-list','ordered-list','|',
+                    'link',
+                    {
+                        name: 'insert-image',
+                        action: () => window.dispatchEvent(new Event('open-media-picker')),
+                        className: 'fa fa-image',
+                        title: 'Insert Image',
+                    },
+                    '|','preview','guide'
+                ],
                 minHeight: '320px',
             });
             editor.codemirror.on('change', () => {
                 textarea.value = editor.value();
             });
+            window.addEventListener('insert-markdown-image', (e) => {
+                const cm = editor.codemirror;
+                cm.replaceRange('![' + e.detail.alt + '](' + e.detail.url + ')\n', cm.getCursor());
+                cm.focus();
+                textarea.value = editor.value();
+            });
         });
     </script>
+
+    <x-media-picker />
 @endsection

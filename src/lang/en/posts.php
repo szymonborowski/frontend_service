@@ -34,4 +34,7 @@ return [
     'save_as_draft' => 'Save as draft',
     'publish' => 'Publish',
     'edit_post' => 'Edit post',
+    'insert_image' => 'Insert Image',
+    'search_media' => 'Search media...',
+    'no_media_found' => 'No media found.',
 ];

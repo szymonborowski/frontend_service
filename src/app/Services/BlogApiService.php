@@ -235,6 +235,19 @@ class BlogApiService
         return ['data' => [], 'meta' => []];
     }
 
+    public function getMedia(array $query = []): array
+    {
+        $response = $this->http()->get("{$this->baseUrl}/media", array_merge([
+            'per_page' => 12,
+        ], $query));
+
+        if ($response->successful()) {
+            return $response->json() ?? ['data' => [], 'meta' => []];
+        }
+
+        return ['data' => [], 'meta' => []];
+    }
+
     public function createPost(array $data): array
     {
         $response = $this->http()->post("{$this->baseUrl}/posts", $data);
