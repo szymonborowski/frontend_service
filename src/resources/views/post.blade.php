@@ -2,6 +2,13 @@
 
 @section('title', $post['title'] ?? __('general.blog'))
 
+@section('og_type', 'article')
+@section('og_title', $post['title'] ?? __('general.blog'))
+@section('og_description', Str::limit(strip_tags(Str::markdown($post['content'] ?? '')), 160))
+@if(!empty($post['cover_image']))
+    @section('og_image', $post['cover_image'])
+@endif
+
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">

@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Extended\Mind::Thesis()')</title>
+
+    {{-- Open Graph --}}
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('og_title', 'Extended\Mind::Thesis()')">
+    <meta property="og:description" content="@yield('og_description', 'Blog techniczny Szymona Borowskiego — Laravel, DevOps, Kubernetes i więcej.')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="@yield('og_image', url('/images/og-cover.png'))">
+    <meta property="og:site_name" content="Extended\Mind::Thesis()">
+    <meta property="og:locale" content="{{ app()->getLocale() == 'pl' ? 'pl_PL' : 'en_US' }}">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('og_title', 'Extended\Mind::Thesis()')">
+    <meta name="twitter:description" content="@yield('og_description', 'Blog techniczny Szymona Borowskiego — Laravel, DevOps, Kubernetes i więcej.')">
+    <meta name="twitter:image" content="@yield('og_image', url('/images/og-cover.png'))">
+
+    {{-- General meta --}}
+    <meta name="description" content="@yield('og_description', 'Blog techniczny Szymona Borowskiego — Laravel, DevOps, Kubernetes i więcej.')">
+
     <link rel="icon" href="/favicon_1.ico" sizes="32x32" type="image/x-icon">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
