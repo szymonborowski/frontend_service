@@ -66,4 +66,8 @@ return [
         'token'    => env('GITHUB_TOKEN'),
     ],
 
+    'internal' => [
+        'api_key' => env('FRONTEND_INTERNAL_API_KEY'),
+    ],
+
 ];

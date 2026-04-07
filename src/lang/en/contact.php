@@ -20,6 +20,8 @@ return [
     'field_name_ph'        => 'John Doe',
     'field_email'          => 'E-mail address',
     'field_email_ph'       => 'you@example.com',
+    'field_phone'          => 'Phone number (optional)',
+    'field_phone_ph'       => '+48 123 456 789',
     'field_subject'        => 'Subject',
     'field_subject_ph'     => 'What is this about?',
     'field_message'        => 'Message',

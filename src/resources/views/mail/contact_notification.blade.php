@@ -39,9 +39,15 @@
                     <span class="meta-label">E-mail</span>
                     <span class="meta-value"><a href="mailto:{{ $senderEmail }}">{{ $senderEmail }}</a></span>
                 </div>
+                @if($phone)
+                <div class="meta-row">
+                    <span class="meta-label">Phone</span>
+                    <span class="meta-value"><a href="tel:{{ $phone }}">{{ $phone }}</a></span>
+                </div>
+                @endif
                 <div class="meta-row">
                     <span class="meta-label">Subject</span>
-                    <span class="meta-value">{{ $subject }}</span>
+                    <span class="meta-value">{{ $contactSubject }}</span>
                 </div>
                 <div class="meta-row">
                     <span class="meta-label">Sent at</span>
@@ -52,7 +58,7 @@
             <div class="message-label">Message</div>
             <div class="message-body">{{ $messageBody }}</div>
 
-            <a href="mailto:{{ $senderEmail }}?subject=Re: {{ rawurlencode($subject) }}" class="reply-btn">
+            <a href="mailto:{{ $senderEmail }}?subject=Re: {{ rawurlencode($contactSubject) }}" class="reply-btn">
                 Reply to {{ $senderName }}
             </a>
         </div>

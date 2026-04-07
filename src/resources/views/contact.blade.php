@@ -75,6 +75,7 @@
                     x-data="{
                         name: '',
                         email: '',
+                        phone: '',
                         subject: '',
                         message: '',
                         status: 'idle',
@@ -95,15 +96,18 @@
                                     body: JSON.stringify({
                                         name: this.name,
                                         email: this.email,
+                                        phone: this.phone || null,
                                         subject: this.subject,
                                         message: this.message,
                                     }),
                                 });
                                 if (res.ok) {
                                     this.status = 'success';
-                                } else {
+                                } else if (res.status === 422) {
                                     const data = await res.json();
                                     this.fieldErrors = data.errors ?? {};
+                                    this.status = 'error';
+                                } else {
                                     this.errorMsg = '{{ __('contact.error_message') }}';
                                     this.status = 'error';
                                 }
@@ -150,6 +154,16 @@
                             </div>
                         </div>
                         <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                                {{ __('contact.field_phone') }}
+                            </label>
+                            <input type="tel" id="phone" name="phone" x-model="phone"
+                                   placeholder="{{ __('contact.field_phone_ph') }}"
+                                   :class="fieldErrors.phone ? 'border-rose-400 focus:ring-rose-500' : 'border-gray-300 dark:border-gray-600 focus:ring-sky-500'"
+                                   class="w-full px-4 py-2.5 rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 transition text-sm">
+                            <p x-show="fieldErrors.phone" x-text="fieldErrors.phone?.[0]" x-cloak class="mt-1 text-xs text-rose-500"></p>
+                        </div>
+                        <div>
                             <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                                 {{ __('contact.field_subject') }}
                             </label>
@@ -181,9 +195,6 @@
                         <button type="submit"
                                 :disabled="status === 'loading'"
                                 class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors">
-                            <svg x-show="status !== 'loading'" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                            </svg>
                             <svg x-show="status === 'loading'" x-cloak class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>

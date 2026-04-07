@@ -20,6 +20,8 @@ return [
     'field_name_ph'        => 'Jan Kowalski',
     'field_email'          => 'Adres e-mail',
     'field_email_ph'       => 'ty@example.com',
+    'field_phone'          => 'Numer telefonu (opcjonalnie)',
+    'field_phone_ph'       => '+48 123 456 789',
     'field_subject'        => 'Temat',
     'field_subject_ph'     => 'O czym chcesz porozmawiać?',
     'field_message'        => 'Wiadomość',
