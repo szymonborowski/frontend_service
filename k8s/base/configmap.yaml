@@ -44,6 +44,12 @@ data:
   # OAuth credentials (generate proper values in production)
   SSO_CLIENT_ID: "frontend-client"
   SSO_CLIENT_SECRET: "frontend-secret-change-in-production"
+  # Mail
+  MAIL_MAILER: "smtp"
+  MAIL_SCHEME: "smtps"
+  MAIL_HOST: "ssl0.ovh.net"
+  MAIL_PORT: "465"
+  MAIL_FROM_NAME: "Frontend"
 ---
 apiVersion: v1
 kind: ConfigMap
