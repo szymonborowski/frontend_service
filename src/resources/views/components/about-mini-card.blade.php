@@ -1,9 +1,9 @@
-<div {{ $attributes->merge(['class' => 'bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-between']) }}>
+<div {{ $attributes->merge(['class' => 'bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-between']) }}>
     <div>
         <div class="flex items-center gap-4 mb-4">
-            <img src="/images/me200x200.png" alt="Szymon Borowski" class="w-16 h-16 rounded-full ring-2 ring-gray-200 dark:ring-gray-700">
+            <img src="/images/me200x200.png" alt="Szymon Borowski" class="w-16 h-16 rounded-full ring-2 ring-gray-300 dark:ring-gray-700">
             <div>
-                <h3 class="font-semibold text-gray-900 dark:text-gray-100">Szymon Borowski</h3>
+                <h3 class="font-semibold text-gray-800 dark:text-gray-100">Szymon Borowski</h3>
                 <p class="text-sm text-gray-500 dark:text-gray-400">Software Developer</p>
             </div>
         </div>

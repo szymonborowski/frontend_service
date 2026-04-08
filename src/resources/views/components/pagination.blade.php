@@ -22,7 +22,7 @@
                 @php
                     $url = $baseUrl . '?' . http_build_query(['per_page' => $num, 'page' => 1]);
                 @endphp
-                <a href="{{ $url }}" class="inline-flex items-center px-3 py-1.5 rounded text-sm font-medium {{ $num === $currentPerPage ? 'bg-sky-700 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400' }}">
+                <a href="{{ $url }}" class="inline-flex items-center px-3 py-1.5 rounded text-sm font-medium {{ $num === $currentPerPage ? 'bg-sky-700 text-white' : 'bg-gray-200/60 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400' }}">
                     {{ $num }}
                 </a>
             @endforeach
@@ -35,7 +35,7 @@
                     @php
                         $pageUrl = $baseUrl . '?' . http_build_query(['per_page' => $currentPerPage, 'page' => $p]);
                     @endphp
-                    <a href="{{ $pageUrl }}" class="inline-flex items-center justify-center min-w-[2.25rem] px-2 py-1.5 rounded text-sm font-medium {{ $p === $currentPage ? 'bg-sky-700 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400' }}">
+                    <a href="{{ $pageUrl }}" class="inline-flex items-center justify-center min-w-[2.25rem] px-2 py-1.5 rounded text-sm font-medium {{ $p === $currentPage ? 'bg-sky-700 text-white' : 'bg-gray-200/60 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400' }}">
                         {{ $p }}
                     </a>
                 @endfor

@@ -1,7 +1,7 @@
 @props(['recentPosts'])
 
-<div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('general.recent_posts') }}</h2>
+<div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">{{ __('general.recent_posts') }}</h2>
     <ul class="space-y-2">
         @forelse($recentPosts as $post)
             @php
@@ -16,8 +16,8 @@
                             {{ mb_substr($firstCat['name'] ?? '?', 0, 1) }}
                         </span>
                     </div>
-                    <div class="flex-1 px-3 py-2.5 bg-white dark:bg-gray-800">
-                        <h3 class="text-xs font-medium text-gray-900 dark:text-gray-100 group-hover:text-sky-700 dark:group-hover:text-sky-400 line-clamp-2 leading-snug">
+                    <div class="flex-1 px-3 py-2.5 bg-gray-50 dark:bg-gray-800">
+                        <h3 class="text-xs font-medium text-gray-800 dark:text-gray-100 group-hover:text-sky-700 dark:group-hover:text-sky-400 line-clamp-2 leading-snug">
                             {{ $post['title'] }}
                         </h3>
                         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">

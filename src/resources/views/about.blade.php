@@ -24,7 +24,7 @@
 
         {{-- Profile --}}
         <section class="max-w-3xl opacity-0" x-data x-init="fadeInOnScroll($el)">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ __('about.profile_heading') }}</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">{{ __('about.profile_heading') }}</h2>
             <div class="text-gray-600 dark:text-gray-400 space-y-4 text-base leading-relaxed">
                 <p>{{ __('about.profile_p1') }}</p>
                 <p>{{ __('about.profile_p2') }}</p>
@@ -33,7 +33,7 @@
 
         {{-- Skills --}}
         <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ __('about.skills_heading') }}</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">{{ __('about.skills_heading') }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach([
                     ['name' => 'PHP',                    'level' => __('about.level_expert'),       'years' => __('about.skill_years_10')],
@@ -49,9 +49,9 @@
                     ['name' => 'Working with AI agents', 'level' => __('about.level_intermediate'), 'years' => __('about.skill_growing')],
                     ['name' => 'Claude Native Apps',     'level' => __('about.level_intermediate'), 'years' => __('about.skill_growing')],
                 ] as $skill)
-                    <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
                         <div class="flex items-center justify-between mb-1">
-                            <span class="font-semibold text-gray-900 dark:text-gray-100">{{ $skill['name'] }}</span>
+                            <span class="font-semibold text-gray-800 dark:text-gray-100">{{ $skill['name'] }}</span>
                             <span class="text-xs font-medium text-sky-700 dark:text-sky-400">{{ $skill['level'] }}</span>
                         </div>
                         <p class="text-xs text-gray-500 dark:text-gray-400">{{ $skill['years'] }}</p>
@@ -62,7 +62,7 @@
 
         {{-- Experience --}}
         <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">{{ __('about.experience_heading') }}</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8">{{ __('about.experience_heading') }}</h2>
             <div class="space-y-0">
                 @foreach([
                     [
@@ -109,7 +109,7 @@
                         {{-- Content --}}
                         <div class="pb-10 {{ $loop->last ? 'pb-0' : '' }}">
                             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
-                                <h3 class="font-semibold text-gray-900 dark:text-gray-100">{{ $job['title'] }}</h3>
+                                <h3 class="font-semibold text-gray-800 dark:text-gray-100">{{ $job['title'] }}</h3>
                                 @if($job['current'])
                                     <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-400">
                                         {{ __('about.present') }}
@@ -144,13 +144,13 @@
 
             {{-- Education --}}
             <section>
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ __('about.education_heading') }}</h2>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">{{ __('about.education_heading') }}</h2>
                 <div class="flex gap-5">
                     <div class="flex flex-col items-center shrink-0">
                         <div class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 mt-1.5 shrink-0"></div>
                     </div>
                     <div>
-                        <h3 class="font-semibold text-gray-900 dark:text-gray-100">{{ __('about.edu1_school') }}</h3>
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-100">{{ __('about.edu1_school') }}</h3>
                         <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">{{ __('about.edu1_period') }}</p>
                         <p class="text-sm text-gray-600 dark:text-gray-400">{{ __('about.edu1_degree') }}</p>
                     </div>
@@ -159,14 +159,14 @@
 
             {{-- Languages --}}
             <section>
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ __('about.languages_heading') }}</h2>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">{{ __('about.languages_heading') }}</h2>
                 <div class="space-y-3">
                     @foreach([
                         ['name' => __('about.lang_pl'), 'level' => __('about.lang_pl_level')],
                         ['name' => __('about.lang_en'), 'level' => __('about.lang_en_level')],
                     ] as $lang)
-                        <div class="flex items-center justify-between bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 px-5 py-3">
-                            <span class="font-medium text-gray-900 dark:text-gray-100 text-sm">{{ $lang['name'] }}</span>
+                        <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 px-5 py-3">
+                            <span class="font-medium text-gray-800 dark:text-gray-100 text-sm">{{ $lang['name'] }}</span>
                             <span class="text-xs font-medium text-sky-700 dark:text-sky-400">{{ $lang['level'] }}</span>
                         </div>
                     @endforeach
@@ -176,15 +176,15 @@
 
         {{-- CV download --}}
         <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
-            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div>
-                    <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">{{ __('about.cv_heading') }}</h2>
+                    <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-1">{{ __('about.cv_heading') }}</h2>
                     <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('about.cv_subtitle') }}</p>
                 </div>
                 <div class="flex gap-3 shrink-0">
                     <a href="/resume/Szymon%20Borowski%20CV.pdf"
                        target="_blank"
-                       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 text-sm font-medium transition-colors shadow-sm">
+                       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 text-sm font-medium transition-colors shadow-sm">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>

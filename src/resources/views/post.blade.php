@@ -19,7 +19,7 @@
 
             {{-- Middle column - single post --}}
             <main class="lg:col-span-2">
-                <article class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <article class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
                     <div class="p-6">
                         <div class="flex items-center space-x-2 mb-3">
                             @if($post['categories'] ?? [])
@@ -33,7 +33,7 @@
                                 @endforeach
                             @endif
                         </div>
-                        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">{{ $post['title'] }}</h1>
+                        <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">{{ $post['title'] }}</h1>
                         <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
                             @if($post['author']['name'] ?? null)
                                 <span>{{ $post['author']['name'] }}</span>
@@ -53,7 +53,7 @@
                             <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
                                 <div class="flex flex-wrap gap-2">
                                     @foreach($post['tags'] as $tag)
-                                        <a href="{{ route('tag.show', $tag['slug']) }}" class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400">
+                                        <a href="{{ route('tag.show', $tag['slug']) }}" class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-200/60 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400">
                                             #{{ $tag['name'] }}
                                         </a>
                                     @endforeach
@@ -95,8 +95,8 @@
 
                 {{-- Comment form for eligible users / login prompt for guests --}}
                 @if(session('access_token') && $canComment)
-                    <div class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                        <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('comments.add_comment') }}</h3>
+                    <div class="mt-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h3 class="text-base font-semibold text-gray-800 dark:text-gray-100 mb-4">{{ __('comments.add_comment') }}</h3>
 
                         @if(session('comment_success'))
                             <div class="mb-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded text-sm text-green-800 dark:text-green-300">
@@ -143,8 +143,8 @@
                 @endif
 
                 {{-- Comments section --}}
-                <div class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6" id="comments">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                <div class="mt-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6" id="comments">
+                    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">
                         {{ __('general.comments') }}
                         @if(($commentsMeta['total'] ?? 0) > 0)
                             <span class="text-sm font-normal text-gray-500 dark:text-gray-400">({{ $commentsMeta['total'] }})</span>
@@ -152,7 +152,7 @@
                     </h2>
 
                     @forelse($comments as $comment)
-                        <div class="py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
+                        <div class="py-4 border-b border-gray-200 dark:border-gray-700 last:border-0">
                             <div class="flex items-center justify-between mb-1">
                                 <span class="text-sm font-medium text-gray-800 dark:text-gray-200">
                                     {{ $comment['author']['name'] ?? __('general.user') . ' #' . $comment['author_id'] }}
@@ -195,11 +195,11 @@
             {{-- Right column - categories and tags --}}
             <aside class="lg:col-span-1 space-y-6">
                 <x-category-grid :categories="$categories" />
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('general.tags') }}</h2>
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">{{ __('general.tags') }}</h2>
                     <div class="flex flex-wrap gap-2">
                         @forelse($tags as $tag)
-                            <a href="{{ route('tag.show', $tag['slug']) }}" class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400">
+                            <a href="{{ route('tag.show', $tag['slug']) }}" class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-200/60 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400">
                                 #{{ $tag['name'] }}
                             </a>
                         @empty

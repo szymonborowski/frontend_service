@@ -54,7 +54,7 @@
         class="inline-flex items-center {{ $sizeClasses }} rounded-full px-3 py-1.5 font-medium transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-sky-500/50"
         :class="liked
             ? 'bg-rose-50 dark:bg-rose-500/10 border-rose-200 dark:border-rose-500/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-500/20'
-            : 'bg-gray-50 dark:bg-gray-700/50 border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-rose-500 dark:hover:text-rose-400'"
+            : 'bg-gray-100 dark:bg-gray-700/50 border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-200/60 dark:hover:bg-gray-700 hover:text-rose-500 dark:hover:text-rose-400'"
         :title="liked ? '{{ __('general.likes') }}' : '{{ __('general.like') }}'"
     >
         {{-- Heart icon --}}

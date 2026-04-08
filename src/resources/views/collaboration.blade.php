@@ -19,7 +19,7 @@
 
         {{-- What I offer --}}
         <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">{{ __('collaboration.offer_heading') }}</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8">{{ __('collaboration.offer_heading') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @foreach([
                     [
@@ -38,14 +38,14 @@
                         'desc'  => __('collaboration.offer_consulting_desc'),
                     ],
                 ] as $i => $service)
-                    <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 opacity-0 stagger-{{ $i + 1 }}"
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 opacity-0 stagger-{{ $i + 1 }}"
                          x-data x-init="fadeInOnScroll($el)">
                         <div class="w-10 h-10 rounded-lg bg-sky-50 dark:bg-sky-900/30 flex items-center justify-center mb-4">
                             <svg class="w-5 h-5 text-sky-600 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 {!! $service['icon'] !!}
                             </svg>
                         </div>
-                        <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">{{ $service['title'] }}</h3>
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-100 mb-2">{{ $service['title'] }}</h3>
                         <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ $service['desc'] }}</p>
                     </div>
                 @endforeach
@@ -54,7 +54,7 @@
 
         {{-- How it works --}}
         <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">{{ __('collaboration.process_heading') }}</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8">{{ __('collaboration.process_heading') }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach([
                     ['step' => '01', 'title' => __('collaboration.step1_title'), 'desc' => __('collaboration.step1_desc')],
@@ -62,9 +62,9 @@
                     ['step' => '03', 'title' => __('collaboration.step3_title'), 'desc' => __('collaboration.step3_desc')],
                     ['step' => '04', 'title' => __('collaboration.step4_title'), 'desc' => __('collaboration.step4_desc')],
                 ] as $step)
-                    <div class="relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-                        <span class="text-4xl font-bold text-gray-100 dark:text-gray-700 absolute top-4 right-5 select-none">{{ $step['step'] }}</span>
-                        <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2 relative">{{ $step['title'] }}</h3>
+                    <div class="relative bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+                        <span class="text-4xl font-bold text-gray-200/70 dark:text-gray-700 absolute top-4 right-5 select-none">{{ $step['step'] }}</span>
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-100 mb-2 relative">{{ $step['title'] }}</h3>
                         <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed relative">{{ $step['desc'] }}</p>
                     </div>
                 @endforeach

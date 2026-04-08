@@ -1,8 +1,8 @@
 @props(['categories'])
 
-<div x-data="{ expanded: false }" {{ $attributes->merge(['class' => 'bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-between']) }}>
+<div x-data="{ expanded: false }" {{ $attributes->merge(['class' => 'bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-between']) }}>
     <div>
-        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{{ __('general.categories') }}</h2>
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">{{ __('general.categories') }}</h2>
         <div class="relative">
             <div class="grid grid-cols-2 gap-2 overflow-hidden transition-[max-height] duration-300 ease-in-out"
                  :class="expanded ? 'max-h-[80rem]' : 'max-h-[11rem]'">
@@ -21,7 +21,7 @@
                  x-transition:leave="transition ease-in duration-200"
                  x-transition:leave-start="opacity-100"
                  x-transition:leave-end="opacity-0"
-                 class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white dark:from-gray-800 to-transparent pointer-events-none"></div>
+                 class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-gray-50 dark:from-gray-800 to-transparent pointer-events-none"></div>
         </div>
     </div>
 

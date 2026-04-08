@@ -18,14 +18,14 @@
 
             {{-- Contact info --}}
             <div class="opacity-0" x-data x-init="fadeInOnScroll($el)">
-                <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">{{ __('contact.details_heading') }}</h2>
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-6">{{ __('contact.details_heading') }}</h2>
                 <ul class="space-y-4 text-sm text-gray-600 dark:text-gray-400">
                     <li class="flex items-start gap-3">
                         <svg class="w-5 h-5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
                         <div>
-                            <p class="font-medium text-gray-900 dark:text-gray-100 mb-0.5">{{ __('contact.label_email') }}</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-100 mb-0.5">{{ __('contact.label_email') }}</p>
                             <a href="mailto:szymon@borowski.services" class="hover:text-sky-700 dark:hover:text-sky-400 transition-colors">
                                 szymon@borowski.services
                             </a>
@@ -36,7 +36,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                         </svg>
                         <div>
-                            <p class="font-medium text-gray-900 dark:text-gray-100 mb-0.5">{{ __('contact.label_phone') }}</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-100 mb-0.5">{{ __('contact.label_phone') }}</p>
                             <a href="tel:+48509132087" class="hover:text-sky-700 dark:hover:text-sky-400 transition-colors">
                                 +48 509 132 087
                             </a>
@@ -48,7 +48,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                         <div>
-                            <p class="font-medium text-gray-900 dark:text-gray-100 mb-0.5">{{ __('contact.label_location') }}</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-100 mb-0.5">{{ __('contact.label_location') }}</p>
                             <span>{{ __('contact.location_value') }}</span>
                         </div>
                     </li>
@@ -57,7 +57,7 @@
                             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                         </svg>
                         <div>
-                            <p class="font-medium text-gray-900 dark:text-gray-100 mb-0.5">{{ __('contact.label_linkedin') }}</p>
+                            <p class="font-medium text-gray-800 dark:text-gray-100 mb-0.5">{{ __('contact.label_linkedin') }}</p>
                             <a href="https://www.linkedin.com/in/szymon-borowski-db84/" target="_blank" rel="noopener"
                                class="hover:text-sky-700 dark:hover:text-sky-400 transition-colors">
                                 szymon-borowski-db84
@@ -69,7 +69,7 @@
 
             {{-- Contact form --}}
             <div class="lg:col-span-2 opacity-0 stagger-1" x-data x-init="fadeInOnScroll($el)">
-                <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">{{ __('contact.form_heading') }}</h2>
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-6">{{ __('contact.form_heading') }}</h2>
 
                 <div
                     x-data="{

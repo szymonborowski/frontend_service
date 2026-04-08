@@ -50,11 +50,11 @@
     @livewireStyles
     <style>[x-cloak] { display: none !important; }</style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-950 min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200">
+<body class="bg-gray-100 dark:bg-gray-950 min-h-screen text-gray-800 dark:text-gray-100 transition-colors duration-200">
     <header
         x-data="{ scrolled: false }"
         @scroll.window="scrolled = window.scrollY > 60"
-        class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg transition-all duration-300 ease-in-out border-b border-gray-200/50 dark:border-gray-700/50"
+        class="fixed top-0 left-0 right-0 z-50 bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-lg transition-all duration-300 ease-in-out border-b border-gray-200/50 dark:border-gray-700/50"
         :class="scrolled ? 'h-16 shadow-md' : 'h-28 shadow-sm'"
     >
         <div
@@ -66,14 +66,14 @@
                     <img
                         src="/images/me200x200.png"
                         alt="Szymon Borowski"
-                        class="rounded-full object-cover shrink-0 transition-all duration-300 hover:opacity-80 ring-2 ring-gray-200 dark:ring-gray-700"
+                        class="rounded-full object-cover shrink-0 transition-all duration-300 hover:opacity-80 ring-2 ring-gray-300 dark:ring-gray-700"
                         :class="scrolled ? 'w-9 h-9' : 'w-20 h-20'"
                     >
                 </a>
                 <div class="relative group">
                     <a
                         href="{{ url('/') }}"
-                        class="font-mono font-bold text-gray-900 dark:text-gray-100 hover:text-sky-700 dark:hover:text-sky-400 whitespace-nowrap transition-all duration-300 cursor-help"
+                        class="font-mono font-bold text-gray-800 dark:text-gray-100 hover:text-sky-700 dark:hover:text-sky-400 whitespace-nowrap transition-all duration-300 cursor-help"
                         :class="scrolled ? 'text-base' : 'text-xl'"
                     >
                         <span class="text-gray-400 dark:text-gray-500">Extended\</span><span>Mind</span><span class="text-sky-700 dark:text-sky-400">::</span><span>Thesis</span><span class="text-gray-400 dark:text-gray-500">()</span>
@@ -138,7 +138,7 @@
 
     @yield('pre-footer')
 
-    <footer class="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 mt-12">
+    <footer class="bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
             {{-- Main grid --}}
@@ -146,7 +146,7 @@
 
                 {{-- Contact info --}}
                 <div>
-                    <h3 class="font-mono font-semibold text-gray-900 dark:text-gray-100 text-sm mb-4">
+                    <h3 class="font-mono font-semibold text-gray-800 dark:text-gray-100 text-sm mb-4">
                         <span class="text-gray-400 dark:text-gray-500">Extended\</span>Mind<span class="text-sky-700 dark:text-sky-400">::</span>Contact<span class="text-gray-400 dark:text-gray-500">()</span>
                     </h3>
                     <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
@@ -180,7 +180,7 @@
 
                 {{-- Navigation --}}
                 <div>
-                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-4 uppercase tracking-wide">{{ __('general.footer_navigation') }}</h3>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-100 text-sm mb-4 uppercase tracking-wide">{{ __('general.footer_navigation') }}</h3>
                     <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                         <li><a href="{{ url('/') }}" class="hover:text-sky-700 dark:hover:text-sky-400 transition-colors">{{ __('general.footer_blog') }}</a></li>
                         <li><a href="{{ url('/about') }}" class="hover:text-sky-700 dark:hover:text-sky-400 transition-colors">{{ __('general.footer_about') }}</a></li>
@@ -191,7 +191,7 @@
 
                 {{-- Social / Dev --}}
                 <div>
-                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-4 uppercase tracking-wide">{{ __('general.footer_find_me') }}</h3>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-100 text-sm mb-4 uppercase tracking-wide">{{ __('general.footer_find_me') }}</h3>
                     <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                         <li>
                             <a href="https://github.com/szymonborowski" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-sky-700 dark:hover:text-sky-400 transition-colors">
@@ -222,10 +222,10 @@
 
                 {{-- Tech Stack --}}
                 <div>
-                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-4 uppercase tracking-wide">{{ __('general.footer_tech_stack') }}</h3>
+                    <h3 class="font-semibold text-gray-800 dark:text-gray-100 text-sm mb-4 uppercase tracking-wide">{{ __('general.footer_tech_stack') }}</h3>
                     <div class="flex flex-wrap gap-2">
                         @foreach(['Laravel', 'PHP 8.5', 'Tailwind CSS', 'Alpine.js', 'Docker', 'Kubernetes', 'MySQL', 'RabbitMQ', 'Nginx'] as $tech)
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-200/60 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
                                 {{ $tech }}
                             </span>
                         @endforeach

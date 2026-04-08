@@ -9,7 +9,7 @@
     $iconPath = \App\Helpers\CategoryIcon::path($categoryIcon);
 @endphp
 
-<article {{ $attributes->merge(['class' => 'group relative flex flex-col bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ' . ($featured ? 'md:flex-row' : '')]) }}>
+<article {{ $attributes->merge(['class' => 'group relative flex flex-col bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ' . ($featured ? 'md:flex-row' : '')]) }}>
     {{-- Cover image / gradient fallback --}}
     <a href="{{ route('post.show', $post['slug']) }}"
        class="{{ $featured ? 'md:w-2/5 shrink-0' : '' }} block relative overflow-hidden {{ $featured ? 'aspect-auto h-48 md:h-auto' : 'aspect-[16/9]' }}">
@@ -44,7 +44,7 @@
         @endif
 
         {{-- Title --}}
-        <h3 class="{{ $featured ? 'text-xl' : 'text-base' }} font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">
+        <h3 class="{{ $featured ? 'text-xl' : 'text-base' }} font-semibold text-gray-800 dark:text-gray-100 mb-2 line-clamp-2">
             <a href="{{ route('post.show', $post['slug']) }}" class="hover:text-sky-700 dark:hover:text-sky-400 transition-colors">
                 {{ $post['title'] }}
             </a>
@@ -58,7 +58,7 @@
         @endif
 
         {{-- Meta row --}}
-        <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-100 dark:border-gray-700">
+        <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-200 dark:border-gray-700">
             <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
                 @if($post['author']['name'] ?? null)
                     <span>{{ $post['author']['name'] }}</span>

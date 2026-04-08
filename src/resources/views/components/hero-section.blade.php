@@ -1,7 +1,7 @@
 {{-- Hero Section — bold typography + journey artwork --}}
 <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950">
     {{-- Journey artwork (fit to height, centered, edge color fills sides) --}}
-    <div class="absolute inset-0 dark:hidden" style="background-color: #fefefe;">
+    <div class="absolute inset-0 dark:hidden" style="background-color: #f3f4f6;">
         <img src="/images/journey-light.webp"
              alt=""
              class="w-full h-full object-contain object-center opacity-25">
@@ -26,7 +26,7 @@
 
             {{-- Main heading with gradient text --}}
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                <span class="text-gray-900 dark:text-white">Extended</span><span class="text-gray-400 dark:text-gray-500">\</span><br class="sm:hidden">
+                <span class="text-gray-800 dark:text-white">Extended</span><span class="text-gray-400 dark:text-gray-500">\</span><br class="sm:hidden">
                 <span class="text-gradient bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500 dark:from-sky-400 dark:via-indigo-400 dark:to-violet-400">Mind<span class="text-sky-600 dark:text-sky-400">::</span>Thesis</span><span class="text-gray-400 dark:text-gray-500">()</span>
             </h1>
 
@@ -38,7 +38,7 @@
             {{-- Tech stack badges --}}
             <div class="flex flex-wrap gap-2 mb-10">
                 @foreach(['PHP', 'Laravel', 'Docker', 'JavaScript', 'Tailwind CSS', 'MySQL'] as $tech)
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-900/10 text-gray-700 border border-gray-900/10 dark:bg-white/10 dark:text-gray-300 dark:border-white/10 backdrop-blur-sm">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-800/10 text-gray-600 border border-gray-800/10 dark:bg-white/10 dark:text-gray-300 dark:border-white/10 backdrop-blur-sm">
                         {{ $tech }}
                     </span>
                 @endforeach
@@ -52,13 +52,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                     </svg>
                 </a>
-                <a href="{{ url('/about') }}" class="inline-flex items-center px-6 py-3 rounded-lg bg-gray-900/10 hover:bg-gray-900/20 text-gray-800 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-medium transition-colors border border-gray-900/20 dark:border-white/20 backdrop-blur-sm">
+                <a href="{{ url('/about') }}" class="inline-flex items-center px-6 py-3 rounded-lg bg-gray-800/10 hover:bg-gray-800/20 text-gray-700 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-medium transition-colors border border-gray-800/20 dark:border-white/20 backdrop-blur-sm">
                     {{ __('general.hero_about_me') }}
                     <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
                 </a>
-                <a href="{{ url('/collaboration') }}" class="inline-flex items-center px-6 py-3 rounded-lg bg-gray-900/10 hover:bg-gray-900/20 text-gray-800 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-medium transition-colors border border-gray-900/20 dark:border-white/20 backdrop-blur-sm">
+                <a href="{{ url('/collaboration') }}" class="inline-flex items-center px-6 py-3 rounded-lg bg-gray-800/10 hover:bg-gray-800/20 text-gray-700 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-medium transition-colors border border-gray-800/20 dark:border-white/20 backdrop-blur-sm">
                     {{ __('general.hero_collaboration') }}
                     <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>

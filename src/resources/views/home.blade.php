@@ -45,7 +45,7 @@
         {{-- Recent Articles (non-feature) --}}
         @if(!empty($recentArticles))
             <div class="mt-12">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 opacity-0" x-data x-init="fadeInOnScroll($el)">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 opacity-0" x-data x-init="fadeInOnScroll($el)">
                     {{ __('general.recent_posts') }}
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -61,7 +61,7 @@
         {{-- Recent Features (dev-log) --}}
         @if(!empty($recentFeatures))
             <div class="mt-12">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 opacity-0" x-data x-init="fadeInOnScroll($el)">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 opacity-0" x-data x-init="fadeInOnScroll($el)">
                     {{ __('general.recent_features') }}
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
