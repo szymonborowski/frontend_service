@@ -241,5 +241,6 @@
     </footer>
 
     @livewireScripts
+    <x-chat-widget />
 </body>
 </html>

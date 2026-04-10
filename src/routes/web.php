@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryViewController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -41,6 +42,10 @@ Route::get('/about',         fn() => view('about'))->name('about');
 Route::get('/contact',       fn() => view('contact'))->name('contact');
 Route::post('/contact',      [ContactController::class, 'send'])->middleware('throttle:5,1')->name('contact.send');
 Route::get('/collaboration', fn() => view('collaboration'))->name('collaboration');
+
+// AI Chat
+Route::post('/chat/send',  [ChatController::class, 'send'])->middleware('throttle:chat')->name('chat.send');
+Route::post('/chat/clear', [ChatController::class, 'clear'])->middleware('throttle:30,1')->name('chat.clear');
 
 Route::get('/kategoria/{slug}', [CategoryViewController::class, 'show'])->name('category.show');
 Route::get('/tag/{slug}', [TagViewController::class, 'show'])->name('tag.show');
