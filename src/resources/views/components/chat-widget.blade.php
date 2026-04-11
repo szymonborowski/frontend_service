@@ -59,7 +59,7 @@
     <button
         @click="toggle()"
         :aria-label="open ? @js(__('chat.close_label')) : @js(__('chat.open_label'))"
-        class="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white shadow-lg transition-all duration-200 hover:bg-indigo-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-500 dark:hover:bg-indigo-400"
+        class="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-rose-800 text-white shadow-lg transition-all duration-200 hover:bg-rose-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-rose-700 focus:ring-offset-2 dark:bg-rose-700 dark:hover:bg-rose-600"
         :class="open ? 'scale-90 opacity-0 pointer-events-none' : 'scale-100 opacity-100'"
     >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -80,13 +80,13 @@
         class="fixed bottom-6 right-6 z-50 flex w-80 sm:w-96 flex-col rounded-2xl border border-gray-200 bg-white shadow-2xl dark:border-gray-700 dark:bg-gray-900"
     >
         {{-- Header --}}
-        <div class="flex items-center justify-between rounded-t-2xl bg-indigo-600 px-4 py-3 dark:bg-indigo-700">
+        <div class="flex items-center justify-between rounded-t-2xl bg-rose-800 px-4 py-3 dark:bg-rose-800">
             <span class="text-sm font-semibold text-white">{{ __('chat.title') }}</span>
             <div class="flex items-center gap-2">
                 <button
                     @click="clear()"
                     title="{{ __('chat.new_chat') }}"
-                    class="rounded p-1 text-indigo-200 transition-colors hover:text-white"
+                    class="rounded p-1 text-rose-300 transition-colors hover:text-white"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -94,7 +94,7 @@
                 </button>
                 <button
                     @click="open = false"
-                    class="rounded p-1 text-indigo-200 transition-colors hover:text-white"
+                    class="rounded p-1 text-rose-300 transition-colors hover:text-white"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -110,12 +110,18 @@
         >
             <template x-for="(msg, i) in messages" :key="i">
                 <div :class="msg.role === 'user' ? 'flex justify-end' : 'flex justify-start'">
-                    <div
-                        :class="msg.role === 'user'
-                            ? 'max-w-[75%] rounded-2xl rounded-br-sm bg-indigo-600 px-3 py-2 text-sm text-white dark:bg-indigo-500'
-                            : 'max-w-[80%] rounded-2xl rounded-bl-sm bg-gray-100 px-3 py-2 text-sm text-gray-800 dark:bg-gray-800 dark:text-gray-100'"
-                        x-text="msg.content"
-                    ></div>
+                    <template x-if="msg.role === 'assistant'">
+                        <div
+                            class="prose prose-sm dark:prose-invert max-w-[80%] rounded-2xl rounded-bl-sm bg-gray-100 px-3 py-2 text-gray-800 dark:bg-gray-800 dark:text-gray-100"
+                            x-html="renderMarkdown(msg.content)"
+                        ></div>
+                    </template>
+                    <template x-if="msg.role === 'user'">
+                        <div
+                            class="max-w-[75%] rounded-2xl rounded-br-sm bg-rose-800 px-3 py-2 text-sm text-white dark:bg-rose-700"
+                            x-text="msg.content"
+                        ></div>
+                    </template>
                 </div>
             </template>
 
@@ -139,14 +145,14 @@
                     :placeholder="@js(__('chat.placeholder'))"
                     :disabled="loading"
                     rows="1"
-                    class="flex-1 resize-none rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
+                    class="flex-1 resize-none rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-rose-600 focus:outline-none focus:ring-1 focus:ring-rose-600 disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
                     style="max-height: 6rem; overflow-y: auto"
                     @input="$el.style.height = 'auto'; $el.style.height = Math.min($el.scrollHeight, 96) + 'px'"
                 ></textarea>
                 <button
                     type="submit"
                     :disabled="loading || !input.trim()"
-                    class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white transition-colors hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed dark:bg-indigo-500 dark:hover:bg-indigo-400"
+                    class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-rose-800 text-white transition-colors hover:bg-rose-800 disabled:opacity-40 disabled:cursor-not-allowed dark:bg-rose-700 dark:hover:bg-rose-600"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

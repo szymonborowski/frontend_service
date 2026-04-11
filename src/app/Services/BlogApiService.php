@@ -31,6 +31,43 @@ class BlogApiService
         return $client;
     }
 
+    /**
+     * Fetch all published posts for indexing (paginated, no cache).
+     * Returns a flat array of posts with full content for both locales.
+     */
+    public function getAllPostsForIndexing(string $locale = 'en'): array
+    {
+        $posts   = [];
+        $page    = 1;
+        $perPage = 50;
+
+        do {
+            $response = $this->http()->get("{$this->baseUrl}/posts", [
+                'status'   => 'published',
+                'locale'   => $locale,
+                'with'     => 'categories,tags,content',
+                'page'     => $page,
+                'per_page' => $perPage,
+            ]);
+
+            if (!$response->successful()) {
+                break;
+            }
+
+            $data      = $response->json('data') ?? [];
+            $lastPage  = $response->json('meta.last_page') ?? 1;
+
+            foreach ($data as $post) {
+                $post['locale'] = $locale;
+                $posts[]        = $post;
+            }
+
+            $page++;
+        } while ($page <= $lastPage);
+
+        return $posts;
+    }
+
     public function getRecentPosts(int $limit = 10): array
     {
         $locale = app()->getLocale();

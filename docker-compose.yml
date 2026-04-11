@@ -28,6 +28,8 @@ services:
     depends_on:
       frontend-redis:
         condition: service_healthy
+      frontend-qdrant:
+        condition: service_started
       frontend-vite:
         condition: service_started
     expose:
@@ -94,6 +96,54 @@ services:
           memory: 64m
           cpus: '0.25'
 
+  frontend-consumer:
+    build:
+      context: .
+      dockerfile: docker/dev/php/Dockerfile
+      target: php-runtime
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    command: php artisan rabbitmq:consume-blog
+    environment:
+      - RABBITMQ_HOST=${RABBITMQ_HOST:-rabbitmq}
+      - RABBITMQ_PORT=${RABBITMQ_PORT:-5672}
+      - RABBITMQ_USER=${RABBITMQ_USER:-admin}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-secret}
+    volumes:
+      - ./src:/var/www/html
+      - frontend_vendor:/var/www/html/vendor
+    depends_on:
+      frontend-redis:
+        condition: service_healthy
+      frontend-qdrant:
+        condition: service_started
+    restart: always
+    networks:
+      - frontend-internal
+      - microservices
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+          cpus: '0.25'
+
+  frontend-qdrant:
+    image: qdrant/qdrant:v1.14.1
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - frontend-internal
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+          cpus: '0.25'
+
   frontend-redis:
     image: redis:7-alpine
     ports:
@@ -126,4 +176,5 @@ networks:
 
 volumes:
   redis_data:
+  qdrant_data:
   frontend_vendor:

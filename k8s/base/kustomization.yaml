@@ -3,9 +3,11 @@ kind: Kustomization
 
 resources:
   - configmap.yaml
+  - consumer-deployment.yaml
   - deployment.yaml
   - ingress.yaml
   - migration-job.yaml
   - mysql.yaml
+  - qdrant.yaml
   - redis.yaml
   - service.yaml

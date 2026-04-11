@@ -19,6 +19,14 @@ data:
   DB_PORT: "3306"
   REDIS_HOST: "frontend-redis"
   REDIS_PORT: "6379"
+  # Qdrant
+  QDRANT_HOST: "frontend-qdrant"
+  QDRANT_PORT: "6333"
+  QDRANT_COLLECTION: "portfolio_posts"
+  # Voyage AI
+  ANTHROPIC_MODEL: "claude-haiku-4-5-20251001"
+  ANTHROPIC_MAX_TOKENS: "1024"
+  VOYAGE_MODEL: "voyage-3"
   # RabbitMQ
   RABBITMQ_HOST: "rabbitmq"
   RABBITMQ_PORT: "5672"

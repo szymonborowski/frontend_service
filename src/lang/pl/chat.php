@@ -6,7 +6,7 @@ return [
     'send'           => 'Wyślij',
     'sending'        => 'Wysyłanie...',
     'new_chat'       => 'Nowa rozmowa',
-    'welcome'        => 'Cześć! Jestem asystentem AI. Zapytaj mnie o umiejętności, projekty lub posty Szymona.',
+    'welcome'        => 'Hej! Jestem **Aina Agent** — asystent AI Szymona. Pytaj o projekty, umiejętności czy posty z bloga. Mogę też pomóc Ci się z nim skontaktować. O co chodzi?',
     'error'          => 'Coś poszło nie tak. Spróbuj ponownie.',
     'rate_limited'   => 'Zbyt wiele wiadomości. Poczekaj chwilę.',
     'open_label'     => 'Otwórz chat',

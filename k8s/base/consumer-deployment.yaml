@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-consumer
+  namespace: portfolio
+  labels:
+    app.kubernetes.io/name: frontend
+    app.kubernetes.io/component: consumer
+    app.kubernetes.io/part-of: portfolio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: frontend
+      app.kubernetes.io/component: consumer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: frontend
+        app.kubernetes.io/component: consumer
+    spec:
+      terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: consumer
+          image: ghcr.io/szymonborowski/portfolio-frontend:v1.21.1
+          imagePullPolicy: IfNotPresent
+          args: ["php", "artisan", "rabbitmq:consume-blog"]
+          envFrom:
+            - configMapRef:
+                name: frontend-config
+            - secretRef:
+                name: frontend-secret
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 256Mi

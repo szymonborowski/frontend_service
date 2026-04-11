@@ -72,6 +72,22 @@ return [
         'max_tokens' => (int) env('ANTHROPIC_MAX_TOKENS', 1024),
     ],
 
+    'voyage' => [
+        'api_key' => env('VOYAGE_API_KEY'),
+        'model'   => env('VOYAGE_MODEL', 'voyage-3'),
+        'base_url' => 'https://api.voyageai.com/v1',
+    ],
+
+    'qdrant' => [
+        'host'       => env('QDRANT_HOST', 'frontend-qdrant'),
+        'port'       => (int) env('QDRANT_PORT', 6333),
+        'collection' => env('QDRANT_COLLECTION', 'portfolio_posts'),
+    ],
+
+    'chat' => [
+        'contact_email' => env('MAIL_CONTACT_TO', env('MAIL_FROM_ADDRESS')),
+    ],
+
     'internal' => [
         'api_key' => env('FRONTEND_INTERNAL_API_KEY'),
     ],

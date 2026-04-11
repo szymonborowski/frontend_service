@@ -1,4 +1,6 @@
 import './bootstrap';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import EasyMDE from 'easymde';
 import 'easymde/dist/easymde.min.css';
 import hljs from 'highlight.js/lib/core';
@@ -23,6 +25,17 @@ hljs.registerLanguage('python', python);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('html', xml);
+
+marked.use({ breaks: true, gfm: true });
+
+window.renderMarkdown = (text) => {
+    const raw = marked.parse(text ?? '');
+    return DOMPurify.sanitize(raw, {
+        ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'a', 'ul', 'ol', 'li', 'code', 'pre', 'blockquote', 'h1', 'h2', 'h3'],
+        ALLOWED_ATTR: ['href', 'target', 'rel'],
+        FORCE_BODY: true,
+    });
+};
 
 window.EasyMDE = EasyMDE;
 

@@ -9,5 +9,10 @@ return [
 
     'exchanges' => [
         'analytics' => env('RABBITMQ_EXCHANGE_ANALYTICS', 'analytics'),
+        'blog'      => env('RABBITMQ_EXCHANGE_BLOG', 'blog'),
+    ],
+
+    'queues' => [
+        'frontend_blog' => env('RABBITMQ_QUEUE_FRONTEND_BLOG', 'frontend.blog'),
     ],
 ];
