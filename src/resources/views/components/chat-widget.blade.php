@@ -8,6 +8,7 @@
 <div
     x-data="{
         open: false,
+        maximized: false,
         messages: [{ role: 'assistant', content: @js($welcomeMsg) }],
         input: '',
         loading: false,
@@ -76,8 +77,9 @@
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 scale-95"
-        style="display: none; height: 30rem"
-        class="fixed bottom-6 right-6 z-50 flex w-80 sm:w-96 flex-col rounded-2xl border border-gray-200 bg-white shadow-2xl dark:border-gray-700 dark:bg-gray-900"
+        style="display: none"
+        :style="maximized ? 'height: min(90vh, 900px); width: min(96vw, 900px);' : 'height: 30rem; width: 24rem;'"
+        class="fixed bottom-6 right-6 z-50 flex flex-col rounded-2xl border border-gray-200 bg-white shadow-2xl transition-[width,height] duration-300 dark:border-gray-700 dark:bg-gray-900"
     >
         {{-- Header --}}
         <div class="flex items-center justify-between rounded-t-2xl bg-rose-800 px-4 py-3 dark:bg-rose-800">
@@ -91,6 +93,22 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
+                </button>
+                <button
+                    @click="maximized = !maximized"
+                    :title="maximized ? 'Przywróć' : 'Maksymalizuj'"
+                    class="rounded p-1 text-rose-300 transition-colors hover:text-white"
+                >
+                    <template x-if="!maximized">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4h4M4 4l5 5M20 8V4h-4m4 0l-5 5M4 16v4h4m-4 0l5-5M20 16v4h-4m4 0l-5-5" />
+                        </svg>
+                    </template>
+                    <template x-if="maximized">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 4v5H4m5 0L4 4M15 4v5h5M20 4l-5 5M9 20v-5H4m5 0l-5 5M15 20v-5h5m-5 5l5-5" />
+                        </svg>
+                    </template>
                 </button>
                 <button
                     @click="open = false"
@@ -136,7 +154,7 @@
         </div>
 
         {{-- Input --}}
-        <div class="border-t border-gray-200 px-3 py-2 dark:border-gray-700">
+        <div class="border-t border-gray-200 px-3 pt-2 pb-1 dark:border-gray-700">
             <form @submit.prevent="send()" class="flex items-end gap-2">
                 <textarea
                     x-ref="input"
@@ -146,19 +164,27 @@
                     :disabled="loading"
                     rows="1"
                     class="flex-1 resize-none rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-rose-600 focus:outline-none focus:ring-1 focus:ring-rose-600 disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500"
-                    style="max-height: 6rem; overflow-y: auto"
-                    @input="$el.style.height = 'auto'; $el.style.height = Math.min($el.scrollHeight, 96) + 'px'"
+                    maxlength="500"
+                    style="overflow-y: hidden"
+                    @input="$el.style.height = 'auto'; $el.style.height = Math.min($el.scrollHeight, 192) + 'px'"
                 ></textarea>
                 <button
                     type="submit"
                     :disabled="loading || !input.trim()"
                     class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-rose-800 text-white transition-colors hover:bg-rose-800 disabled:opacity-40 disabled:cursor-not-allowed dark:bg-rose-700 dark:hover:bg-rose-600"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                     </svg>
                 </button>
             </form>
+            <div class="flex justify-end mt-0.5">
+                <span
+                    x-text="input.length + '/500'"
+                    :class="input.length > 450 ? 'text-rose-500' : 'text-gray-400 dark:text-gray-500'"
+                    class="text-xs"
+                ></span>
+            </div>
         </div>
     </div>
 </div>

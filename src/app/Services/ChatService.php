@@ -151,7 +151,9 @@ BASE;
 {$context}
 
 Response format for blog-related queries:
-1. Start with a list of relevant post links: [Post Title](/blog/slug)
+1. Start with a list of relevant post links using the format: [Post Title](/post/slug)
+   - Individual post URL format is always: /post/{slug} (never /blog or /blog/slug)
+   - If the user asks for the blog or a list of posts in general, direct them to the homepage (/) where recent posts are displayed — do NOT invent a /blog URL.
 2. Below the links, give a brief direct answer (under 100 words).
 3. End with: "I can summarize any of these posts — just ask."
 PROMPT;

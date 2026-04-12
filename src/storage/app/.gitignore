@@ -1,4 +1,6 @@
 *
 !private/
 !public/
+!chat/
+!chat/*
 !.gitignore
