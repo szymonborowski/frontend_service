@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OAuthController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\PostViewController;
 use App\Http\Controllers\TagViewController;
 use App\Http\Controllers\UserPanelController;
@@ -47,6 +48,7 @@ Route::get('/collaboration', fn() => view('collaboration'))->name('collaboration
 Route::post('/chat/send',  [ChatController::class, 'send'])->middleware('throttle:chat')->name('chat.send');
 Route::post('/chat/clear', [ChatController::class, 'clear'])->middleware('throttle:30,1')->name('chat.clear');
 
+Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
 Route::get('/kategoria/{slug}', [CategoryViewController::class, 'show'])->name('category.show');
 Route::get('/tag/{slug}', [TagViewController::class, 'show'])->name('tag.show');
 Route::get('/post/{slugOrId}', [PostViewController::class, 'show'])->name('post.show')->where('slugOrId', '[a-zA-Z0-9\-]+|\d+');

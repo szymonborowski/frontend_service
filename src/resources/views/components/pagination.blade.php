@@ -1,6 +1,7 @@
 @props([
     'paginationRoute',
     'paginationRouteParams' => [],
+    'extraParams' => [],
     'meta' => [],
     'currentPerPage' => 10,
     'allowedPerPage' => [10, 20, 30, 50],
@@ -8,9 +9,9 @@
 
 @php
     $currentPage = (int) ($meta['current_page'] ?? 1);
-    $lastPage = (int) ($meta['last_page'] ?? 1);
-    $total = (int) ($meta['total'] ?? 0);
-    $baseUrl = route($paginationRoute, $paginationRouteParams);
+    $lastPage    = (int) ($meta['last_page'] ?? 1);
+    $total       = (int) ($meta['total'] ?? 0);
+    $baseUrl     = route($paginationRoute, $paginationRouteParams);
 @endphp
 
 @if($total > 0)
@@ -20,7 +21,7 @@
             <span class="text-sm text-gray-600 dark:text-gray-400">{{ __('general.per_page') }}</span>
             @foreach($allowedPerPage as $num)
                 @php
-                    $url = $baseUrl . '?' . http_build_query(['per_page' => $num, 'page' => 1]);
+                    $url = $baseUrl . '?' . http_build_query(array_merge($extraParams, ['per_page' => $num, 'page' => 1]));
                 @endphp
                 <a href="{{ $url }}" class="inline-flex items-center px-3 py-1.5 rounded text-sm font-medium {{ $num === $currentPerPage ? 'bg-sky-700 text-white' : 'bg-gray-200/60 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400' }}">
                     {{ $num }}
@@ -33,7 +34,7 @@
             <nav class="flex flex-wrap items-center gap-1" aria-label="{{ __('general.pagination') }}">
                 @for($p = 1; $p <= $lastPage; $p++)
                     @php
-                        $pageUrl = $baseUrl . '?' . http_build_query(['per_page' => $currentPerPage, 'page' => $p]);
+                        $pageUrl = $baseUrl . '?' . http_build_query(array_merge($extraParams, ['per_page' => $currentPerPage, 'page' => $p]));
                     @endphp
                     <a href="{{ $pageUrl }}" class="inline-flex items-center justify-center min-w-[2.25rem] px-2 py-1.5 rounded text-sm font-medium {{ $p === $currentPage ? 'bg-sky-700 text-white' : 'bg-gray-200/60 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-sky-100 dark:hover:bg-sky-900/30 hover:text-sky-700 dark:hover:text-sky-400' }}">
                         {{ $p }}

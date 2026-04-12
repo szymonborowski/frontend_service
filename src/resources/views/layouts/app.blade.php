@@ -86,6 +86,7 @@
 
             {{-- Nav --}}
             <div class="flex items-center space-x-3">
+                <livewire:search-box />
                 <x-language-toggle />
                 <x-theme-toggle />
 

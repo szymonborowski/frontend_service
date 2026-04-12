@@ -274,9 +274,10 @@ class BlogApiService
 
     public function getMedia(array $query = []): array
     {
-        $response = $this->http()->get("{$this->baseUrl}/media", array_merge([
+        $response = $this->http()->get("{$this->baseUrl}/media", [
             'per_page' => 12,
-        ], $query));
+            ...$query,
+        ]);
 
         if ($response->successful()) {
             return $response->json() ?? ['data' => [], 'meta' => []];
@@ -336,6 +337,60 @@ class BlogApiService
         $response = $this->http()->patch("{$this->baseUrl}/comments/{$commentId}/approve");
 
         return $response->successful();
+    }
+
+    public function getPosts(
+        int $page = 1,
+        int $perPage = 10,
+        ?string $search = null,
+        ?int $categoryId = null,
+        ?int $tagId = null,
+        string $sortBy = 'published_at',
+        string $sortOrder = 'desc'
+    ): array {
+        $params = [
+            'status'     => 'published',
+            'locale'     => app()->getLocale(),
+            'with'       => 'categories,tags,author',
+            'page'       => $page,
+            'per_page'   => $perPage,
+            'sort_by'    => $sortBy,
+            'sort_order' => $sortOrder,
+        ];
+
+        if ($search !== null && $search !== '') {
+            $params['search'] = $search;
+        }
+
+        if ($categoryId !== null) {
+            $params['category_id'] = $categoryId;
+        }
+
+        if ($tagId !== null) {
+            $params['tag_id'] = $tagId;
+        }
+
+        $response = $this->http()->get("{$this->baseUrl}/posts", $params);
+
+        if ($response->successful()) {
+            return $response->json() ?? ['data' => [], 'meta' => []];
+        }
+
+        return ['data' => [], 'meta' => []];
+    }
+
+    public function search(string $query, string $locale = 'pl'): array
+    {
+        $response = $this->http()->get("{$this->baseUrl}/search", [
+            'q'      => $query,
+            'locale' => $locale,
+        ]);
+
+        if ($response->successful()) {
+            return $response->json() ?? ['posts' => [], 'categories' => [], 'tags' => []];
+        }
+
+        return ['posts' => [], 'categories' => [], 'tags' => []];
     }
 
     public function subscribeNewsletter(string $email): array

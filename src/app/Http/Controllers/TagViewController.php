@@ -20,7 +20,7 @@ class TagViewController extends Controller
         $tag = $this->blogApi->getTagBySlug($slug);
 
         if (!$tag) {
-            abort(404);
+            return redirect()->route('posts.index');
         }
 
         $perPage = (int) $request->get('per_page', 10);

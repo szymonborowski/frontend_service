@@ -90,4 +90,24 @@ return [
     'per_page' => 'Per page:',
     'pagination' => 'Pages',
     'cancel' => 'Cancel',
+
+    // Posts page
+    'posts_all_title'           => 'All Posts',
+    'posts_search_title'        => 'Search results: :query',
+    'posts_search_results'      => 'Search results for',
+    'posts_filter_all_categories' => 'All categories',
+    'posts_filter_all_tags'     => 'All tags',
+    'posts_sort_newest'         => 'Newest first',
+    'posts_sort_oldest'         => 'Oldest first',
+    'posts_clear_filters'       => 'Clear filters',
+
+    // Search
+    'search'              => 'Search',
+    'search_placeholder'  => 'Search posts, categories, tags...',
+    'search_posts'        => 'Posts',
+    'search_categories'   => 'Categories',
+    'search_tags'         => 'Tags',
+    'search_about'        => 'Szymon Borowski',
+    'search_no_results'   => 'No results for ":query"',
+    'search_close'        => 'close',
 ];

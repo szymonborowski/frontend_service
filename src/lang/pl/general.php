@@ -90,4 +90,24 @@ return [
     'per_page' => 'Na stronie:',
     'pagination' => 'Strony',
     'cancel' => 'Anuluj',
+
+    // Posts page
+    'posts_all_title'           => 'Wszystkie wpisy',
+    'posts_search_title'        => 'Wyniki wyszukiwania: :query',
+    'posts_search_results'      => 'Wyniki wyszukiwania dla',
+    'posts_filter_all_categories' => 'Wszystkie kategorie',
+    'posts_filter_all_tags'     => 'Wszystkie tagi',
+    'posts_sort_newest'         => 'Najnowsze',
+    'posts_sort_oldest'         => 'Najstarsze',
+    'posts_clear_filters'       => 'Wyczyść filtry',
+
+    // Search
+    'search'              => 'Szukaj',
+    'search_placeholder'  => 'Szukaj postów, kategorii, tagów...',
+    'search_posts'        => 'Posty',
+    'search_categories'   => 'Kategorie',
+    'search_tags'         => 'Tagi',
+    'search_about'        => 'Szymon Borowski',
+    'search_no_results'   => 'Brak wyników dla „:query"',
+    'search_close'        => 'zamknij',
 ];

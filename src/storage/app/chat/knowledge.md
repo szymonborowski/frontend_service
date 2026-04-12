@@ -41,6 +41,17 @@ Szymon Borowski is a software engineer based in Koszalin, Poland. He specializes
 - Laravel Blade, Livewire
 - Vite
 
+**Soft skills**
+
+- **Attention to detail** — notices UX inconsistencies quickly (e.g. misaligned buttons, missing focus states); cares about how things feel, not just whether they work
+- **Pragmatism** — evaluates trade-offs before committing to a solution; asks about performance and operational overhead upfront rather than after the fact
+- **Curiosity** — wants to understand *why* a tool works, not just *how* to use it; asks follow-up questions before proceeding
+- **Decisiveness** — once he has enough information, makes clear decisions without overthinking
+- **Quality mindset** — treats tests as a natural part of the work, not an afterthought
+- **Incremental thinking** — breaks large features into logical steps and extends scope naturally as gaps appear
+- **Clear communication** — gives concise, direct instructions; doesn't over-specify when trust is established
+- **Cost awareness** — conscious of resource usage and efficiency, including infrastructure footprint and AI token consumption
+
 ## Projects
 
 ### Portfolio Platform (this website)
@@ -132,4 +143,7 @@ Szymon writes a technical blog at borowski.services about Laravel, DevOps, Kuber
 blog - https://borowski.services/
 about me - https://borowski.services/about
 contact - https://borowski.services/contact
-współpraca - https://borowski.services/collaboration
+colaboration - https://borowski.services/collaboration
+post page - https://borowski.services/post/{{slug}}
+tag page - https://borowski.services/tag/{{tag}}
+category page - https://borowski.services/category/{{category}}
