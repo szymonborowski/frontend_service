@@ -16,28 +16,13 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+COPY docker/dev/php/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 WORKDIR /var/www/html
 
-COPY ../../../src .
-
-ENV COMPOSER_ALLOW_SUPERUSER=1
-
-RUN composer install \
-    --no-dev \
-    --optimize-autoloader \
-    --no-interaction \
-    --no-ansi \
-    --no-scripts
-
-RUN rm -f bootstrap/cache/*.php
-
-# Then run the Laravel step explicitly
-RUN php artisan package:discover --ansi
-
-RUN chown -R www-data:www-data storage bootstrap/cache
-
-RUN php artisan view:clear \
- && php artisan config:clear \
- && php artisan route:clear
+RUN mkdir -p vendor && chown app:app vendor
 
 USER app
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
