@@ -39,7 +39,7 @@ return [
 
     // Hero
     'hero_greeting' => '> Hello, World!',
-    'hero_subtitle' => 'Software developer blog about PHP, Laravel, Docker, and modern web architecture. Thoughts, experiments, and lessons learned.',
+    'hero_subtitle' => "AI Engineer & Laravel developer's blog. Anthropic API, RAG, event-driven microservices, Kubernetes, and production-grade observability. Thoughts, experiments, and lessons learned.",
     'hero_read_blog' => 'Read Blog',
     'hero_about_me' => 'About Me',
 

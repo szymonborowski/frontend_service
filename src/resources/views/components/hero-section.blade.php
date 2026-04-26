@@ -37,7 +37,7 @@
 
             {{-- Tech stack badges --}}
             <div class="flex flex-wrap gap-2 mb-10">
-                @foreach(['PHP', 'Laravel', 'Docker', 'JavaScript', 'Tailwind CSS', 'MySQL'] as $tech)
+                @foreach(['Anthropic Claude', 'RAG', 'Laravel', 'Kubernetes', 'Microservices', 'Docker', 'PHP 8.5', 'Meilisearch'] as $tech)
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-800/10 text-gray-600 border border-gray-800/10 dark:bg-white/10 dark:text-gray-300 dark:border-white/10 backdrop-blur-sm">
                         {{ $tech }}
                     </span>
