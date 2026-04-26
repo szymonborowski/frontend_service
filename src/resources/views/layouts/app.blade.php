@@ -24,6 +24,18 @@
     {{-- General meta --}}
     <meta name="description" content="@yield('og_description', 'Blog Szymona Borowskiego — AI Engineer i Laravel developer. Anthropic API, RAG, event-driven microservices, Kubernetes, observability.')">
 
+    {{-- Canonical + hreflang alternates --}}
+    @php
+        $cleanQuery = collect(request()->query())->except('lang')->all();
+        $canonicalUrl = url(request()->path()) . (empty($cleanQuery) ? '' : '?' . http_build_query($cleanQuery));
+        $altEn = url(request()->path()) . '?' . http_build_query(array_merge($cleanQuery, ['lang' => 'en']));
+        $altPl = url(request()->path()) . '?' . http_build_query(array_merge($cleanQuery, ['lang' => 'pl']));
+    @endphp
+    <link rel="canonical" href="{{ $canonicalUrl }}">
+    <link rel="alternate" hreflang="en" href="{{ $altEn }}">
+    <link rel="alternate" hreflang="pl" href="{{ $altPl }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $canonicalUrl }}">
+
     <link rel="icon" href="/favicon_1.ico" sizes="32x32" type="image/x-icon">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
