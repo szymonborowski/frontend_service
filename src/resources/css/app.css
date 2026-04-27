@@ -59,10 +59,57 @@ html {
 .stagger-5 { animation-delay: 0.25s; }
 .stagger-6 { animation-delay: 0.3s; }
 
+/* ── Skill cloud cluster: flex on mobile, scattered absolute on desktop ── */
+.skill-cloud-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+.skill-cloud-cluster .skill-pos { position: static; }
+
+@media (min-width: 1024px) {
+    .skill-cloud-cluster {
+        position: relative;
+        display: block;
+        height: 420px;
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .skill-cloud-cluster .skill-pos {
+        position: absolute;
+        top: var(--skill-top);
+        left: var(--skill-left);
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* ── Skill cloud drift ── */
+@keyframes skill-drift {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(2px, -3px); }
+    50%      { transform: translate(-1px, 2px); }
+    75%      { transform: translate(-2px, -1px); }
+}
+
+.skill-drift {
+    animation: skill-drift var(--drift-duration, 7s) ease-in-out infinite;
+    animation-delay: var(--drift-delay, 0s);
+    will-change: transform;
+}
+.skill-drift-1 { --drift-duration: 6s;    --drift-delay: 0s; }
+.skill-drift-2 { --drift-duration: 8s;    --drift-delay: 0.7s; }
+.skill-drift-3 { --drift-duration: 7.5s;  --drift-delay: 1.2s; }
+.skill-drift-4 { --drift-duration: 9.5s;  --drift-delay: 0.3s; }
+.skill-drift-5 { --drift-duration: 10s;   --drift-delay: 1.8s; }
+.skill-drift-6 { --drift-duration: 11s;   --drift-delay: 0.5s; }
+
 /* ── Respect reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
     .animate-gradient,
-    .animate-fade-in-up {
+    .animate-fade-in-up,
+    .skill-drift {
         animation: none;
     }
     * {

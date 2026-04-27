@@ -18,7 +18,8 @@
     <div class="absolute inset-0 opacity-0 dark:opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
-        <div class="max-w-3xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
             {{-- Greeting --}}
             <p class="text-sky-600 dark:text-sky-400 font-mono text-sm sm:text-base mb-4 tracking-wide">
                 {{ __('general.hero_greeting') }}
@@ -34,15 +35,6 @@
             <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl leading-relaxed">
                 {{ __('general.hero_subtitle') }}
             </p>
-
-            {{-- Tech stack badges --}}
-            <div class="flex flex-wrap gap-2 mb-10">
-                @foreach(['Anthropic Claude', 'RAG', 'Laravel', 'Kubernetes', 'Microservices', 'Docker', 'PHP 8.5', 'Meilisearch'] as $tech)
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-800/10 text-gray-600 border border-gray-800/10 dark:bg-white/10 dark:text-gray-300 dark:border-white/10 backdrop-blur-sm">
-                        {{ $tech }}
-                    </span>
-                @endforeach
-            </div>
 
             {{-- CTA buttons --}}
             <div class="flex flex-wrap gap-4">
@@ -65,6 +57,12 @@
                     </svg>
                 </a>
             </div>
+        </div>
+
+        {{-- Tech stack constellation (scattered cloud on desktop, wrap on mobile) --}}
+        <div class="lg:col-span-5">
+            <x-skill-cloud />
+        </div>
         </div>
     </div>
 </section>
