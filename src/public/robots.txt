@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /og-preview
+Disallow: /panel
+Disallow: /oauth/
+Disallow: /chat/
+
+Sitemap: https://borowski.services/sitemap.xml

@@ -39,7 +39,40 @@ Route::get('/lang/{locale}', function (string $locale) {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/og-preview',    fn() => view('og-preview'))->name('og.preview');
 Route::get('/about',         fn() => view('about'))->name('about');
+
+Route::get('/sitemap.xml', function (\App\Services\BlogApiService $api) {
+    $static = [
+        ['loc' => url('/'),              'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => url('/about'),         'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => url('/posts'),         'priority' => '0.9', 'changefreq' => 'weekly'],
+        ['loc' => url('/collaboration'), 'priority' => '0.7', 'changefreq' => 'monthly'],
+        ['loc' => url('/contact'),       'priority' => '0.5', 'changefreq' => 'yearly'],
+    ];
+
+    $posts = [];
+    foreach (['en', 'pl'] as $locale) {
+        try {
+            foreach ($api->getAllPostsForIndexing($locale) as $post) {
+                $slug = $post['slug'] ?? $post['id'] ?? null;
+                if (!$slug) continue;
+                $posts[] = [
+                    'loc' => url('/post/' . $slug) . '?lang=' . $locale,
+                    'lastmod' => isset($post['updated_at']) ? \Carbon\Carbon::parse($post['updated_at'])->toIso8601String() : null,
+                    'priority' => '0.7',
+                    'changefreq' => 'monthly',
+                ];
+            }
+        } catch (\Throwable $e) {
+            // blog API unreachable — skip dynamic, keep static
+        }
+    }
+
+    return response()
+        ->view('sitemap', ['urls' => array_merge($static, $posts)])
+        ->header('Content-Type', 'application/xml; charset=utf-8');
+})->name('sitemap');
 Route::get('/contact',       fn() => view('contact'))->name('contact');
 Route::post('/contact',      [ContactController::class, 'send'])->middleware('throttle:5,1')->name('contact.send');
 Route::get('/collaboration', fn() => view('collaboration'))->name('collaboration');

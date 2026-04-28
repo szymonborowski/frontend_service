@@ -9,6 +9,54 @@
     @section('og_image', $post['cover_image'])
 @endif
 
+@push('head')
+    {{-- article: meta tags --}}
+    @isset($post['published_at'])
+        <meta property="article:published_time" content="{{ \Carbon\Carbon::parse($post['published_at'])->toIso8601String() }}">
+    @endisset
+    @isset($post['updated_at'])
+        <meta property="article:modified_time" content="{{ \Carbon\Carbon::parse($post['updated_at'])->toIso8601String() }}">
+    @endisset
+    @if(!empty($post['author']['name']))
+        <meta property="article:author" content="{{ $post['author']['name'] }}">
+    @endif
+    @if(!empty($post['tags']))
+        @foreach($post['tags'] as $tag)
+            <meta property="article:tag" content="{{ $tag['name'] ?? '' }}">
+        @endforeach
+    @endif
+
+    {{-- BlogPosting JSON-LD --}}
+    @php
+        $blogPostingLd = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BlogPosting',
+            'headline' => $post['title'] ?? '',
+            'image' => $post['cover_image'] ?? url('/images/og-cover.png'),
+            'datePublished' => isset($post['published_at']) ? \Carbon\Carbon::parse($post['published_at'])->toIso8601String() : null,
+            'dateModified' => isset($post['updated_at']) ? \Carbon\Carbon::parse($post['updated_at'])->toIso8601String() : null,
+            'author' => [
+                '@type' => 'Person',
+                'name' => $post['author']['name'] ?? 'Szymon Borowski',
+                'url' => url('/'),
+            ],
+            'publisher' => [
+                '@type' => 'Person',
+                'name' => 'Szymon Borowski',
+                'url' => url('/'),
+            ],
+            'mainEntityOfPage' => [
+                '@type' => 'WebPage',
+                '@id' => url()->current(),
+            ],
+            'description' => Str::limit(strip_tags(Str::markdown($post['content'] ?? '')), 160),
+            'inLanguage' => $post['locale'] ?? app()->getLocale(),
+        ];
+        $blogPostingLd = array_filter($blogPostingLd, fn($v) => $v !== null);
+    @endphp
+    <script type="application/ld+json">{!! json_encode($blogPostingLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
+
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">

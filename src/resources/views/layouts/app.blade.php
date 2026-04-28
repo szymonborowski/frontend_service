@@ -4,25 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Extended\Mind::Thesis()')</title>
+    <title>@yield('title', 'Szymon Borowski · AI Engineer · Laravel · Kubernetes')</title>
+
+    {{-- General meta --}}
+    <meta name="author" content="Szymon Borowski">
+    <meta name="description" content="@yield('og_description', 'Blog Szymona Borowskiego — AI Engineer i Laravel developer. Anthropic API, RAG, event-driven microservices, Kubernetes, observability.')">
+    <meta name="application-name" content="Extended\Mind::Thesis()">
+    <meta name="apple-mobile-web-app-title" content="EMT">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f3f4f6" media="(prefers-color-scheme: light)">
+    <meta name="format-detection" content="telephone=no">
 
     {{-- Open Graph --}}
-    <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:title" content="@yield('og_title', 'Extended\Mind::Thesis()')">
+    <meta property="og:type" content="@yield('og_type', 'profile')">
+    <meta property="og:title" content="@yield('og_title', 'Szymon Borowski · AI Engineer · Laravel · Kubernetes')">
     <meta property="og:description" content="@yield('og_description', 'Blog Szymona Borowskiego — AI Engineer i Laravel developer. Anthropic API, RAG, event-driven microservices, Kubernetes, observability.')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', url('/images/og-cover.png'))">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="@yield('og_image_alt', 'Szymon Borowski — AI Engineer & Laravel Developer')">
     <meta property="og:site_name" content="Extended\Mind::Thesis()">
     <meta property="og:locale" content="{{ app()->getLocale() == 'pl' ? 'pl_PL' : 'en_US' }}">
+    <meta property="profile:first_name" content="Szymon">
+    <meta property="profile:last_name" content="Borowski">
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('og_title', 'Extended\Mind::Thesis()')">
+    <meta name="twitter:title" content="@yield('og_title', 'Szymon Borowski · AI Engineer · Laravel · Kubernetes')">
     <meta name="twitter:description" content="@yield('og_description', 'Blog Szymona Borowskiego — AI Engineer i Laravel developer. Anthropic API, RAG, event-driven microservices, Kubernetes, observability.')">
     <meta name="twitter:image" content="@yield('og_image', url('/images/og-cover.png'))">
-
-    {{-- General meta --}}
-    <meta name="description" content="@yield('og_description', 'Blog Szymona Borowskiego — AI Engineer i Laravel developer. Anthropic API, RAG, event-driven microservices, Kubernetes, observability.')">
+    <meta name="twitter:image:alt" content="@yield('og_image_alt', 'Szymon Borowski — AI Engineer & Laravel Developer')">
 
     {{-- Canonical + hreflang alternates --}}
     @php
@@ -36,8 +50,66 @@
     <link rel="alternate" hreflang="pl" href="{{ $altPl }}">
     <link rel="alternate" hreflang="x-default" href="{{ $canonicalUrl }}">
 
+    {{-- Schema.org JSON-LD: Person + WebSite --}}
+    @php
+        $siteUrl = url('/');
+        $jsonLd = [
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'Person',
+                'name' => 'Szymon Borowski',
+                'url' => $siteUrl,
+                'image' => url('/images/me200x200.png'),
+                'jobTitle' => 'AI Engineer & Laravel Developer',
+                'sameAs' => [
+                    'https://github.com/szymonborowski',
+                    'https://www.linkedin.com/in/szymon-borowski-db84/',
+                ],
+                'knowsAbout' => [
+                    'Anthropic Claude API',
+                    'Retrieval-Augmented Generation (RAG)',
+                    'AI Agents',
+                    'Large Language Models',
+                    'Laravel',
+                    'PHP',
+                    'Kubernetes',
+                    'Microservices Architecture',
+                    'Event-Driven Architecture',
+                    'Docker',
+                    'ArgoCD',
+                    'GitOps',
+                    'RabbitMQ',
+                    'Redis',
+                    'Meilisearch',
+                    'Qdrant',
+                    'Prometheus',
+                    'Grafana',
+                ],
+            ],
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebSite',
+                'name' => 'Extended\\Mind::Thesis()',
+                'url' => $siteUrl,
+                'inLanguage' => ['en', 'pl'],
+                'potentialAction' => [
+                    '@type' => 'SearchAction',
+                    'target' => [
+                        '@type' => 'EntryPoint',
+                        'urlTemplate' => $siteUrl . '/posts?search={search_term_string}',
+                    ],
+                    'query-input' => 'required name=search_term_string',
+                ],
+            ],
+        ];
+    @endphp
+    <script type="application/ld+json">{!! json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+
     <link rel="icon" href="/favicon_1.ico" sizes="32x32" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/images/me400x400.png">
     <link rel="manifest" href="/site.webmanifest">
+
+    @stack('head')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
