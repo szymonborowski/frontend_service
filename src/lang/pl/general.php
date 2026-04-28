@@ -41,6 +41,7 @@ return [
     'hero_greeting' => '> Hello, World!',
     'hero_subtitle' => 'Blog AI Engineera i Laravel developera. Anthropic API, RAG, event-driven microservices, Kubernetes i obserwowalność na produkcji. Przemyślenia, eksperymenty i wyciągnięte wnioski.',
     'hero_skills_label' => 'Stack technologiczny',
+    'hero_chat_cta' => 'Pogadaj z moim AI',
     'hero_read_blog' => 'Czytaj bloga',
     'hero_about_me' => 'O mnie',
 

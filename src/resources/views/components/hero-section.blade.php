@@ -26,10 +26,15 @@
             </p>
 
             {{-- Main heading with gradient text --}}
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 leading-tight">
                 <span class="text-gray-800 dark:text-white">Extended</span><span class="text-gray-400 dark:text-gray-500">\</span><br class="sm:hidden">
                 <span class="text-gradient bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500 dark:from-sky-400 dark:via-indigo-400 dark:to-violet-400">Mind<span class="text-sky-600 dark:text-sky-400">::</span>Thesis</span><span class="text-gray-400 dark:text-gray-500">()</span>
             </h1>
+
+            {{-- SEO/keyword tagline (H2) --}}
+            <h2 class="text-base sm:text-lg font-mono text-gray-500 dark:text-gray-400 mb-6 tracking-wide">
+                AI Engineer<span class="text-gray-400 dark:text-gray-600 mx-2">·</span>Laravel<span class="text-gray-400 dark:text-gray-600 mx-2">·</span>Kubernetes
+            </h2>
 
             {{-- Subtitle --}}
             <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl leading-relaxed">
@@ -38,6 +43,14 @@
 
             {{-- CTA buttons --}}
             <div class="flex flex-wrap gap-4">
+                <button type="button"
+                        onclick="window.dispatchEvent(new CustomEvent('open-chat'))"
+                        class="inline-flex items-center px-6 py-3 rounded-lg bg-rose-700 hover:bg-rose-600 text-white font-medium transition-colors shadow-lg shadow-rose-700/30">
+                    <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                    </svg>
+                    {{ __('general.hero_chat_cta') }}
+                </button>
                 <a href="#posts" class="inline-flex items-center px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-medium transition-colors shadow-lg shadow-sky-600/25">
                     {{ __('general.hero_read_blog') }}
                     <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

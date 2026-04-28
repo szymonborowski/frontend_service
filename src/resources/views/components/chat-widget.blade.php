@@ -55,6 +55,7 @@
         }
     }"
     @keydown.escape.window="open = false"
+    @open-chat.window="open = true; $nextTick(() => $refs.input && $refs.input.focus())"
 >
     {{-- Floating button --}}
     <button
