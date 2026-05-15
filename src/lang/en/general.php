@@ -83,6 +83,11 @@ return [
     'footer_collaboration' => 'Collaboration',
     'hero_collaboration'   => 'Collaboration',
 
+    // Collaboration CTA (home page banner)
+    'collab_cta_title'    => 'Looking for someone for your project?',
+    'collab_cta_subtitle' => 'I help businesses and sole traders build web apps, automate processes, and deploy AI assistants. Get in touch — I usually reply within 24 hours.',
+    'collab_cta_link'     => 'Learn more',
+
     // GitHub
     'recent_commits' => 'Recent commits',
     'no_commits' => 'No commit data available.',
