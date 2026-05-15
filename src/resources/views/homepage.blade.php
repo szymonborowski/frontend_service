@@ -41,14 +41,14 @@
                 {{ __('general.hero_chat_cta') }}
             </button>
             <a href="#contact"
-               class="inline-flex items-center px-7 py-3.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-base transition-colors shadow-lg shadow-sky-600/30">
+               class="inline-flex items-center px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-medium transition-colors shadow-lg shadow-sky-600/30">
                 {{ __('general.landing_contact_cta') }}
                 <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
             </a>
             <a href="{{ config('app.blog_frontend_url') }}"
-               class="inline-flex items-center px-7 py-3.5 rounded-lg bg-gray-800/10 hover:bg-gray-800/20 text-gray-700 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-semibold text-base transition-colors border border-gray-800/20 dark:border-white/20 backdrop-blur-sm">
+               class="inline-flex items-center px-6 py-3 rounded-lg bg-gray-800/10 hover:bg-gray-800/20 text-gray-700 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-medium transition-colors border border-gray-800/20 dark:border-white/20 backdrop-blur-sm">
                 {{ __('general.landing_go_to_blog') }}
                 <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -207,6 +207,16 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="mt-10 text-center opacity-0" x-data x-init="fadeInOnScroll($el)">
+                <a href="{{ route('collaboration') }}"
+                   class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-sky-600 text-sky-600 dark:text-sky-400 dark:border-sky-500 hover:bg-sky-50 dark:hover:bg-sky-900/20 font-medium transition-colors">
+                    {{ __('general.collab_cta_link') }}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
