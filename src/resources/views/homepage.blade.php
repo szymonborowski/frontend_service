@@ -9,82 +9,53 @@
     {{-- =====================================================================
          HERO
          ===================================================================== --}}
-    <section class="relative overflow-hidden flex items-start bg-gradient-to-b from-slate-900 to-slate-950">
-        {{-- Background artwork --}}
-        <div class="absolute inset-0 dark:hidden" style="background-color: #f3f4f6;">
-            <img src="/images/journey-light.webp" alt="" class="w-full h-full object-contain object-top opacity-25">
-        </div>
-        <div class="absolute inset-0 hidden dark:block" style="background-color: #0a0911;">
-            <img src="/images/journey-dark.webp" alt="" class="w-full h-full object-contain object-top opacity-25">
-        </div>
+    @php
+        $portfolioSkills = [
+            ['name' => __('general.landing_skill_apps'),       'category' => 'architecture', 'tag' => null, 'tier' => 'xl', 'top' => '20%', 'left' => '30%'],
+            ['name' => __('general.landing_skill_automation'), 'category' => 'ai',           'tag' => null, 'tier' => 'lg', 'top' => '5%',  'left' => '55%'],
+            ['name' => __('general.landing_skill_ai'),         'category' => 'ai',           'tag' => null, 'tier' => 'md', 'top' => '45%', 'left' => '70%'],
+            ['name' => __('general.landing_skill_crm'),        'category' => 'backend',      'tag' => null, 'tier' => 'md', 'top' => '62%', 'left' => '18%'],
+            ['name' => __('general.landing_skill_api'),        'category' => 'devops',       'tag' => null, 'tier' => 'sm', 'top' => '78%', 'left' => '55%'],
+            ['name' => __('general.landing_skill_ecommerce'),  'category' => 'backend',      'tag' => null, 'tier' => 'sm', 'top' => '90%', 'left' => '32%'],
+        ];
+    @endphp
 
-        {{-- Subtle grid pattern --}}
-        <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23000000&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-        {{-- Dark mode grid (white crosses) --}}
-        <div class="absolute inset-0 opacity-0 dark:opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    <x-hero-section
+        :greeting="__('general.landing_greeting')"
+        :tagline="__('general.landing_tagline')"
+        :subtitle="__('general.landing_subtitle')"
+        :skills="$portfolioSkills"
+    >
+        <x-slot:title>
+            <span class="text-gray-800 dark:text-white">Szymon</span>
+            <span class="block text-gradient bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500 dark:from-sky-400 dark:via-indigo-400 dark:to-violet-400">Borowski</span>
+        </x-slot>
 
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-                {{-- Left: copy --}}
-                <div class="lg:col-span-7">
-                    <p class="text-sky-600 dark:text-sky-400 font-mono text-sm sm:text-base mb-4 tracking-wide">
-                        {{ __('general.landing_greeting') }}
-                    </p>
-
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-                        <span class="text-gray-800 dark:text-white">Szymon</span>
-                        <span class="block text-gradient bg-gradient-to-r from-sky-500 via-indigo-500 to-violet-500 dark:from-sky-400 dark:via-indigo-400 dark:to-violet-400">Borowski</span>
-                    </h1>
-
-                    <h2 class="text-xl sm:text-2xl font-mono text-gray-500 dark:text-gray-400 mb-6 tracking-wide">
-                        AI Engineer<span class="text-gray-400 dark:text-gray-600 mx-2">·</span>Laravel<span class="text-gray-400 dark:text-gray-600 mx-2">·</span>Kubernetes
-                    </h2>
-
-                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-xl leading-relaxed">
-                        {{ __('general.landing_subtitle') }}
-                    </p>
-
-                    <div class="flex flex-wrap gap-4">
-                        <button type="button"
-                                onclick="window.dispatchEvent(new CustomEvent('open-chat'))"
-                                class="inline-flex items-center px-6 py-3 rounded-lg bg-rose-700 hover:bg-rose-600 text-white font-medium transition-colors shadow-lg shadow-rose-700/30">
-                            <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-                            </svg>
-                            {{ __('general.hero_chat_cta') }}
-                        </button>
-                        <a href="#contact"
-                           class="inline-flex items-center px-7 py-3.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-base transition-colors shadow-lg shadow-sky-600/30">
-                            {{ __('general.landing_contact_cta') }}
-                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </a>
-                        <a href="{{ config('app.blog_frontend_url') }}"
-                           class="inline-flex items-center px-7 py-3.5 rounded-lg bg-gray-800/10 hover:bg-gray-800/20 text-gray-700 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-semibold text-base transition-colors border border-gray-800/20 dark:border-white/20 backdrop-blur-sm">
-                            {{ __('general.landing_go_to_blog') }}
-                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                {{-- Right: skill cloud --}}
-                <div class="lg:col-span-5">
-                    <x-skill-cloud />
-                </div>
-            </div>
-        </div>
-
-        {{-- Scroll indicator --}}
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <svg class="w-6 h-6 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-        </div>
-    </section>
+        <x-slot:buttons>
+            <button type="button"
+                    onclick="window.dispatchEvent(new CustomEvent('open-chat'))"
+                    class="inline-flex items-center px-6 py-3 rounded-lg bg-rose-700 hover:bg-rose-600 text-white font-medium transition-colors shadow-lg shadow-rose-700/30">
+                <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                </svg>
+                {{ __('general.hero_chat_cta') }}
+            </button>
+            <a href="#contact"
+               class="inline-flex items-center px-7 py-3.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-base transition-colors shadow-lg shadow-sky-600/30">
+                {{ __('general.landing_contact_cta') }}
+                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </a>
+            <a href="{{ config('app.blog_frontend_url') }}"
+               class="inline-flex items-center px-7 py-3.5 rounded-lg bg-gray-800/10 hover:bg-gray-800/20 text-gray-700 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-semibold text-base transition-colors border border-gray-800/20 dark:border-white/20 backdrop-blur-sm">
+                {{ __('general.landing_go_to_blog') }}
+                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+            </a>
+        </x-slot>
+    </x-hero-section>
 
     {{-- STATS BAND --}}
     <section class="bg-gray-100 dark:bg-gray-900 border-y border-gray-200 dark:border-gray-800">

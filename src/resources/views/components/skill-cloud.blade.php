@@ -1,5 +1,7 @@
+@props(['skills' => null])
+
 @php
-    $skills = [
+    $skills ??= [
         ['name' => 'Microservices',    'category' => 'architecture', 'tag' => 'microservices', 'tier' => 'md', 'top' => '6%',  'left' => '60%'],
         ['name' => 'Anthropic Claude', 'category' => 'ai',           'tag' => 'anthropic',     'tier' => 'xl', 'top' => '24%', 'left' => '32%'],
         ['name' => 'AI Agents',        'category' => 'ai',           'tag' => 'agent',         'tier' => 'lg', 'top' => '42%', 'left' => '74%'],
