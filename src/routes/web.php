@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\BlogLandingController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\PostViewController;
@@ -37,7 +38,7 @@ Route::get('/lang/{locale}', function (string $locale) {
     return redirect()->back();
 })->name('lang.switch');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomepageController::class, 'index'])->name('home');
 
 Route::get('/og-preview',    fn() => view('og-preview'))->name('og.preview');
 Route::get('/about',         fn() => view('about'))->name('about');
@@ -81,8 +82,9 @@ Route::get('/collaboration', fn() => view('collaboration'))->name('collaboration
 Route::post('/chat/send',  [ChatController::class, 'send'])->middleware('throttle:chat')->name('chat.send');
 Route::post('/chat/clear', [ChatController::class, 'clear'])->middleware('throttle:30,1')->name('chat.clear');
 
+Route::get('/blog', [BlogLandingController::class, 'index'])->name('blog.landing');
 Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
-Route::get('/kategoria/{slug}', [CategoryViewController::class, 'show'])->name('category.show');
+Route::get('/category/{slug}', [CategoryViewController::class, 'show'])->name('category.show');
 Route::get('/tag/{slug}', [TagViewController::class, 'show'])->name('tag.show');
 Route::get('/post/{slugOrId}', [PostViewController::class, 'show'])->name('post.show')->where('slugOrId', '[a-zA-Z0-9\-]+|\d+');
 Route::post('/post/{postId}/comments', [CommentController::class, 'store'])->name('post.comments.store')->middleware('auth.session')->where('postId', '\d+');

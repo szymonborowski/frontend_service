@@ -6,7 +6,7 @@ use App\Services\BlogApiService;
 use App\Services\GitHubService;
 use Illuminate\View\View;
 
-class HomeController extends Controller
+class BlogLandingController extends Controller
 {
     public function __construct(
         protected BlogApiService $blogApi,

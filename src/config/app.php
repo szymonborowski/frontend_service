@@ -123,4 +123,12 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Blog landing page URL
+    |--------------------------------------------------------------------------
+    */
+
+    'blog_frontend_url' => env('BLOG_FRONTEND_URL', 'blog.borowski.services'),
 ];

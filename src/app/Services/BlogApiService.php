@@ -19,9 +19,9 @@ class BlogApiService
     {
         $token = session('access_token');
 
-        $client = Http::withOptions([
-            'verify' => false,  // Disable SSL verification for internal calls
-            'allow_redirects' => false,  // Don't follow redirects
+        $client = Http::retry(2, 500)->withOptions([
+            'verify' => false,
+            'allow_redirects' => false,
         ]);
 
         if ($token) {
