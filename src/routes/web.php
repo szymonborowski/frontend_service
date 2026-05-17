@@ -40,7 +40,8 @@ Route::get('/lang/{locale}', function (string $locale) {
 
 Route::get('/', [HomepageController::class, 'index'])->name('home');
 
-Route::get('/og-preview',    fn() => view('og-preview'))->name('og.preview');
+Route::get('/og-preview',         fn() => view('og-preview'))->name('og.preview');
+Route::get('/og-preview-landing', fn() => view('og-preview-landing'))->name('og.preview.landing');
 Route::get('/about',         fn() => view('about'))->name('about');
 
 Route::get('/sitemap.xml', function (\App\Services\BlogApiService $api) {
