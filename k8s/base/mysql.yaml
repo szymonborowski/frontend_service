@@ -55,7 +55,7 @@ spec:
         - name: mysql
           image: mysql:8
           args:
-            - --innodb-buffer-pool-size=128M
+            - --innodb-buffer-pool-size=32M
           ports:
             - containerPort: 3306
               name: mysql

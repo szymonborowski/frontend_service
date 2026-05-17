@@ -24,7 +24,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: consumer
-          image: ghcr.io/szymonborowski/portfolio-frontend:v1.21.1
+          image: ghcr.io/szymonborowski/portfolio-frontend:v1.31.0
           imagePullPolicy: IfNotPresent
           args: ["php", "artisan", "rabbitmq:consume-blog"]
           envFrom:

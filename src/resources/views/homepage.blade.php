@@ -228,39 +228,6 @@
     </section>
 
     {{-- =====================================================================
-         BLOG PREVIEW
-         ===================================================================== --}}
-    @if(!empty($featuredPosts))
-    <section class="py-20 bg-gray-50 dark:bg-gray-950">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="flex items-end justify-between mb-10 opacity-0" x-data x-init="fadeInOnScroll($el)">
-                <div>
-                    <p class="text-sky-600 dark:text-sky-400 font-mono text-sm mb-2 tracking-wide">{{ __('general.landing_blog_label') }}</p>
-                    <h2 class="text-3xl font-bold text-gray-800 dark:text-white">{{ __('general.landing_blog_title') }}</h2>
-                </div>
-                <a href="{{ config('app.blog_frontend_url') }}"
-                   class="text-sm font-medium text-sky-600 dark:text-sky-400 hover:text-sky-500 flex items-center gap-1">
-                    {{ __('general.landing_blog_all') }}
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @foreach($featuredPosts as $index => $post)
-                    <div class="opacity-0 stagger-{{ $index + 1 }}" x-data x-init="fadeInOnScroll($el)">
-                        <x-post-card :post="$post" />
-                    </div>
-                @endforeach
-            </div>
-
-        </div>
-    </section>
-    @endif
-
-    {{-- =====================================================================
          KONTAKT
          ===================================================================== --}}
     <section id="contact" class="py-20 bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900">
