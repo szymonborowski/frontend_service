@@ -3,3 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base
+
+images:
+  - name: ghcr.io/szymonborowski/portfolio-frontend
+    newTag: v1.31.0
