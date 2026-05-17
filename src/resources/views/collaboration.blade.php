@@ -71,6 +71,92 @@
             </div>
         </section>
 
+        {{-- For whom --}}
+        <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">{{ __('collaboration.for_whom_heading') }}</h2>
+            <p class="text-gray-500 dark:text-gray-400 mb-8">{{ __('collaboration.for_whom_intro') }}</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach([
+                    ['title' => __('collaboration.for_whom_legal_title'),      'desc' => __('collaboration.for_whom_legal_desc'),      'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>'],
+                    ['title' => __('collaboration.for_whom_agency_title'),     'desc' => __('collaboration.for_whom_agency_desc'),     'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>'],
+                    ['title' => __('collaboration.for_whom_ecommerce_title'),  'desc' => __('collaboration.for_whom_ecommerce_desc'),  'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>'],
+                    ['title' => __('collaboration.for_whom_operations_title'), 'desc' => __('collaboration.for_whom_operations_desc'), 'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l1.5 1M13 16l2-4m0 0l3 4m-3-4h3m0 0V9a1 1 0 011-1h.5"/>'],
+                ] as $i => $item)
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 opacity-0 stagger-{{ $i + 1 }}"
+                         x-data x-init="fadeInOnScroll($el)">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center mb-4">
+                            <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {!! $item['icon'] !!}
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-100 mb-2">{{ $item['title'] }}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ $item['desc'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+
+        {{-- After the project --}}
+        <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">{{ __('collaboration.after_heading') }}</h2>
+            <p class="text-gray-500 dark:text-gray-400 mb-8">{{ __('collaboration.after_intro') }}</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                @foreach([
+                    ['title' => __('collaboration.after_warranty_title'),    'desc' => __('collaboration.after_warranty_desc'),    'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>'],
+                    ['title' => __('collaboration.after_maintenance_title'), 'desc' => __('collaboration.after_maintenance_desc'), 'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>'],
+                    ['title' => __('collaboration.after_handover_title'),    'desc' => __('collaboration.after_handover_desc'),    'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>'],
+                ] as $i => $item)
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 opacity-0 stagger-{{ $i + 1 }}"
+                         x-data x-init="fadeInOnScroll($el)">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center mb-4">
+                            <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {!! $item['icon'] !!}
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-100 mb-2">{{ $item['title'] }}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ $item['desc'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+
+        {{-- FAQ --}}
+        <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8">{{ __('collaboration.faq_heading') }}</h2>
+            <div class="max-w-3xl space-y-3">
+                @foreach([
+                    ['q' => __('collaboration.faq_q1'), 'a' => __('collaboration.faq_a1')],
+                    ['q' => __('collaboration.faq_q2'), 'a' => __('collaboration.faq_a2')],
+                    ['q' => __('collaboration.faq_q3'), 'a' => __('collaboration.faq_a3')],
+                    ['q' => __('collaboration.faq_q4'), 'a' => __('collaboration.faq_a4')],
+                    ['q' => __('collaboration.faq_q5'), 'a' => __('collaboration.faq_a5')],
+                ] as $faq)
+                    <div x-data="{ open: false }"
+                         class="bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <button @click="open = !open"
+                                class="w-full flex items-center justify-between gap-4 px-6 py-4 text-left">
+                            <span class="font-medium text-gray-800 dark:text-gray-100">{{ $faq['q'] }}</span>
+                            <svg class="w-4 h-4 text-gray-400 flex-shrink-0 transition-transform duration-200"
+                                 :class="open ? 'rotate-180' : ''"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div x-show="open"
+                             x-transition:enter="transition-all duration-200 ease-out"
+                             x-transition:enter-start="opacity-0 max-h-0"
+                             x-transition:enter-end="opacity-100 max-h-96"
+                             x-transition:leave="transition-all duration-150 ease-in"
+                             x-transition:leave-start="opacity-100 max-h-96"
+                             x-transition:leave-end="opacity-0 max-h-0"
+                             class="overflow-hidden">
+                            <p class="px-6 pb-5 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ $faq['a'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+
         {{-- CTA --}}
         <section class="opacity-0" x-data x-init="fadeInOnScroll($el)">
             <div class="bg-gradient-to-r from-sky-600 to-indigo-600 rounded-2xl p-10 text-center">
