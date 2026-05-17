@@ -6,7 +6,7 @@
 
 @section('og_description', __('general.landing_og_description'))
 
-@section('og_image', url('/images/og-cover-landing.png'))
+@section('og_image', url('/images/og-cover-landing.webp'))
 
 @section('og_image_alt', 'Szymon Borowski — Aplikacje webowe i automatyzacja dla MŚP')
 

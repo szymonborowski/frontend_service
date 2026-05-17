@@ -22,9 +22,9 @@
     <meta property="og:title" content="@yield('og_title', 'Szymon Borowski · AI Engineer · Laravel · Kubernetes')">
     <meta property="og:description" content="@yield('og_description', 'Blog Szymona Borowskiego — AI Engineer i Laravel developer. Anthropic API, RAG, event-driven microservices, Kubernetes, observability.')">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="@yield('og_image', url('/images/og-cover.png'))">
+    <meta property="og:image" content="@yield('og_image', url('/images/og-cover.webp'))">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:height" content="560">
     <meta property="og:image:alt" content="@yield('og_image_alt', 'Szymon Borowski — AI Engineer & Laravel Developer')">
     <meta property="og:site_name" content="Extended\Mind::Thesis()">
     <meta property="og:locale" content="{{ app()->getLocale() == 'pl' ? 'pl_PL' : 'en_US' }}">
@@ -35,7 +35,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('og_title', 'Szymon Borowski · AI Engineer · Laravel · Kubernetes')">
     <meta name="twitter:description" content="@yield('og_description', 'Blog Szymona Borowskiego — AI Engineer i Laravel developer. Anthropic API, RAG, event-driven microservices, Kubernetes, observability.')">
-    <meta name="twitter:image" content="@yield('og_image', url('/images/og-cover.png'))">
+    <meta name="twitter:image" content="@yield('og_image', url('/images/og-cover.webp'))">
     <meta name="twitter:image:alt" content="@yield('og_image_alt', 'Szymon Borowski — AI Engineer & Laravel Developer')">
 
     {{-- Canonical + hreflang alternates --}}
